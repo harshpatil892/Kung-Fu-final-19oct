@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "693789213352",
+    "firebase_url": "https://kungfu-app.firebaseio.com",
+    "project_id": "kungfu-app",
+    "storage_bucket": "kungfu-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693789213352:android:d2deef2fa9ec42f6",
+        "android_client_info": {
+          "package_name": "com.example.vrushali.kungfu123"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693789213352-7pe9ain9o98onucqjkmt1472b3upkd3n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vrushali.kungfu123",
+            "certificate_hash": "517cbf76669a7a01c35720a4523448328dd5ec02"
+          }
+        },
+        {
+          "client_id": "693789213352-n3t0ennbv3l82cr2gu6en31lfe72bukf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBLx_A_po9jxiD_sPnXoiwyLU-aWG71cw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693789213352-n3t0ennbv3l82cr2gu6en31lfe72bukf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

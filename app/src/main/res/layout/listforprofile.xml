@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="200dp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_personprofile"
+            android:drawablePadding="18dp"
+            android:gravity="start"
+            android:textColor="#000"
+            android:textSize="22dp"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="320dp"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="20dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:drawableLeft="@drawable/ic_phone"
+            android:textColor="#000"
+            android:textSize="22dp"
+             />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="320dp"
+            android:drawablePadding="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="start"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_beltname"
+            android:textColor="#000"
+            android:textSize="22dp"
+            />
+
+</LinearLayout>

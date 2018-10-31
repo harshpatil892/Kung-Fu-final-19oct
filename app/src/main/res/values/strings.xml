@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">AIKFWSA Kung Fu</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_home">Home</string>
+    <string name="blank">   </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="title_home">Martial Arts</string>
+    <string name="title_dashboard">Health Tips</string>
+
+    <string name="Stud_registration">Student</string>
+    <string name="parent_registration">Parent</string>
+    <string name="Existing">Ex.Parent Add Child</string>
+
+    <string name="Event_register">Event Registration</string>
+
+    <string name="Event_detail">Event Registration Details</string>
+
+    <string name="event_register_title">Event Registration</string>
+    <string name="event_detail_title">Event Registration Details</string>
+
+    <string name="stud_detail">Student Details</string>
+    <string name="notification">Notification</string>
+    <string name="addfees">Add Fees</string>
+    <string name="feesrecord">Fees Record</string>
+    <string name="attend_record">Attendance Record</string>
+    <string name="bankdetail">Bank Details</string>
+    <string name="training_center">Training Centers</string>
+    <string name="upcoming_events">Upcoming Events</string>
+
+    <string name="grading">Grading</string>
+    <string name="camp">Camp</string>
+    <string name="competition">Competition</string>
+    <string name="tour">Tour</string>
+
+    <string name="Feedback">Feedback</string>
+    <string name="EventFeedback">Event_Feedback</string>
+
+
+    <string name="inbox">Inbox</string>
+    <string name="event">Event</string>
+    <string name="register">Registration</string>
+    <string name="fees">Fees</string>
+
+    <string name="profile">Profile</string>
+    <string name="ch_password">Change Password</string>
+    <string name="timetable">Timetable</string>
+    <string name="gallery">Gallery</string>
+    <string name="suggestion">Suggestions</string>
+
+    <string name="batch">Batch</string>
+    <string name="individual">Individual</string>
+
+    <string name="about_us">About Us</string>
+    <string name="contact_detail">Contact Detail</string>
+
+    <string name="photos">Photos</string>
+    <string name="videos">Videos</string>
+
+    <string name="attendance">Attendance</string>
+    <string name="key_per">Key Personnel</string>
+
+    <string name="manage">Management</string>
+
+    <string name="dialog_title">Select Months</string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear all</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+
+    <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+
+    <string name="slide_3_title">Great Discounts</string>
+    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+    <string name="fq1">The time allotted for the training was sufficient?</string>
+    <string name="fq2">The training was started on time?</string>
+    <string name="fq3">What have you learnt that is new to you?</string>
+    <string name="fq4">What do you think of the trainer proficiency for this batch?</string>
+
+    <string name="efq">How was the event ?</string>
+
+</resources>

@@ -42,7 +42,7 @@ public class about_profile extends Fragment {
         profile2=(WebView)v.findViewById(R.id.profile2);
         profile3=(WebView)v.findViewById(R.id.profile3);
         profile4=(WebView)v.findViewById(R.id.profile4);
-
+        hideNavigationBar();
         profile1.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         profile1.getSettings().setJavaScriptEnabled(true);
         profile1.loadUrl("http://www.aikfwsa.com/app/values/");
@@ -54,5 +54,15 @@ public class about_profile extends Fragment {
         profile4.loadUrl("http://www.aikfwsa.com/app/vision/");
         return v;
     }
-
+    private void hideNavigationBar() {
+        getActivity().getWindow().getDecorView()
+                .setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_FULLSCREEN |
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                );
+    }
 }
