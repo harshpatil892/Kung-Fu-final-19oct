@@ -1,12 +1,18 @@
 package com.example.vrushali.kungfu123;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +30,9 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +48,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Individual_notify extends Fragment{
 
 
@@ -48,7 +59,7 @@ public class Individual_notify extends Fragment{
     Button noti;
     Spinner spin1;
     String item1,select_item_id,title,address;
-    String uiddd="16";
+    String uiddd="23";
     EditText harsh,harshal;
     CheckBox checkBox_getid;
     private ListView listView;
@@ -95,17 +106,9 @@ public class Individual_notify extends Fragment{
         harshal=(EditText)v.findViewById(R.id.address_area);
         noti=(Button)v.findViewById(R.id.sendnoti);
 
-         title=harsh.getText().toString();
-         address=harsh.getText().toString();
 
-        SharedPreferences sp1=getActivity().getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp1.edit();
-        editor.putString("tit", title);
-        editor.putString("add",address);
-        editor.commit();
 
-//                          editor.putString("ucid",temp13);
-        editor.commit();
+
         select_batch = new ArrayList<String>();
         select_batch.add(0,"select");
 
@@ -115,7 +118,20 @@ public class Individual_notify extends Fragment{
             @Override
             public void onClick(View v) {
 
+                title=harsh.getText().toString();
+                address=harshal.getText().toString();
+
+
+                Log.e("title:",title);
+                Log.e("addr:",address);
+
+
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("noti", MODE_PRIVATE).edit();
+                editor.putString("name", title);
+                editor.putString("idName", address);
+                editor.commit();
                 new JsonPost(address,title,uiddd).execute();
+
             }
         });
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -131,7 +147,7 @@ public class Individual_notify extends Fragment{
                     select_item_id =String.valueOf(spin1.getSelectedItemId());
                     Log.e("Selected item:",select_item_id);
 
-                    SharedPreferences sp1 = getActivity().getSharedPreferences("batchinfo", Context.MODE_PRIVATE);
+                    SharedPreferences sp1 = getActivity().getSharedPreferences("batchinfo", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp1.edit();
 
                     editor.putString("batchid", select_item_id);
@@ -140,8 +156,6 @@ public class Individual_notify extends Fragment{
 
                     editor.clear();
                     editor.commit();
-
-
 
                     Toast.makeText(adapterView.getContext(),"Selected:"+item1,Toast.LENGTH_SHORT).show();
                 }
@@ -300,7 +314,7 @@ public class Individual_notify extends Fragment{
 
                         contact.put("b",b);
 
-                        SharedPreferences sp1=getActivity().getSharedPreferences("getid", Context.MODE_PRIVATE);
+                        SharedPreferences sp1=getActivity().getSharedPreferences("getid", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp1.edit();
                         editor.putString("studid", a);
                         editor.commit();
@@ -358,9 +372,6 @@ public class Individual_notify extends Fragment{
 
                 }
             });
-
-
-
 
         }
 
@@ -466,5 +477,6 @@ public class Individual_notify extends Fragment{
         return data;
 
     }
+
 
 }

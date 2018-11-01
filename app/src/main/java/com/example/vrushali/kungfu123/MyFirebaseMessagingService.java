@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -15,48 +16,34 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import static android.support.constraint.Constraints.TAG;
+import static android.view.View.generateViewId;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-    String temp,role;
+
     SharedPreferences result1,role1;
+    String temp,role;
+    String name ;
+    String idName;
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage){
+    public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        result1 = getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
-        role1 = getSharedPreferences("userinfos", Context.MODE_PRIVATE);
-        temp = result1.getString("tit", "");
-        role = role1.getString("add","");
-
-        Log.e("TITITI:",role);
-        Log.e("MESSSAGE:",temp);
-
-//        Log.d(TAG, "From: " + remoteMessage.getFrom());
-//
-//// Check if message contains a data payload.
-//        if (remoteMessage.getData().size() > 0) {
-//            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-//// Handle message within 10 seconds
-//        }
-//
-//// Check if message contains a notification payload.
-//        if (remoteMessage.getNotification() != null) {
-//            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-//        }
-
-
         Intent intent=new Intent(this,MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+        result1 = getSharedPreferences("noti", MODE_PRIVATE);
+//        String restoredText = prefs.getString("text", "hii");
+//        if (restoredText != null) {
+//            temp = prefs.getString("name", "");//"No name defined" is the default value.
+//            role = prefs.getString("idName", ""); //0 is the default value.
+//        }
+
+        temp = result1.getString("name", name);//"No name defined" is the default value.
+        role = result1.getString("idName", idName); //0 is the default value.
+
         notificationBuilder.setContentTitle(temp);
         notificationBuilder.setContentText(role);
-
 //        notificationBuilder.setAutoCancel(true);
-
-
-        notificationBuilder.setContentTitle(role);
-        notificationBuilder.setContentText(temp);
-
         notificationBuilder.setSmallIcon(R.drawable.ic_beach);
         notificationBuilder.setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -72,6 +59,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationBuilder.setVibrate(view);
 //        notificationManager.notify(1, notificationBuilder.build());
     }
+    }
 
 
-}
