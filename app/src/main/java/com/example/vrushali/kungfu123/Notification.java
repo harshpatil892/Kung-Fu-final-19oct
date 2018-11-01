@@ -42,7 +42,7 @@ public class Notification extends BaseActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        new MyFirebaseMessagingService();
+
 
 
     }

@@ -7,7 +7,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="android:textSize">18dp</item>
-        <item name="android:textColor">#455a64</item>
 
 
     </style>

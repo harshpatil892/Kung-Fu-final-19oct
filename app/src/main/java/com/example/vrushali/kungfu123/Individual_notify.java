@@ -50,7 +50,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Individual_notify extends Fragment{
+public class Individual_notify extends Fragment {
 
 
     private String TAG = Individual_notify.class.getSimpleName();
@@ -65,7 +65,7 @@ public class Individual_notify extends Fragment{
     private ListView listView;
     ArrayList namelist;
     private CustomAdapterNotification adapter;
-
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
     ArrayList<String> select_batch;
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
     String URL1 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=student_info_for_trainer_by_batch";
@@ -106,9 +106,6 @@ public class Individual_notify extends Fragment{
         harshal=(EditText)v.findViewById(R.id.address_area);
         noti=(Button)v.findViewById(R.id.sendnoti);
 
-
-
-
         select_batch = new ArrayList<String>();
         select_batch.add(0,"select");
 
@@ -120,17 +117,15 @@ public class Individual_notify extends Fragment{
 
                 title=harsh.getText().toString();
                 address=harshal.getText().toString();
-
-
-                Log.e("title:",title);
-                Log.e("addr:",address);
-
-
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences("noti", MODE_PRIVATE).edit();
-                editor.putString("name", title);
-                editor.putString("idName", address);
+                SharedPreferences sp1=getActivity().getSharedPreferences("noti", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp1.edit();
+                editor.putString("userrole", title);
+                editor.putString("userid",address);
+//                          editor.putString("ucid",temp13);
                 editor.commit();
-                new JsonPost(address,title,uiddd).execute();
+                Log.e("TITLE:",title);
+                Log.e("Adreessss:-",address);
+                new JsonPost().execute(title,address,uiddd);
 
             }
         });
@@ -392,10 +387,6 @@ public class Individual_notify extends Fragment{
     class JsonPost extends AsyncTask<String ,String,String>{
 
 
-        public JsonPost(String address, String title, String uiddd) {
-
-        }
-
         @Override
         protected String doInBackground(String... params) {
 
@@ -409,7 +400,7 @@ public class Individual_notify extends Fragment{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getActivity(),"Registration successful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Notification sent",Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
 
 //            textView.setText(result);
