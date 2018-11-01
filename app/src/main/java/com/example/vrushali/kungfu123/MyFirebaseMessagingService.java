@@ -21,20 +21,19 @@ import static android.view.View.generateViewId;
 public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
 
+    String note,note1;
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        String title = remoteMessage.getNotification().getTitle();
-        String address = remoteMessage.getNotification().getTitle();
-
 
         Intent intent=new Intent(this,MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
 
-        notificationBuilder.setContentTitle(title);
-        notificationBuilder.setContentText(address);
+        notificationBuilder.setContentTitle("");
+        notificationBuilder.setContentText("");
 
 //        notificationBuilder.setAutoCancel(true);
         notificationBuilder.setSmallIcon(R.drawable.ic_beach);

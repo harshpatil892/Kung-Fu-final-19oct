@@ -117,12 +117,7 @@ public class Individual_notify extends Fragment {
 
                 title=harsh.getText().toString();
                 address=harshal.getText().toString();
-                SharedPreferences sp1=getActivity().getSharedPreferences("noti", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp1.edit();
-                editor.putString("userrole", title);
-                editor.putString("userid",address);
-//                          editor.putString("ucid",temp13);
-                editor.commit();
+
                 Log.e("TITLE:",title);
                 Log.e("Adreessss:-",address);
                 new JsonPost().execute(title,address,uiddd);
