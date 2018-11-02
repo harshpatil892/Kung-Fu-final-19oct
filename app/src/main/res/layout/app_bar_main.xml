@@ -81,7 +81,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Martial Arts"/>
+                            android:text="@string/title_home"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -92,7 +92,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="14dp"
-                            android:text="However beautiful the strategy, you should occasionally look at the results"
+                            android:text="@string/slogen1"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -121,7 +121,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Health Tips"/>
+                            android:text="@string/title_dashboard"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -132,7 +132,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="14dp"
-                            android:text="The more you sweat in training, the less you bleed in combat"
+                            android:text="@string/slogen2"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -158,18 +158,21 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center">
+
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:background="@drawable/circleshape"
                             android:src="@drawable/ic_info_outline"
                             android:padding="10dp"/>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="About Us"/>
+                            android:text="@string/About_us"/>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -180,7 +183,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="14dp"
-                            android:text="On the day of victory no fatigue is felt"
+                            android:text="@string/slogen3"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 

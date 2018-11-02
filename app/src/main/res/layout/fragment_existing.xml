@@ -36,7 +36,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
-                            android:text="Batch :"
+                            android:text="@string/batch"
                             android:textSize="18sp" />
 
                         <Spinner
@@ -103,7 +103,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Date of Birth :"
+                            android:text="@string/Date_of_birth"
                             android:textSize="18sp"
                             android:paddingLeft="10dp"
                             android:id="@+id/birth_text"/>
@@ -141,7 +141,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Registration Date :"
+                            android:text="@string/Registration_date"
                             android:textSize="18sp"
                             android:paddingLeft="10dp"
                             android:id="@+id/register_text"/>
@@ -219,7 +219,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
-                            android:text="Belt Level :"
+                            android:text="@string/Belt_level"
                             android:textSize="18sp" />
 
                         <Spinner

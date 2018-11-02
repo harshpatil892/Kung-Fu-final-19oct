@@ -11,20 +11,20 @@
     <item
         android:id="@+id/login"
         android:icon="@drawable/ic_logout"
-        android:title="Login"
+        android:title="@string/login"
         />
 
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
-        android:title="Home"
+        android:title="@string/home"
 
         />
 
     <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_person"
-        android:title="Profile"
+        android:title="@string/profile"
         android:visible="false"
 
         />
@@ -32,100 +32,100 @@
     <item
         android:id="@+id/attendance_trainer"
         android:icon="@drawable/ic_group"
-        android:title="Take Attendance"
+        android:title="@string/Take_Attendance"
         android:visible="false"
         />
 
     <item
         android:id="@+id/attendance"
         android:icon="@drawable/ic_group"
-        android:title="Attendance"
+        android:title="@string/attendance"
         android:visible="false"
                 />
 
     <item
         android:id="@+id/fees"
         android:icon="@drawable/ic_person"
-        android:title="Fees"
+        android:title="@string/fees"
         android:visible="false"/>
 
 
     <item
         android:id="@+id/stud_detail"
         android:icon="@drawable/ic_person"
-        android:title="Student Details"
+        android:title="@string/Student_Details"
         android:visible="false"/>
 
     <item
         android:id="@+id/trainer_profile"
         android:icon="@drawable/ic_person"
-        android:title="Trainer Profile"
+        android:title="@string/Trainer_profile"
         android:visible="false"/>
 
     <item
         android:id="@+id/result"
         android:icon="@drawable/ic_person"
-        android:title="Result"
+        android:title="@string/Result"
         android:visible="false"/>
 
     <item
         android:id="@+id/notify"
         android:icon="@drawable/ic_mail"
-        android:title="Send Notification"
+        android:title="@string/Send_Notification"
         android:visible="false"/>
 
     <item
         android:id="@+id/attend_record"
         android:icon="@drawable/ic_feedback"
-        android:title="Attendance Record"
+        android:title="@string/Attendance_Record"
         android:visible="false"/>
 
     <item
         android:id="@+id/bank_detail"
         android:icon="@drawable/ic_result"
-        android:title="Bank Details"
+        android:title="@string/Bank_Details"
         android:visible="false"/>
 
     <item
         android:id="@+id/training_centre"
         android:icon="@drawable/ic_location"
-        android:title="Training Centers" />
+        android:title="@string/Training_centers" />
 
     <item
         android:id="@+id/up_event"
         android:icon="@drawable/ic_flag"
-        android:title="Upcoming Events" />
+        android:title="@string/Upcoming_Events" />
 
     <item
         android:id="@+id/feedback"
         android:icon="@drawable/ic_flag"
-        android:title="Feedback"
+        android:title="@string/Feedback"
         android:visible="false"/>
 
     <item
         android:id="@+id/suggestion"
         android:icon="@drawable/ic_feedback"
-        android:title="Suggestions" />
+        android:title="@string/Suggestions" />
 
     <item
         android:id="@+id/about_us"
         android:icon="@drawable/ic_location"
-        android:title="About us" />
+        android:title="@string/About_us" />
 
     <item
         android:id="@+id/gallery"
         android:icon="@drawable/ic_gallery"
-        android:title="Gallery" />
+        android:title="@string/gallery" />
 
     <item
         android:id="@+id/inbox"
         android:icon="@drawable/ic_mail"
-        android:title="Inbox" />
+        android:title="@string/inbox" />
 
     <item
         android:id="@+id/logout"
         android:icon="@drawable/ic_logout"
-        android:title="Logout"
+        android:title="@string/Logout"
         android:visible="false"/>
 
     </group>

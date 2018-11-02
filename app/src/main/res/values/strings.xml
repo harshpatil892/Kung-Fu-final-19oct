@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">AIKFWSA Kung Fu</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -39,16 +40,15 @@
     <string name="competition">Competition</string>
     <string name="tour">Tour</string>
 
-    <string name="Feedback">Feedback</string>
+    <!--<string name="Feedback">Feedback</string>-->
     <string name="EventFeedback">Event_Feedback</string>
-
 
     <string name="inbox">Inbox</string>
     <string name="event">Event</string>
     <string name="register">Registration</string>
     <string name="fees">Fees</string>
 
-    <string name="profile">Profile</string>
+    <!--<string name="profile">Profile</string>-->
     <string name="ch_password">Change Password</string>
     <string name="timetable">Timetable</string>
     <string name="gallery">Gallery</string>
@@ -98,5 +98,64 @@
     <string name="fq4">What do you think of the trainer proficiency for this batch?</string>
 
     <string name="efq">How was the event ?</string>
+
+<!--drawer-->
+
+    <string name="login">Login</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="Take_Attendance">Take Attendance</string>
+    <string name="Student_Details">Student Details</string>
+    <string name="Send_Notification">Send Notification</string>
+    <string name="Attendance_Record">Attendance Record</string>
+    <string name="Bank_Details">Bank Details</string>
+    <string name="Training_centers">Training Centers</string>
+    <string name="Upcoming_Events">Upcoming_Events</string>
+    <string name="Suggestions">Suggestions</string>
+    <string name="About_us">About_us</string>
+    <string name="Gallery">Gallery</string>
+    <string name="Inbox">Inbox</string>
+    <string name="Logout">Logout</string>
+    <string name="Result">Result</string>
+    <string name="Feedback">Feedback</string>
+    <string name="Trainer_profile">Trainer_profile</string>
+
+
+    <string name="Registration">Registration</string>
+    <string name="Event">Event</string>
+    <string name="Fees">Fees</string>
+    <string name="Language">Language</string>
+
+
+<!--menu-->
+
+    <string name="slogen1">However beautiful the strategy, you should occasionally look at the results</string>
+    <string name="slogen2">The more you sweat in training, the less you bleed in combat</string>
+    <string name="slogen3">On the day of victory no fatigue is felt</string>
+    <string name="slogen4">Legend tells of a legendary warrior whose kung fu skills were the stuff of legend</string>
+    <string name="slogen5">The most powerful weapon on earth is the human soul on fire</string>
+    <string name="slogen6">We may encounter many defeats but we must not be defeated</string>
+
+<!--textviews-->
+
+    <string name="Select_Batch">Select Batch</string>
+    <string name="Select_Month">Select Month</string>
+    <string name="Select_Year">Select Year</string>
+    <string name="Compitition">Compitition</string>
+    <string name="Select_Student">Select Student</string>
+    <string name="Monthly_Fees">Monthly Fees</string>
+    <string name="Notification_batch">Send Notification to Batch</string>
+    <string name="Select_Event">Select_Event</string>
+    <string name="Registration_fees">Registration fees</string>
+    <string name="Type_of_event">Type of Event</string>
+    <string name="Date_of_birth">Date_of_Birth</string>
+    <string name="Registration_date">Registration_date</string>
+    <string name="gender">Gender</string>
+    <string name="Belt_level">Belt Level</string>
+    <string name="Fee_Record">Fee_Record</string>
+    <string name="Notification_Individual">Notification_Individual</string>
+    <string name="Upload_Photo">Upload Photo</string>
+    <string name="Update_photo">Update Photo</string>
+    <string name="Night_Mode">Night Mode</string>
 
 </resources>

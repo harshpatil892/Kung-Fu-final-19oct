@@ -51,7 +51,7 @@
                     android:layout_width="152dp"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:text="Type of Event"
+                    android:text="@string/Type_of_event"
                     android:textColor="#000"
                     android:textSize="16sp" />
 
@@ -83,7 +83,7 @@
                     android:layout_width="152dp"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:text="Select event"
+                    android:text="@string/Select_Event"
                     android:textColor="#000"
                     android:textSize="16sp" />
 

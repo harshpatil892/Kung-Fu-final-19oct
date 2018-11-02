@@ -25,7 +25,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fees Record"
+                    android:text="@string/feesrecord"
                     android:textColor="#ffffff"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -52,7 +52,7 @@
                     android:layout_width="152dp"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:text="Select batch"
+                    android:text="@string/Select_Batch"
                     android:textColor="#000"
                     android:textSize="16sp" />
 

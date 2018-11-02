@@ -48,7 +48,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Key Personnel"/>
+                            android:text="@string/key_per"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -59,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="14dp"
-                            android:text="Legend tells of a legendary warrior whose kung fu skills were the stuff of legend"
+                            android:text="@string/slogen4"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -88,7 +88,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Management"/>
+                            android:text="@string/manage"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="14dp"
-                            android:text="The most powerful weapon on earth is the human soul on fire"
+                            android:text="@string/slogen5"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -136,7 +136,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="About Us"/>
+                            android:text="@string/About_us"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -146,7 +146,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="We may encounter many defeats but we must not be defeated"
+                            android:text="@string/slogen6"
                             android:padding="5dp"
                             android:textSize="14dp"
                             android:textColor="@android:color/darker_gray"/>

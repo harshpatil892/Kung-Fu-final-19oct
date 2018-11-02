@@ -131,7 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="7dp"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="#ffffff"
         android:textSize="18dp"
         android:textStyle="bold" />

@@ -45,7 +45,7 @@
                 android:layout_width="153dp"
                 android:layout_height="40dp"
                 android:gravity="center"
-                android:text="Select batch"
+                android:text="@string/Select_Batch"
                 android:textColor="#000"
                 android:textSize="16sp" />
 

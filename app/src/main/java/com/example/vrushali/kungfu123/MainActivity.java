@@ -1,9 +1,11 @@
 package com.example.vrushali.kungfu123;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -22,6 +24,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -44,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         hideNavigationBar();
         martial_arts_card = findViewById(R.id.martial_arts);
         health_tips_card = findViewById(R.id.health_tips);
@@ -361,6 +364,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent4 = new Intent(MainActivity.this, Mode.class);
                 startActivity(intent4);
                 return true;
+
+            case R.id.lang:
+                Intent intent5 = new Intent(MainActivity.this, Lang.class);
+                startActivity(intent5);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

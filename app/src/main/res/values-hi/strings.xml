@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AIKFWSA Kung Fu</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_home">होम</string>
+    <string name="blank">   </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="title_home">मार्शल आर्ट</string>
+    <string name="title_dashboard">स्वास्थ्य सुझाव</string>
+
+    <string name="Stud_registration">छात्र</string>
+    <string name="parent_registration">माता-पिता</string>
+    <string name="Existing">पूर्व माता पिता जोड़ें</string>
+
+    <string name="Event_register">घटना पंजीकरण</string>
+
+    <string name="Event_detail">घटना पंजीकरण विवरण</string>
+
+    <string name="event_register_title">घटना पंजीकरण</string>
+    <string name="event_detail_title">घटना पंजीकरण विवरण</string>
+
+    <string name="stud_detail">छात्र विवरण</string>
+    <string name="notification">अधिसूचना</string>
+    <string name="addfees">शुल्क जोड़ें</string>
+    <string name="feesrecord">शुल्क रिकॉर्ड</string>
+    <string name="attend_record">उपस्थिति रिकॉर्ड</string>
+    <string name="bankdetail">बैंक विवरण</string>
+    <string name="training_center">प्रशिक्षण केंद्र</string>
+    <string name="upcoming_events">आने वाले कार्यक्रम</string>
+
+    <string name="grading">ग्रेडिंग</string>
+    <string name="camp">शिविर</string>
+    <string name="competition">प्रतियोगिता</string>
+    <string name="tour">यात्रा</string>
+
+    <!--<string name="Feedback">प्रतिक्रिया</string>-->
+    <string name="EventFeedback">घटना प्रतिक्रिया</string>
+
+
+    <string name="inbox">इनबॉक्स</string>
+    <string name="event">घटना</string>
+    <string name="register">पंजीकरण</string>
+    <string name="fees">शुल्क</string>
+
+    <!--<string name="profile">प्रोफाइल</string>-->
+    <string name="ch_password">पासवर्ड परिवर्तन</string>
+    <string name="timetable">समय सारणी</string>
+    <string name="gallery">गेलरी</string>
+    <string name="suggestion">सुझाव</string>
+
+    <string name="batch">जत्था</string>
+    <string name="individual">व्यक्ति</string>
+
+    <string name="about_us">हमारे बारे में</string>
+    <string name="contact_detail">संपर्क विवरण</string>
+
+    <string name="photos">तस्वीरें</string>
+    <string name="videos">वीडियो</string>
+
+    <string name="attendance">उपस्थिति</string>
+    <string name="key_per">मुख्य कार्यकर्ता</string>
+
+    <string name="manage">प्रबंध</string>
+
+    <string name="dialog_title">महीनों का चयन करें</string>
+    <string name="ok_label">ठीक</string>
+    <string name="dismiss_label">खारिज</string>
+    <string name="clear_all_label">सभी साफ करें.</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">आगे</string>
+    <string name="skip">छोड़ें</string>
+    <string name="start">समझ गया</string>
+
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+
+    <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+
+    <string name="slide_3_title">Great Discounts</string>
+    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <!--feedbck-->
+    <string name="fq1">प्रशिक्षण के लिए आवंटित समय पर्याप्त था?</string>
+    <string name="fq2">प्रशिक्षण समय पर शुरू किया गया था</string>
+    <string name="fq3">आपने क्या सीखा है कि यह आपके लिए नया है?</string>
+    <string name="fq4">इस बैच के लिए ट्रेनर प्रवीणता के बारे में आप क्या सोचते हैं?</string>
+
+    <string name="efq">घटना कैसी थी ?</string>
+
+
+<!--drawer-->
+    <string name="login">लॉग इन करें</string>
+    <string name="home">होम</string>
+    <string name="profile">प्रोफाइल</string>
+    <string name="Take_Attendance">उपस्थिति लें</string>
+    <string name="Student_Details">छात्र विवरण</string>
+    <string name="Send_Notification">अधिसूचना भेजें</string>
+    <string name="Attendance_Record">उपस्थिति रिकॉर्ड</string>
+    <string name="Bank_Details">बैंक विवरण</string>
+    <string name="Training_centers">प्रशिक्षण केंद्र</string>
+    <string name="Upcoming_Events">आने वाले कार्यक्रम</string>
+    <string name="Suggestions">सुझाव</string>
+    <string name="About_us">हमारे बारे में</string>
+    <string name="Gallery">गेलरी</string>
+    <string name="Inbox">इनबॉक्स</string>
+    <string name="Logout">लोग आउट</string>
+    <string name="Result">परिणाम</string>
+    <string name="Feedback">प्रतिक्रिया</string>
+    <string name="Trainer_profile">ट्रेनर प्रोफाइल</string>
+
+
+<!--menu-->
+    <string name="Registration">पंजीकरण</string>
+    <string name="Event">घटना</string>
+    <string name="Fees">शुल्क</string>
+    <string name="Language">भाषा</string>
+
+<!--slogen-->
+    <string name="slogen1">हालांकि रणनीति को सुंदर, आपको कभी-कभी परिणामों को देखना चाहिए</string>
+    <string name="slogen2">जितना अधिक आप प्रशिक्षण में पसीना करते हैं, उतना ही कम आप युद्ध में खून बहते हैं</string>
+    <string name="slogen3">जीत के दिन कोई थकान महसूस नहीं होती है</string>
+    <string name="slogen4">किंवदंती एक महान योद्धा के बारे में बताती है जिसका कुंग फू कौशल किंवदंती की चीजें थी</string>
+    <string name="slogen5">पृथ्वी पर सबसे शक्तिशाली हथियार आग पर मानव आत्मा है</string>
+    <string name="slogen6">हमें कई हार का सामना करना पड़ सकता है लेकिन हमें पराजित नहीं होना चाहिए</string>
+
+
+<!--textview-->
+    <string name="Select_Batch">बैच का चयन करें</string>
+    <string name="Select_Month">महीना चुनिए</string>
+    <string name="Select_Year">वर्ष का चयन करें</string>
+    <string name="Compitition">प्रतियोगिता</string>
+    <string name="Select_Student">छात्र चुने</string>
+    <string name="Monthly_Fees">मासिक शुल्क</string>
+    <string name="Notification_batch">बैच को अधिसूचना भेजें</string>
+    <string name="Select_Event">घटना का चयन करें</string>
+    <string name="Registration_fees">पंजीकरण शुल्क</string>
+    <string name="Type_of_event">घटना के प्रकार</string>
+    <string name="Date_of_birth">जन्म की तारीख</string>
+    <string name="Registration_date">पंजीकरण की तारीख</string>
+    <string name="gender">लिंग</string>
+    <string name="Belt_level">बेल्ट स्तर</string>
+    <string name="Fee_Record">शुल्क रिकॉर्ड</string>
+    <string name="Notification_Individual">अधिसूचना व्यक्तिगत</string>
+    <string name="Upload_Photo">फोटो अपलोड करें</string>
+    <string name="Update_photo">फोटो अपडेट करें</string>
+    <string name="Night_Mode">रात्री स्वरुप</string>
+
+
+
+</resources>

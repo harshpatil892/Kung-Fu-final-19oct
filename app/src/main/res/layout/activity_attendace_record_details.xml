@@ -63,7 +63,7 @@
                     android:layout_width="152dp"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:text="Select Month"
+                    android:text="@string/Select_Month"
                     android:textColor="#000"
                     android:textSize="16sp" />
 
@@ -102,7 +102,9 @@
                 <Spinner
                     android:id="@+id/spinner2"
                     android:layout_width="152dp"
-                    android:layout_height="40dp"></Spinner>
+                    android:layout_height="40dp">
+
+                </Spinner>
 
             </LinearLayout>
 

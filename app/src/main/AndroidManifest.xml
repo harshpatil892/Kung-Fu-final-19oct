@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -155,8 +154,10 @@
         <activity
             android:name=".Mode"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AttendaceRecordDetails"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AttendaceRecordDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Lang"></activity>
     </application>
 
 </manifest>

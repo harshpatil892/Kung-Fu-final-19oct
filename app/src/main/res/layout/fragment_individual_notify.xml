@@ -32,7 +32,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Send Notification to Individual"
+                    android:text="@string/Notification_Individual"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -63,7 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Title"
-                        android:text="header"
+
                         android:id="@+id/name"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -86,7 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Address"
-                        android:text="Harshal Patil"
+
                         android:lines="3"
                         android:ems="10"
                         android:gravity="top"
