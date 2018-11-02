@@ -157,7 +157,9 @@
         <activity
             android:name=".AttendaceRecordDetails"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Lang"></activity>
+        <activity android:name=".Lang"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

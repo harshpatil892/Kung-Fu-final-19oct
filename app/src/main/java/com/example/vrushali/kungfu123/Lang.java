@@ -22,8 +22,8 @@ public class Lang extends AppCompatActivity {
         loadLocale();
         setContentView(R.layout.activity_lang);
 
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getResources().getString(R.string.app_name));
+//        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle(getResources().getString(R.string.app_name));
 
         Button ChangeLang = findViewById(R.id.ChangeLang);
         ChangeLang.setOnClickListener(new View.OnClickListener() {
@@ -31,8 +31,8 @@ public class Lang extends AppCompatActivity {
             public void onClick(View v) {
 
                 showChangeLanguageDialog();
-                
-            }
+
+          }
         });
     }
 
@@ -76,6 +76,7 @@ public class Lang extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("Settings",Activity.MODE_PRIVATE);
         String language = prefs.getString("My_Lang","");
         setLocale(language);
+
     }
 
     @Override
@@ -83,4 +84,5 @@ public class Lang extends AppCompatActivity {
         Intent intent = new Intent(Lang.this,MainActivity.class);
         startActivity(intent);
     }
+
 }
