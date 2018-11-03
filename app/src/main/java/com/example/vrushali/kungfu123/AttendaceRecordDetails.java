@@ -38,7 +38,6 @@ public class AttendaceRecordDetails extends BaseActivity {
     ArrayList<String> mnth ;
     ArrayList<String> year;
 
-    private ShimmerFrameLayout mShimmerViewContainer;
     private String TAG = AttendaceRecordDetails.class.getSimpleName();
     private ProgressDialog pDialog;
     private ListView lv;
@@ -68,10 +67,8 @@ public class AttendaceRecordDetails extends BaseActivity {
         drawer.addView(contentView, 0);
         contactList = new ArrayList<>();
 
-
         lv = (ListView) findViewById(R.id.listforattrecdetails);
 //        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
-
 
         get_month = findViewById(R.id.spinner1);
         get_year = findViewById(R.id.spinner2);
@@ -79,12 +76,11 @@ public class AttendaceRecordDetails extends BaseActivity {
         mnth = new ArrayList<>();
         year = new ArrayList<>();
 
-
-
         mnth.add(0,"select");
         mnth.add("January");
         mnth.add("February");
         mnth.add("March");
+        mnth.add("April");
         mnth.add("May");
         mnth.add("June");
         mnth.add("July");
@@ -99,7 +95,7 @@ public class AttendaceRecordDetails extends BaseActivity {
         year.add("2018");
         year.add("2019");
 
-        new GetContacts().execute();
+
 
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, mnth);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -114,17 +110,24 @@ public class AttendaceRecordDetails extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                monthh= String.valueOf(get_month.getSelectedItemId());
+                if(parent.getItemAtPosition(position).equals("select")) {
+                    // do nothing
 
-                SharedPreferences sp1 = getSharedPreferences("month", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp1.edit();
+                }
 
-                editor.putString("monthid", monthh);
-                editor.clear();
-                editor.commit();
+                else{
+                    monthh= String.valueOf(get_month.getSelectedItemId());
 
-                Log.e("Selected month id",monthh);
+                    SharedPreferences sp1 = getSharedPreferences("month", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp1.edit();
 
+                    editor.putString("monthid", monthh);
+                    editor.clear();
+                    editor.commit();
+
+                    Log.e("Selected month id",monthh);
+
+                }
             }
 
             @Override
@@ -137,18 +140,26 @@ public class AttendaceRecordDetails extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                yr = String.valueOf(get_year.getSelectedItem());
+                if(parent.getItemAtPosition(position).equals("select")) {
+                    // do nothing
 
-                SharedPreferences sp1 = getSharedPreferences("year", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp1.edit();
+                }
 
-                editor.putString("yrid", yr);
-                editor.clear();
-                editor.commit();
+                else{
+                    yr = String.valueOf(get_year.getSelectedItem());
 
+                    SharedPreferences sp1 = getSharedPreferences("year", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp1.edit();
 
+                    editor.putString("yrid", yr);
+                    editor.clear();
+                    editor.commit();
 
-                Log.e("Selected year",yr);
+                    Log.e("Selected year",yr);
+
+                    new GetContacts().execute();
+
+                }
             }
 
             @Override
@@ -273,7 +284,7 @@ public class AttendaceRecordDetails extends BaseActivity {
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(AttendaceRecordDetails.this,MainActivity.class);
+        Intent intent = new Intent(AttendaceRecordDetails.this,Attendance_record.class);
         startActivity(intent);
 
     }

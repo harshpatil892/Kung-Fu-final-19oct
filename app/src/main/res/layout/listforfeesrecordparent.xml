@@ -1,88 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin">
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="320dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        card_view:cardCornerRadius="15dp">
-
-        <TextView
-            android:id="@+id/id"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="2dip"
-            android:paddingTop="6dip"
-            android:textColor="#ffffff"
-            android:background="#ffad1457"
-            android:textSize="16dp"
-            android:drawableStart="@drawable/ic_place_black_24dp"
-            android:gravity="start"
-            android:textStyle="bold"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/add"
-            android:layout_width="84dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="70dp"
-            android:text="Date : "
-            android:gravity="start"
-            android:textColor="#000"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="219dp"
-            android:layout_height="74dp"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="70dp"
-            android:gravity="start"
-            android:textColor="#000"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/beltlevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="160dp"
-            android:gravity="start"
-            android:text="Receiver : "
-            android:textColor="#000"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="219dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="160dp"
-            android:gravity="start"
-            android:textColor="#000"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            tools:ignore="RtlCompat" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                card_view:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <TextView
+                            android:id="@+id/mnth"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#ffad1457"
+                            android:drawableStart="@drawable/ic_place_black_24dp"
+                            android:gravity="start"
+                            android:paddingTop="6dip"
+                            android:paddingBottom="2dip"
+                            android:textColor="#ffffff"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlCompat" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="Fees : "
+                            android:textColor="#000"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/fee1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="#000"
+                            android:textSize="16dp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/Feerecvdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="Fee Received date : "
+                            android:textColor="#000"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/Feerecvdate1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="#000"
+                            android:textSize="16dp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/feepaidyr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="Year : "
+                            android:textColor="#000"
+                            android:textSize="16dp"
+                            android:textStyle="bold"/>
 
 
+                        <TextView
+                            android:id="@+id/feepaidyr1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="#000"
+                            android:textSize="16dp"
+                            />
 
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/feereciver"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="Fee Receiver : "
+                            android:textColor="#000"
+                            android:textSize="16dp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/feereciver1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="#000"
+                            android:textSize="16dp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</FrameLayout>

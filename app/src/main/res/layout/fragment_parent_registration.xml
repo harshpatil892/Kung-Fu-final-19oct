@@ -46,7 +46,7 @@
                                 android:id="@+id/name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Name" />
+                                android:hint="@string/name" />
 
                         </android.support.design.widget.TextInputLayout>
 
@@ -108,7 +108,7 @@
                                 android:id="@+id/mobno"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Mobile no."
+                                android:hint="@string/mobile"
                                 android:inputType="number"/>
 
                         </android.support.design.widget.TextInputLayout>
@@ -136,7 +136,7 @@
                                 android:id="@+id/pwd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Password"
+                                android:hint="@string/Pass"
                                 android:inputType="textPassword" />
 
                         </android.support.design.widget.TextInputLayout>
@@ -164,7 +164,7 @@
                                 android:id="@+id/conpwd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Confirm Password"
+                                android:hint="@string/CPass"
                                 android:inputType="textPassword" />
 
                         </android.support.design.widget.TextInputLayout>
@@ -190,7 +190,7 @@
                                 android:layout_height="wrap_content"
                                 android:ems="10"
                                 android:gravity="top"
-                                android:hint="Address"
+                                android:hint="@string/address"
                                 android:inputType="textMultiLine"
                                 android:lines="3" />
 
@@ -231,7 +231,7 @@
                                 android:id="@+id/fname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Name" />
+                                android:hint="@string/name" />
 
                         </android.support.design.widget.TextInputLayout>
 
@@ -250,7 +250,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
-                            android:text="Date of Birth :"
+                            android:text="@string/Date_of_birth"
                             android:textSize="18sp" />
 
 
@@ -294,7 +294,7 @@
                                 android:id="@+id/ad_fees"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Admission Fees"
+                                android:hint="@string/admission_fees"
                                 android:inputType="number"/>
 
                         </android.support.design.widget.TextInputLayout>
@@ -357,7 +357,7 @@
                                 android:id="@+id/gr_no"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Gr Number" />
+                                android:hint="@string/Gr" />
 
                         </android.support.design.widget.TextInputLayout>
 
@@ -422,7 +422,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
-                            android:text="Registration Date :"
+                            android:text="@string/Registration_date"
                             android:textSize="18sp" />
 
 
@@ -457,7 +457,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/save_btn"
-                android:text="Save"
+                android:backgroundTint="#ff8f00"
+                android:textColor="#fff"
+                android:text="@string/add"
                 android:layout_below="@+id/cardView"
                 />
 

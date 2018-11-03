@@ -4,8 +4,12 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -312,6 +316,7 @@ public class Existing extends Fragment{
 
         StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
 
             public void onResponse(String response) {
@@ -327,6 +332,7 @@ public class Existing extends Fragment{
                         String temp2 = cn.getString("level");
 
                         belt = temp + "-" + temp1;
+
                         Log.e("Concated String:-",belt);
 
                         belt_level_names.add(belt);
@@ -351,7 +357,6 @@ public class Existing extends Fragment{
         stringRequest.setRetryPolicy(policy);
         requestQueue.add(stringRequest);
     }
-
 
     class GetContacts extends AsyncTask<Void, Void, Void> {
 
@@ -494,14 +499,12 @@ public class Existing extends Fragment{
 //
 //                        select_parent.add(b);
 
-
                         res = a + "-" + b;
 
                         Log.e("Concated:-",res);
 
                         select_parent.add(res);
                         Log.e("FINAL BATCHID:", res);
-
 
                     }
 

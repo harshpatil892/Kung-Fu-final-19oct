@@ -30,11 +30,11 @@ import java.util.HashMap;
 
 
 public class Event_register_detail extends Fragment implements SearchView.OnQueryTextListener{
+
     private String TAG = Event_register_detail.class.getSimpleName();
     Spinner type_event,sub_event;
 
-
-    String selected_event_type,res,res1,res2;
+    String selected_event_type,res,res1,res2,event;
     private SearchView mSearchView;
     ArrayList<String> event_type ;
     ArrayList<String> event_name;
@@ -97,17 +97,6 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                String select_item = String.valueOf(type_event.getSelectedItem());
-
-                SharedPreferences sp1 = getActivity().getSharedPreferences("selectevent", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp1.edit();
-
-                editor.putString("eventname", select_item);
-                editor.clear();
-                editor.commit();
-
-
-
                 if(parent.getItemAtPosition(position).equals("select")){
                     // do nothing
 
@@ -120,7 +109,6 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
                 }
 
                 else if(type_event.getSelectedItem().equals("Grading-Exam")){
-
 
                     selected_event_type =String.valueOf(type_event.getSelectedItem());
                     Log.e("Selected item:",selected_event_type);
@@ -148,7 +136,6 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
                 else if(type_event.getSelectedItem().equals("Camp")){
 
-
                     selected_event_type =String.valueOf(type_event.getSelectedItem());
                     Log.e("Selected item:",selected_event_type);
 
@@ -159,6 +146,15 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
                     myAdapter1.clear();
                 }
+
+                SharedPreferences sp1 = getActivity().getSharedPreferences("selectevent", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp1.edit();
+
+                editor.putString("eventname", selected_event_type);
+                editor.commit();
+
+
+
             }
 
             @Override
@@ -166,6 +162,35 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
             }
         });
+
+
+        sub_event.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String item =parent.getItemAtPosition(position).toString();
+
+                String string = item;
+                String[] parts = string.split("-");
+                event = parts[0]; // 004
+                String part2 = parts[1]; // 034556
+
+                SharedPreferences sp1 = getActivity().getSharedPreferences("subevent", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp1.edit();
+
+                editor.putString("eventid", event);
+                editor.commit();
+
+                new GetContacts1().execute();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         lv.setTextFilterEnabled(true);
         setupSearchView();

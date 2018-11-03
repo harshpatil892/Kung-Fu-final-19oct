@@ -56,12 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPage);
         ImageAdapter adapterView = new ImageAdapter(this);
         mViewPager.setAdapter(adapterView);
-        log_out = getSharedPreferences("login", Context.MODE_PRIVATE);
-
-//        if(log_out.contains("mobile") && log_out.contains("password")){
-//            Intent intent = new Intent(this, MainActivity.class);
-//            startActivity(intent);
-//        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -278,14 +272,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
+
+                                log_out = getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor e = log_out.edit();
-                                e.clear();
+                                e.remove("userrole");
                                 e.commit();
 
-//                                navigationView1.setVisibility(View.INVISIBLE);
-//                                navigationView.setVisibility(View.VISIBLE);
-                                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                                Intent intent = new Intent(MainActivity.this,MainActivity.class);
                                 startActivity(intent);
+
 
                             }
                         });

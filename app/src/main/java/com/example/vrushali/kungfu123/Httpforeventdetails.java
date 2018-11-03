@@ -30,14 +30,14 @@ public class Httpforeventdetails {
 
     public Httpforeventdetails(Context context){
 
-        result2 = context.getSharedPreferences("selectevent", Context.MODE_PRIVATE);
-        temp1 = result2.getString("eventname", "");
+        result1 = context.getSharedPreferences("selectevent", Context.MODE_PRIVATE);
+        temp = result1.getString("eventname", "");
 
-        result1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
-        temp = result1.getString("userid", "");
+        result2 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
+        temp1 = result2.getString("userid", "");
 
         result3 = context.getSharedPreferences("subevent", Context.MODE_PRIVATE);
-        temp2 = result3.getString("subeventname", "");
+        temp2 = result3.getString("eventid", "");
 
     }
 
@@ -50,9 +50,13 @@ public class Httpforeventdetails {
             conn.setRequestMethod("POST");
             conn.getRequestMethod();
             JSONObject jsonParam = new JSONObject();
-            jsonParam.put("event_name", temp1);
+            jsonParam.put("event_name", temp);
             jsonParam.put("event_id", temp2);
-            jsonParam.put("trainer_id", temp);
+            jsonParam.put("trainer_id", temp1);
+
+            Log.e("event_name", temp);
+            Log.e("event_id", temp2);
+            Log.e("trainer_id", temp1);
 
             OutputStreamWriter out = new   OutputStreamWriter(conn.getOutputStream());
             out.write(jsonParam.toString());

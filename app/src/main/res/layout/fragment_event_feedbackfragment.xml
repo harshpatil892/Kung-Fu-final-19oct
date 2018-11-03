@@ -6,18 +6,83 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context=".EventFeedbackfragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="152dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="Type of Event"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:layout_width="152dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/spinner1">
+
+                </Spinner>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.12"
+                android:background="@android:color/black">
+            </View>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:layout_width="152dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="Select event"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <Spinner
+                    android:layout_width="152dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/spinner2">
+                </Spinner>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view1"
-        android:layout_width="320dp"
-        android:layout_height="160dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
-        card_view:cardCornerRadius="15dp">
+        android:layout_margin="15dp"
+        card_view:cardCornerRadius="15dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/fq1"
@@ -37,8 +102,8 @@
             android:id="@+id/rating1"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
-            android:layout_marginLeft="35dp"
             android:layout_marginTop="65dp"
+            android:layout_marginLeft="50dp"
             android:isIndicator="false"
             android:numStars="5"
             android:rating="0.0"
@@ -51,24 +116,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="110dp"
+            android:layout_marginBottom="5dp"
             />
 
     </android.support.v7.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="13dp">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            android:layout_marginLeft="120dp"/>
 
-    </LinearLayout>
-    </LinearLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:backgroundTint="#ff8f00"
+        android:textColor="#fff"
+        android:text="@string/submit"
+        android:layout_marginTop="380dp"/>
+
+
 
 </FrameLayout>

@@ -21,15 +21,15 @@ public class Httpfordetails {
 
     private static final String TAG = Httpfordetails.class.getSimpleName();
 
-    SharedPreferences result1,result2,result3,result4;
+    SharedPreferences result1,result2,result3,result4,result5;
 
     static String UserId;
-    String temp,temp1,temp2,temp3;
+    String temp,temp1,temp2,temp3,temp4;
 
-  public Httpfordetails(Context context){
+    public Httpfordetails(Context context){
 
-        result1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
-        temp = result1.getString("userid", "");
+        result1 = context.getSharedPreferences("studentid", Context.MODE_PRIVATE);
+        temp = result1.getString("gsid", "");
 
         result2 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
         temp1 = result2.getString("userrole","");
@@ -39,6 +39,10 @@ public class Httpfordetails {
 
         result4 = context.getSharedPreferences("year", Context.MODE_PRIVATE);
         temp3 = result4.getString("yrid","");
+
+        result5 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
+        temp4 = result5.getString("userid", "");
+
     }
 
 
@@ -52,13 +56,53 @@ public class Httpfordetails {
             conn.getRequestMethod();
             JSONObject jsonParam = new JSONObject();
             jsonParam.put("role", temp1);
-            jsonParam.put("uid", "26");
-            jsonParam.put("month", "3");
-            jsonParam.put("year", "2017");
+            jsonParam.put("uid", temp);
+            jsonParam.put("month", temp2);
+            jsonParam.put("year", temp3);
 
-            Log.e("data:",temp);
+            Log.e("role", temp1);
+            Log.e("uid", temp);
+            Log.e("month", temp2);
+            Log.e("year", temp3);
 
-//            jsonParam.put("trainer_id", "2");
+            OutputStreamWriter out = new   OutputStreamWriter(conn.getOutputStream());
+            out.write(jsonParam.toString());
+            out.close();
+            // read the response
+            InputStream in = new BufferedInputStream(conn.getInputStream());
+            response = convertStreamToString(in);
+        } catch (MalformedURLException e) {
+            Log.e(TAG, "MalformedURLException: " + e.getMessage());
+        } catch (ProtocolException e) {
+            Log.e(TAG, "ProtocolException: " + e.getMessage());
+        } catch (IOException e) {
+            Log.e(TAG, "IOException: " + e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, "Exception: " + e.getMessage());
+        }
+        return response;
+    }
+
+
+    public String makeServiceCall1(String reqUrl) {
+
+        String response = null;
+        try {
+            URL url = new URL("http://10.0.43.1/kungfu2/api/v1/user.php?data=show_attendance");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.getRequestMethod();
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("role", temp1);
+            jsonParam.put("uid", temp4);
+            jsonParam.put("month", temp2);
+            jsonParam.put("year", temp3);
+
+            Log.e("role", temp1);
+            Log.e("uid", temp4);
+            Log.e("month", temp2);
+            Log.e("year", temp3);
+
             OutputStreamWriter out = new   OutputStreamWriter(conn.getOutputStream());
             out.write(jsonParam.toString());
             out.close();

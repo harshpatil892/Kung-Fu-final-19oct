@@ -33,8 +33,8 @@ public class Httpforfeesrecord {
         result1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
         temp = result1.getString("userid", "");
 
-        result2 = context.getSharedPreferences("batchinfoid", Context.MODE_PRIVATE);
-        temp1 = result2.getString("batchidd", "");
+        result2 = context.getSharedPreferences("batchidd", Context.MODE_PRIVATE);
+        temp1 = result2.getString("gbatchid", "");
 
         result3 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
         temp2 = result3.getString("userrole", "");
@@ -91,5 +91,4 @@ public class Httpforfeesrecord {
         }
         return sb.toString();
     }
-
 }

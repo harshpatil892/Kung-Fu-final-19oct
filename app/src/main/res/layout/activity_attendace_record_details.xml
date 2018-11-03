@@ -95,7 +95,7 @@
                     android:layout_width="152dp"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:text="Select Year"
+                    android:text="@string/Select_Year"
                     android:textColor="#000"
                     android:textSize="16sp" />
 

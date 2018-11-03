@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -50,9 +51,11 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
     private RecyclerView recyclerView;
     ArrayList<String> select_batch;
 
+    String stud_id,part1,res;
+
     private android.support.v7.widget.SearchView searchView;
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
-    private static String url = "http://10.0.43.1/kungfu2/api/v1/user.php?data=show_attendance";
+    String URL1 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=show_attendance";
     private ListView lv;
     ArrayList<HashMap<String, String>> contactList;
 
@@ -79,6 +82,8 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
         lv = (ListView) findViewById(R.id.attrec);
         mSearchView = (SearchView)findViewById(R.id.searchView1);
+
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -86,8 +91,21 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
                                     long arg3)
             {
 
+                String value = lv.getItemAtPosition(position).toString();
+                Log.e("ITEM SELECETD",value);
+                stud_id = value.replaceAll("[a-z,{}.A-Z=]","");
+                Log.e("HARSHAL :",stud_id);
+
+                SharedPreferences sp1 = getSharedPreferences("studentid", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp1.edit();
+
+                editor.putString("gsid", stud_id);
+                editor.clear();
+                editor.commit();
+
                 Intent intent = new Intent(Attendance_record.this,AttendaceRecordDetails.class);
                 startActivity(intent);
+
             }
         });
 
@@ -96,13 +114,41 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
         spin1 = findViewById(R.id.spinner1);
 
         select_batch = new ArrayList<String>();
+        select_batch.add(0,"select");
+
 
         new GetBatch().execute();
-        new GetContacts().execute();
+
 
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if(adapterView.getItemAtPosition(i).equals("select")) {
+                    // do nothing
+
+                }
+
+                else{
+
+                    String item2 =adapterView.getItemAtPosition(i).toString();
+
+                    String string = item2;
+                    String[] parts = string.split("-");
+                    part1 = parts[0]; // 004
+                    String part2 = parts[1]; // 034556
+
+                    SharedPreferences sp1 = getSharedPreferences("attbatchid", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp1.edit();
+
+                    editor.putString("gatt", part1);
+                    editor.clear();
+                    editor.commit();
+
+                    new GetContacts().execute();
+
+                }
+
 
             }
 
@@ -111,7 +157,6 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
             }
         });
-
         lv.setTextFilterEnabled(true);
         setupSearchView();
 
@@ -122,7 +167,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
     {
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(this);
-        mSearchView.setSubmitButtonEnabled(true);
+        mSearchView.setSubmitButtonEnabled(false);
         mSearchView.setQueryHint("Search Here");
     }
     @Override
@@ -194,25 +239,10 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
                         String eg = c.getString("b_name");
                         String f = c.getString("b_location");
 
+                        res = a + "-" + eg;
 
+                        select_batch.add(res);
 
-
-//                        String uname = c.getString("uc_status");
-//                        String ureg = c.getString("uc_reg_date");
-//
-                        // Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
-
-                        // tmp hash map for single contact
-                        HashMap<String, String> contact = new HashMap<>();
-
-                        // adding each child node to HashMap key => value
-                        contact.put("eg", eg);
-
-                        select_batch.add(eg);
                     }
 
                 } catch (final JSONException e) {
@@ -259,6 +289,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {
 
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -276,7 +307,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
             Httpforattendancerecord sh = new Httpforattendancerecord(getApplicationContext());
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(url);
+            String jsonStr = sh.makeServiceCall(URL1);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 
@@ -293,18 +324,12 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
                         String id = c.getString("uc_id");
                         String name = c.getString("uc_name");
-
-
-
-
-//                        String address = c.getString("address");
-//                        String gender = c.getString("gender");
-//
-//                        // Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("phone");
-//                        String mobile = phone.getString("mobile");
-//                        String home = phone.getString("home");
-//                        String office = phone.getString("office");
+//                        String name1 = c.getString("uc_batch");
+//                        String name2 = c.getString("a_id");
+//                        String name3 = c.getString("a_s_id");
+//                        String name4 = c.getString("a_t_id");
+//                        String name5 = c.getString("a_date");
+//                        String name6 = c.getString("a_status");
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
@@ -353,8 +378,6 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 //            if (pDialog.isShowing())
 //                pDialog.dismiss();
 
-
-
 //            mShimmerViewContainer.setVisibility(View.GONE);
             /**
              * Updating parsed JSON data into ListView
@@ -367,6 +390,15 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
             lv.setAdapter(adapter);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(Attendance_record.this,MainActivity.class);
+        startActivity(intent);
+
     }
 
 }

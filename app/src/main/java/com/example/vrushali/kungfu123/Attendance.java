@@ -39,7 +39,7 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
     private String TAG = Attendance.class.getSimpleName();
 
     Spinner spin1;
-    String trainid;
+    String trainid,batch,res;
     private SearchView mSearchView;
     String  item,harsh,temp;
     ArrayList<String> select_batch;
@@ -97,11 +97,36 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         });
 
         new GetContacts().execute();
-        new GetContacts1().execute();
+
 
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if(adapterView.getItemAtPosition(i).equals("select")) {
+                    // do nothing
+
+                }
+
+                else{
+
+                    String item2 =adapterView.getItemAtPosition(i).toString();
+
+                    String string = item2;
+                    String[] parts = string.split("-");
+                    batch = parts[0]; // 004
+                    String part2 = parts[1]; // 034556
+
+                    SharedPreferences sp1 = getSharedPreferences("attbatchid1", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp1.edit();
+
+                    editor.putString("gatt1", batch);
+                    editor.clear();
+                    editor.commit();
+
+                    new GetContacts1(batch).execute();
+
+                }
 
             }
             @Override
@@ -181,22 +206,10 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
                         String eg = c.getString("b_name");
                         String f = c.getString("b_location");
 
-//                        String uname = c.getString("uc_status");
-//                        String ureg = c.getString("uc_reg_date");
-//
-                        // Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
+                        res =  a + "-" + eg;
 
-                        // tmp hash map for single contact
-                        HashMap<String, String> contact = new HashMap<>();
+                        select_batch.add(res);
 
-                        // adding each child node to HashMap key => value
-                        contact.put("eg", eg);
-
-                        select_batch.add(eg);
                     }
 
                 } catch (final JSONException e) {
@@ -231,7 +244,7 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-        spin1.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, select_batch));
+            spin1.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, select_batch));
 
 
 //            Toast.makeText(getApplicationContext(), "In Spinner", Toast.LENGTH_SHORT).show();
@@ -241,6 +254,16 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
     }
 
     private class GetContacts1 extends AsyncTask<Void, Void, Void> {
+
+        String item1;
+        public GetContacts1(String item) {
+
+            this.item1 =item;
+
+//            Log.e("Selected batch id:",item1);
+
+        }
+
 
         @Override
         protected void onPreExecute() {
@@ -279,8 +302,6 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
                         // adding each child node to HashMap key => value
                         contact.put("id", id);
                         contact.put("name", name);
-
-
 
 //                        contact.put("mobile", mobile);
 
@@ -330,7 +351,7 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
                     Attendance.this, contactList,
                     R.layout.listfortakeattendance, new String[]{"id","name"
             }, new int[]{R.id.id,R.id.name
-                    });
+            });
 
             lv.setAdapter(adapter);
         }
@@ -351,10 +372,8 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(Attendance.this,"Registration successful",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
+            Toast.makeText(Attendance.this,"Attendance Inserted successfully",Toast.LENGTH_SHORT).show();
 
-//            textView.setText(result);
         }
     }
 

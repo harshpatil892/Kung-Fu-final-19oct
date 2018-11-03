@@ -1,7 +1,6 @@
 <resources>
 
     <string name="app_name">AIKFWSA Kung Fu</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -10,7 +9,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
     <string name="title_home">Martial Arts</string>
     <string name="title_dashboard">Health Tips</string>
@@ -99,7 +97,7 @@
 
     <string name="efq">How was the event ?</string>
 
-<!--drawer-->
+    <!--drawer-->
 
     <string name="login">Login</string>
     <string name="home">Home</string>
@@ -110,15 +108,15 @@
     <string name="Attendance_Record">Attendance Record</string>
     <string name="Bank_Details">Bank Details</string>
     <string name="Training_centers">Training Centers</string>
-    <string name="Upcoming_Events">Upcoming_Events</string>
+    <string name="Upcoming_Events">Upcoming Events</string>
     <string name="Suggestions">Suggestions</string>
-    <string name="About_us">About_us</string>
+    <string name="About_us">About us</string>
     <string name="Gallery">Gallery</string>
     <string name="Inbox">Inbox</string>
     <string name="Logout">Logout</string>
     <string name="Result">Result</string>
     <string name="Feedback">Feedback</string>
-    <string name="Trainer_profile">Trainer_profile</string>
+    <string name="Trainer_profile">Trainer profile</string>
 
 
     <string name="Registration">Registration</string>
@@ -127,7 +125,7 @@
     <string name="Language">Language</string>
 
 
-<!--menu-->
+    <!--menu-->
 
     <string name="slogen1">However beautiful the strategy, you should occasionally look at the results</string>
     <string name="slogen2">The more you sweat in training, the less you bleed in combat</string>
@@ -136,7 +134,7 @@
     <string name="slogen5">The most powerful weapon on earth is the human soul on fire</string>
     <string name="slogen6">We may encounter many defeats but we must not be defeated</string>
 
-<!--textviews-->
+    <!--textviews-->
 
     <string name="Select_Batch">Select Batch</string>
     <string name="Select_Month">Select Month</string>
@@ -148,14 +146,34 @@
     <string name="Select_Event">Select_Event</string>
     <string name="Registration_fees">Registration fees</string>
     <string name="Type_of_event">Type of Event</string>
-    <string name="Date_of_birth">Date_of_Birth</string>
+    <string name="Date_of_birth">Date of Birth</string>
     <string name="Registration_date">Registration_date</string>
     <string name="gender">Gender</string>
     <string name="Belt_level">Belt Level</string>
-    <string name="Fee_Record">Fee_Record</string>
-    <string name="Notification_Individual">Notification_Individual</string>
+    <string name="Fee_Record">Fee Record</string>
+    <string name="Notification_Individual">Notification Individual</string>
     <string name="Upload_Photo">Upload Photo</string>
     <string name="Update_photo">Update Photo</string>
     <string name="Night_Mode">Night Mode</string>
+
+
+    <!--hints-->
+    <string name="mobile">Enter Mobile no.</string>
+    <string name="password">Enter password</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="admission_fees">Admission Fees</string>
+    <string name="Pass">Password</string>
+    <string name="CPass">Confirm Password</string>
+    <string name="Gr">Gr Number</string>
+    <string name="username">username</string>
+    <string name="change_language">You can change language from here !</string>
+
+
+    <!--button-->
+    <string name="add">Add</string>
+    <string name="submit">Submit</string>
+    <string name="send">Send</string>
+
 
 </resources>

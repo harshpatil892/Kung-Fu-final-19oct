@@ -41,7 +41,7 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Name"
+                                android:hint="@string/name"
                                 android:id="@+id/name"/>
 
                         </android.support.design.widget.TextInputLayout>
@@ -183,7 +183,7 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Mobile No."
+                                android:hint="@string/mobile"
                                 android:id="@+id/mob_no"
                                 android:inputType="number"
                                 android:ems="10"/>
@@ -209,7 +209,7 @@
                                 android:id="@+id/edittextarea"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Address"
+                                android:hint="@string/address"
                                 android:lines="3"
                                 android:ems="10"
                                 android:gravity="top"
@@ -280,7 +280,7 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Admission Fees"
+                                android:hint="@string/admission_fees"
                                 android:id="@+id/ad_fees"
                                 android:inputType="number"/>
 
@@ -309,7 +309,7 @@
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Password"
+                                android:hint="@string/Pass"
                                 android:id="@+id/pwd"
                                 android:inputType="textPassword"/>
 
@@ -337,7 +337,7 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Confirm Password"
+                                android:hint="@string/CPass"
                                 android:id="@+id/con_pwd"
                                 android:inputType="textPassword"
                                 />
@@ -363,7 +363,7 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Gr Number"
+                                android:hint="@string/Gr"
                                 android:id="@+id/gr_no"/>
 
                         </android.support.design.widget.TextInputLayout>
@@ -381,8 +381,10 @@
                             android:id="@+id/button_save"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:backgroundTint="#ff8f00"
+                            android:textColor="#fff"
                             android:layout_marginLeft="120dp"
-                            android:text="Save" />
+                            android:text="@string/add" />
 
                     </LinearLayout>
 

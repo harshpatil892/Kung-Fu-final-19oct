@@ -49,7 +49,7 @@ public class Event_Register extends Fragment{
     Spinner type_event,sub_event,spin_batch,spin_student,spin_belt;
     LinearLayout linearLayout;
     Button add_btn;
-    String selected_event_type,res,res1,res2,res3,res4,item1,select_batch_id,res6;
+    String selected_event_type,res,res1,res2,res3,res4,res6;
     String event,batch,student,belt,get_fees;
     ArrayAdapter<String> myAdapter,myAdapter1,myAdapter2,myAdapter3;
     ArrayList<String> event_type ;
@@ -206,15 +206,18 @@ public class Event_Register extends Fragment{
                 }
                 else{
 
-                    item1 =parent.getItemAtPosition(position).toString();
-                    select_batch_id =String.valueOf(spin_batch.getSelectedItemId());
-                    Log.e("Selected item:",select_batch_id);
+                    String item2 =parent.getItemAtPosition(position).toString();
+
+
+                    String string = item2;
+                    String[] parts = string.split("-");
+                    batch = parts[0]; // 004
+                    String part2 = parts[1]; // 034556
 
                     SharedPreferences sp1 = getActivity().getSharedPreferences("batchinfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp1.edit();
 
                     editor.putString("batchid", batch);
-                    editor.clear();
                     editor.commit();
 
                     new GetStudents(batch).execute();
@@ -223,11 +226,7 @@ public class Event_Register extends Fragment{
                     spin_student.setAdapter(myAdapter);
 
                     myAdapter.clear();
-//
-//                    String string = item1;
-//                    String[] parts = string.split("-");
-//                    batch = parts[0]; // 004
-//                    String part2 = parts[1]; // 034556
+
 
                 }
 
@@ -359,10 +358,10 @@ public class Event_Register extends Fragment{
                         String temp2 = cn.getString("level");
 
                         res4 = temp + "-" + temp1;
-                        Log.e("Concated String:-",res4);
+//                        Log.e("Concated String:-",res4);
 
                         belt_level.add(res4);
-                        Log.e("Belt Levels:", res4);
+//                        Log.e("Belt Levels:", res4);
                     }
 
                     spin_belt.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, belt_level));
@@ -439,10 +438,10 @@ public class Event_Register extends Fragment{
 
                         res = a + "-" + b;
 
-                        Log.e("Concated:-",res);
+//                        Log.e("Concated:-",res);
 
                         event_name.add(res);
-                        Log.e("FINAL BATCHID:", res);
+//                        Log.e("FINAL BATCHID:", res);
                     }
 
                 } catch (final JSONException e) {
@@ -545,10 +544,10 @@ public class Event_Register extends Fragment{
 
                         res1 = a + "-" + b;
 
-                        Log.e("Concated:-",res1);
+//                        Log.e("Concated:-",res1);
 
                         event_name.add(res1);
-                        Log.e("FINAL BATCHID:", res1);
+//                        Log.e("FINAL BATCHID:", res1);
                     }
 
                 } catch (final JSONException e) {
@@ -649,10 +648,10 @@ public class Event_Register extends Fragment{
 
                         res2 = a + "-" + b;
 
-                        Log.e("Concated:-",res2);
+//                        Log.e("Concated:-",res2);
 
                         event_name.add(res2);
-                        Log.e("FINAL BATCHID:", res2);
+//                        Log.e("FINAL BATCHID:", res2);
                     }
 
                 } catch (final JSONException e) {
@@ -734,13 +733,10 @@ public class Event_Register extends Fragment{
                         String eg = c.getString("b_name");
                         String f = c.getString("b_location");
 
-
-                        batches.add(eg);
-
-//                        res3 = a + "-" + eg;
+                        res3 = a + "-" + eg;
 //                        Log.e("Concated String:-",res3);
-//
-//                        batches.add(res3);
+
+                        batches.add(res3);
 //                        Log.e("FINAL BATCHID:", res3);
                     }
 
@@ -832,10 +828,10 @@ public class Event_Register extends Fragment{
 
                         res6 = a + "-" + b;
 
-                        Log.e("Concated:-",res6);
+//                        Log.e("Concated:-",res6);
 
                         select_student.add(res6);
-                        Log.e("FINAL students:", res6);
+//                        Log.e("FINAL students:", res6);
 
 
                     }
@@ -1143,7 +1139,6 @@ public class Event_Register extends Fragment{
                                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 );
     }
-
 
 }
 

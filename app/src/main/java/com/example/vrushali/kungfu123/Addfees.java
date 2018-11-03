@@ -48,9 +48,9 @@ public class Addfees extends Fragment {
     Button btn1, mMonth ,yYear;
     TextView mItemSelected,yItemSelected;
     EditText insert_fees;
-    String part1,part3;
+    String part1,part3,res1;
 
-    SharedPreferences result1,result2;
+    SharedPreferences result1;
 
     ArrayList<String> select_batch;
     ArrayList<String> select_student = new ArrayList<String>();;
@@ -58,7 +58,7 @@ public class Addfees extends Fragment {
     ArrayAdapter<String> myAdapter;
 //    ArrayList<Integer> mUserMonths = new ArrayList<>();
 
-    String item1,select_item_id,result,select_student_id,item;
+    String select_item_id,result,select_student_id;
     String erg = "";
     String erg1 = "";
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
@@ -90,8 +90,6 @@ public class Addfees extends Fragment {
         yYear = v.findViewById(R.id.select_yr_btn);
         mItemSelected = v.findViewById(R.id.select_month_tvw);
         yItemSelected = v.findViewById(R.id.select_yr_tvw);
-
-
 
 //        checkedMonths = new boolean[listMonths.length + 1];
 
@@ -158,13 +156,12 @@ public class Addfees extends Fragment {
                 }
                 else{
 
-                    item1 =parent.getItemAtPosition(position).toString();
+                    String item1 =parent.getItemAtPosition(position).toString();
 
                     String string = item1;
                     String[] parts = string.split("-");
-                    part3 = parts[0]; // 004
-                    String part2 = parts[1]; // 034556
-
+                    part3 = parts[0];
+                    String part4 = parts[1];
 
                     select_item_id =String.valueOf(spin1.getSelectedItemId());
                     Log.e("Selected item:",select_item_id);
@@ -202,10 +199,7 @@ public class Addfees extends Fragment {
                 }
                 else{
 
-//                       item = parent.getSelectedItem().toString();
-
-                    item =parent.getItemAtPosition(position).toString();
-
+                    String item =parent.getItemAtPosition(position).toString();
 
                     String string = item;
                     String[] parts = string.split("-");
@@ -279,12 +273,19 @@ public class Addfees extends Fragment {
                     String d = c.getString("b_to_time");
                     String eg = c.getString("b_name");
                     String f = c.getString("b_location");
-                    HashMap<String, String> contact = new HashMap<>();
 
-                    // adding each child node to HashMap key => value
-                    contact.put("eg", eg);
 
-                    select_batch.add(eg);
+
+//                    HashMap<String, String> contact = new HashMap<>();
+//
+//                    // adding each child node to HashMap key => value
+//                    contact.put("eg", eg);
+//
+//                    select_batch.add(eg);
+
+                    res1 = a + "-" + eg;
+
+                    select_batch.add(res1);
                 }
 
             } catch (final JSONException e) {

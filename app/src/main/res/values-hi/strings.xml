@@ -105,7 +105,7 @@
 
 
 <!--drawer-->
-    <string name="login">लॉग इन करें</string>
+    <string name="login">लॉग इन </string>
     <string name="home">होम</string>
     <string name="profile">प्रोफाइल</string>
     <string name="Take_Attendance">उपस्थिति लें</string>
@@ -160,6 +160,24 @@
     <string name="Upload_Photo">फोटो अपलोड करें</string>
     <string name="Update_photo">फोटो अपडेट करें</string>
     <string name="Night_Mode">रात्री स्वरुप</string>
+
+    <!--hints-->
+    <string name="mobile">मोबाइल नंबर दर्ज करें.</string>
+    <string name="password">पास वर्ड दर्ज करें</string>
+    <string name="name">नाम</string>
+    <string name="address">पता</string>
+    <string name="admission_fees">प्रवेश शुल्क</string>
+    <string name="Pass">पासवर्ड</string>
+    <string name="CPass">पासवर्ड की पुष्टि कीजिये</string>
+    <string name="Gr">जीआर संख्या</string>
+    <string name="username">मोबाइल नंबर</string>
+    <string name="change_language">आप यहां से भाषा बदल सकते हैं!</string>
+
+<!--button-->
+
+    <string name="add">जोडे</string>
+    <string name="submit">जमा करें</string>
+    <string name="send">भेजे</string>
 
 
 </resources>

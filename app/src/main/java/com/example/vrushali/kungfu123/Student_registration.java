@@ -589,5 +589,4 @@ public class Student_registration extends Fragment{
                                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 );
     }
-
 }

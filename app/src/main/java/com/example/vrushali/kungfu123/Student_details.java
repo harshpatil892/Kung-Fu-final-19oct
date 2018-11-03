@@ -2,6 +2,7 @@ package com.example.vrushali.kungfu123;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
@@ -31,6 +32,8 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
     private ListView lv;
     private SearchView mSearchView;
     Spinner spin1;
+
+    String batch,res;
 
     ArrayList<String> select_batch;
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
@@ -68,6 +71,31 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                if(adapterView.getItemAtPosition(i).equals("select")){
+                    // do nothing
+
+                }
+                else{
+                    String item = adapterView.getItemAtPosition(i).toString();
+//                    Log.e("Selected belt",item);
+                    Toast.makeText(adapterView.getContext(),"Selected:"+item,Toast.LENGTH_SHORT).show();
+
+                    String string = item;
+                    String[] parts = string.split("-");
+                    batch = parts[0]; // 004
+                    String part2 = parts[1]; // 034556
+
+                    SharedPreferences sp1 = getSharedPreferences("gbatchid", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp1.edit();
+
+                    editor.putString("gbid", batch);
+                    editor.commit();
+
+
+                    new GetStudDetails(batch).execute();
+
+                }
+
             }
 
             @Override
@@ -75,6 +103,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
 
             }
         });
+
         lv.setTextFilterEnabled(true);
         setupSearchView();
     }
@@ -152,13 +181,11 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
                         String eg = c.getString("b_name");
                         String f = c.getString("b_location");
 
-                        // tmp hash map for single contact
-                        HashMap<String, String> contact = new HashMap<>();
 
-                        // adding each child node to HashMap key => value
-                        contact.put("eg", eg);
+                        res = a + "-" + eg;
 
-                        select_batch.add(eg);
+                        select_batch.add(res);
+
                     }
 
 
@@ -205,20 +232,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
                         String a = c.getString("uc_name");
                         String b = c.getString("fulladdr");
                         String cd = c.getString("u_mob");
-//                        String d = c.getString("b_to_time");
-//                        String eg = c.getString("b_name");
-//                        String f = c.getString("b_location");
 
-//                        String uname = c.getString("uc_status");
-//                        String ureg = c.getString("uc_reg_date");
-//
-                        // Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
-
-                        // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 
                         // adding each child node to HashMap key => value
@@ -266,6 +280,101 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
 
             spin1.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, select_batch));
 
+
+        }
+
+    }
+
+    class GetStudDetails extends AsyncTask<Void, Void, Void> {
+
+        String item11;
+        public GetStudDetails(String item) {
+
+            this.item11 =item;
+
+            Log.e("Selected belt exam:",item11);
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            // Showing progress dialog
+//                pDialog = new ProgressDialog(getActivity());
+//                pDialog.setMessage("Please wait...");
+//                pDialog.setCancelable(false);
+//                pDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandlerBatch sh = new HttpHandlerBatch(getApplicationContext());
+
+            String jsonStr1 = sh.makeServiceCall1(URL1);
+            Log.e(TAG, "Response from url: " + jsonStr1);
+            if (jsonStr1 != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr1);
+                    // Getting JSON Array node
+                    JSONArray contacts = jsonObj.getJSONArray("0");
+
+                    // looping through All Contacts
+                    for (int i = 0; i < contacts.length(); i++) {
+                        JSONObject c = contacts.getJSONObject(i);
+
+                        String a = c.getString("uc_name");
+                        String b = c.getString("fulladdr");
+                        String cd = c.getString("u_mob");
+
+                        // tmp hash map for single contact
+                        HashMap<String, String> contact = new HashMap<>();
+
+                        // adding each child node to HashMap key => value
+                        contact.put("a", a);
+                        contact.put("b", b);
+                        contact.put("cd", cd);
+
+                        contactList.add(contact);
+
+                    }
+
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+
+
             ListAdapter adapter = new SimpleAdapter(
                     Student_details.this, contactList,
                     R.layout.listforstuddetails, new String[]{"a", "b",
@@ -277,5 +386,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
         }
 
     }
+
+
 
 }

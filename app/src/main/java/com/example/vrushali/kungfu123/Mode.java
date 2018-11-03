@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 
 public class Mode extends BaseActivity {
 
@@ -41,11 +43,14 @@ public class Mode extends BaseActivity {
         onn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 InitApplication.getInstance().setIsNightModeEnabled(true);
                 Intent intent = getIntent();
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 finish();
                 startActivity(intent);
+
+
             }
         });
 
@@ -62,7 +67,6 @@ public class Mode extends BaseActivity {
 
 
     }
-
 
     private void hideNavigationBar() {
         this.getWindow().getDecorView()

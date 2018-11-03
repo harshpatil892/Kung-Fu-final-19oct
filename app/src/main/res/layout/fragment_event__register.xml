@@ -67,9 +67,7 @@
                         <Spinner
                             android:layout_width="152dp"
                             android:layout_height="40dp"
-                            android:id="@+id/spinner1">
-
-                        </Spinner>
+                            android:id="@+id/spinner1"></Spinner>
 
 
                     </LinearLayout>
@@ -250,7 +248,9 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:text="Add"
+                            android:text="@string/add"
+                            android:backgroundTint="#ff8f00"
+                            android:textColor="#fff"
                             android:textStyle="bold"
                             android:id="@+id/add_button"/>
 

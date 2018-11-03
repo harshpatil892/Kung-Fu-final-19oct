@@ -118,7 +118,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cardview"
             android:layout_margin="10dp"
-            android:text="Send"
+            android:backgroundTint="#ff8f00"
+            android:text="@string/send"
+            android:textColor="@android:color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 

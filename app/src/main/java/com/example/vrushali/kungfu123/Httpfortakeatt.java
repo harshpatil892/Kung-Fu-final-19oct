@@ -30,21 +30,9 @@ public class Httpfortakeatt {
 
     public Httpfortakeatt(Context context){
 
-        result1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
-        temp = result1.getString("userid", "");
+        result1 = context.getSharedPreferences("attbatchid1", Context.MODE_PRIVATE);
+        temp = result1.getString("gatt1", "");
     }
-
-//    private static SharedPreferences getPrefs(Context context) {
-//
-//
-//        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-//    }
-//
-//    public static String getUserId(Context context) {
-//
-//        UserId = getPrefs(context).getString("userid", "");
-//        return UserId;
-//    }
 
     public String makeServiceCall(String reqUrl) {
 
@@ -56,10 +44,9 @@ public class Httpfortakeatt {
             conn.setRequestMethod("POST");
             conn.getRequestMethod();
             JSONObject jsonParam = new JSONObject();
-            jsonParam.put("batch_id","10");
+            jsonParam.put("batch_id",temp);
             Log.e("data:",temp);
-//
-//            jsonParam.put("trainer_id", "2");
+
             OutputStreamWriter out = new   OutputStreamWriter(conn.getOutputStream());
             out.write(jsonParam.toString());
             out.close();

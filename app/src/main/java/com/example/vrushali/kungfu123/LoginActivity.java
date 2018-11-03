@@ -43,13 +43,6 @@ public class LoginActivity extends AppCompatActivity {
 
       log_in = findViewById(R.id.loginbtn);
 
-      sp=getSharedPreferences("login",Context.MODE_PRIVATE);
-
-      if(sp.contains("mobile") && sp.contains("password")){
-          Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-          startActivity(intent);
-      }
-
       log_in.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -162,11 +155,11 @@ public class LoginActivity extends AppCompatActivity {
                           Toast.makeText(getApplicationContext(),temp10 , Toast.LENGTH_SHORT).show();
                       }
 
+                      sp=getSharedPreferences("login",Context.MODE_PRIVATE);
                       SharedPreferences.Editor e=sp.edit();
                       e.putString("mobile",un);
                       e.putString("password",pwd1);
                       e.commit();
-
 
                       Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                       Intent intent = new Intent(LoginActivity.this,MainActivity.class);

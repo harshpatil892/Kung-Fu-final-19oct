@@ -1,5 +1,6 @@
 package com.example.vrushali.kungfu123;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
     ListView lv;
     ArrayList<String> select_batch;
     private SearchView mSearchView;
-    String part1;
+    String part1,res1;
 
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
     String URL1 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=show_fees";
@@ -76,7 +77,7 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
         select_batch.add(0,"select");
         new GetContacts().execute();
 
-    spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -92,13 +93,10 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
                     part1 = parts[0]; // 004
                     String part2 = parts[1]; // 034556
 
-                    select_item_id =String.valueOf(spin1.getSelectedItemId());
-                    Log.e("Selected item:",select_item_id);
-
-                    SharedPreferences sp1 = getActivity().getSharedPreferences("batchinfo", Context.MODE_PRIVATE);
+                    SharedPreferences sp1 = getActivity().getSharedPreferences("batchidd", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp1.edit();
 
-                    editor.putString("batchid", part1);
+                    editor.putString("gbatchid", part1);
                     editor.clear();
                     editor.commit();
 
@@ -113,6 +111,35 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
 
             }
         });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String s = lv.getItemAtPosition(position).toString();
+
+                String[] items = s.split(",");
+                String fees = items[0].split("=")[1]; //CURRENT
+                String name = items[1].split("=")[1]; //NAME
+                String idd = items[2].replaceAll("[a-z,{}.A-Z=]","");
+
+                Log.e("fees",fees);
+                Log.e("name",name);
+                Log.e("id",idd);
+
+                SharedPreferences sp1 = getActivity().getSharedPreferences("studentidd", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp1.edit();
+
+                editor.putString("gstudid", idd);
+                editor.clear();
+                editor.commit();
+
+                Intent intent = new Intent(getActivity(),FeeRecorddetail.class);
+                startActivity(intent);
+            }
+        });
+
+
         lv.setTextFilterEnabled(true);
         setupSearchView();
 
@@ -179,11 +206,10 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
                     String d = c.getString("b_to_time");
                     String eg = c.getString("b_name");
                     String f = c.getString("b_location");
-                    HashMap<String, String> contact = new HashMap<>();
 
-                    contact.put("eg", eg);
+                    res1 = a + "-" + eg;
+                    select_batch.add(res1);
 
-                    select_batch.add(eg);
                 }
 
             } catch (final JSONException e) {
@@ -242,7 +268,6 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
 //            pDialog.setCancelable(false);
 //            pDialog.show();
 
-
         }
 
         @Override
@@ -262,20 +287,22 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
 
-                        String id = c.getString("uc_id");
+                        String sid = c.getString("uc_id");
                         String name = c.getString("uc_name");
                         String email = c.getString("sf_total");
 
                         HashMap<String, String> contact = new HashMap<>();
 
                         // adding each child node to HashMap key => value
-                        contact.put("id", id);
+                        contact.put("id", sid);
                         contact.put("name", name);
                         contact.put("email", email);
 
-
                         // adding contact to contact list
                         contactList1.add(contact);
+
+
+                        Log.e("Contact list", String.valueOf(contactList1));
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -292,7 +319,7 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
                 }
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
-               getActivity().runOnUiThread(new Runnable() {
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(getActivity(),
@@ -321,9 +348,9 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
                     R.id.name,R.id.email});
 
             lv.setAdapter(adapter);
-
         }
     }
+
 
     private void hideNavigationBar() {
         getActivity().getWindow().getDecorView()

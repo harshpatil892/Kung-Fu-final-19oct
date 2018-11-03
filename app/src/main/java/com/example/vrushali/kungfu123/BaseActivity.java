@@ -167,6 +167,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 startActivity(getIntent());
                 return false;
+            case R.id.lang:
+                Intent intent5 = new Intent(BaseActivity.this, Lang.class);
+                startActivity(intent5);
+                return false;
             case R.id.mode:
                 Intent intent4 = new Intent(BaseActivity.this, Mode.class);
                 startActivity(intent4);
