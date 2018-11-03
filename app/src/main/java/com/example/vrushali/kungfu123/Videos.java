@@ -30,7 +30,7 @@ public class Videos extends Fragment {
                              Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_videos,container,false);
         recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
-        hideNavigationBar();
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(super.getContext()));
         youtubeVideos.add(new YoutubeVideo("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/3U-YfTj5Vag\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>"));

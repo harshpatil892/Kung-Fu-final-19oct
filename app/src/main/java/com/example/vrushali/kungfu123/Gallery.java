@@ -20,7 +20,7 @@ public class Gallery extends BaseActivity {
         @SuppressLint("InflateParams")
         View contentView = inflater.inflate(R.layout.activity_gallery, null, false);
         drawer.addView(contentView, 0);
-        hideNavigationBar();
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         GalleryPagerAdapter adapter = new GalleryPagerAdapter(this, getSupportFragmentManager());

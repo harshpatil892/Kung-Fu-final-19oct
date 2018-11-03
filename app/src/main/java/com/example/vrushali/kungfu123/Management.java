@@ -20,7 +20,7 @@ public class Management extends AppCompatActivity {
 
         }
         super.onCreate(savedInstanceState);
-        hideNavigationBar();
+
         setContentView(R.layout.activity_management);
         management=(WebView)findViewById(R.id.managemnet);
         management.getSettings().setJavaScriptEnabled(true);

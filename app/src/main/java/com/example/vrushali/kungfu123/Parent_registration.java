@@ -124,7 +124,7 @@ public class Parent_registration extends Fragment {
         belt_level_names=new ArrayList<String>();
         loadSpinnerData(URL);
 
-        hideNavigationBar();
+
 
         belt_level_names.add(0,"select");
 

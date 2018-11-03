@@ -37,13 +37,14 @@ public class Photos extends Fragment {
 
 
         View v =inflater.inflate(R.layout.fragment_photos,container,false);
-        hideNavigationBar();
+
         photos1=(WebView)v.findViewById(R.id.photo);
 
         photos1.getSettings().setJavaScriptEnabled(true);
         photos1.loadUrl("http://www.aikfwsa.com/app/gallery/photo-gallery/");
         return v;
     }
+    
     private void hideNavigationBar() {
         getActivity().getWindow().getDecorView()
                 .setSystemUiVisibility(

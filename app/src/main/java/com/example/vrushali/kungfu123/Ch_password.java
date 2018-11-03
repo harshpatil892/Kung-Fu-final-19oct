@@ -60,7 +60,7 @@ public class Ch_password extends Fragment {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         }
-        hideNavigationBar();
+
 
         View v =inflater.inflate(R.layout.fragment_ch_password,container,false);
         npass=(EditText)v.findViewById(R.id.pwd);

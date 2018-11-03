@@ -46,7 +46,7 @@ public class MartialArts extends AppCompatActivity {
 
         }
         super.onCreate(savedInstanceState);
-        hideNavigationBar();
+
         setContentView(R.layout.activity_martial_arts);
         txt = (TextView) findViewById(R.id.textclick);
         txt1 = (TextView)findViewById(R.id.textclick1);

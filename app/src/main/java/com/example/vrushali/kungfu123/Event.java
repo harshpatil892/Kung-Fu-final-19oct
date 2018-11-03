@@ -29,7 +29,7 @@ public class Event extends BaseActivity {
         @SuppressLint("InflateParams")
         View contentView = inflater.inflate(R.layout.activity_event, null, false);
         drawer.addView(contentView, 0);
-        hideNavigationBar();
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         EventPagerAdapter adapter = new EventPagerAdapter(this, getSupportFragmentManager());

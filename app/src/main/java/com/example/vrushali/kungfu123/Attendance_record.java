@@ -71,7 +71,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
         }
         super.onCreate(savedInstanceState);
-        hideNavigationBar();
+
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //inflate your activity layout here!
         @SuppressLint("InflateParams")

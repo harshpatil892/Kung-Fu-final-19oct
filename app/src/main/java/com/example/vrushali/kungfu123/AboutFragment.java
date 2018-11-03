@@ -40,7 +40,7 @@ public class AboutFragment extends Fragment {
         card1 = v.findViewById(R.id.key_personel);
         card2 = v.findViewById(R.id.management);
         card3 = v.findViewById(R.id.about_us_card1);
-        hideNavigationBar();
+
         card1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

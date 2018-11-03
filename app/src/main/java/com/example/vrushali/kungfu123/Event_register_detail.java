@@ -87,7 +87,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
 
         lv = (ListView) v.findViewById(R.id.eventrecord);
-        hideNavigationBar();
+
 
         contactList1 = new ArrayList<>();
 

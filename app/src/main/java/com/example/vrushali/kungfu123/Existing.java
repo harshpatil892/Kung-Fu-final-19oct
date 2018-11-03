@@ -97,8 +97,6 @@ public class Existing extends Fragment{
         ed_fees = v.findViewById(R.id.ad_fees);
         grno = v.findViewById(R.id.gr_no);
 
-        hideNavigationBar();
-
         btnGet = (Button) v.findViewById(R.id.select_bdate);
         tvw = (TextView) v.findViewById(R.id.birthdate);
 

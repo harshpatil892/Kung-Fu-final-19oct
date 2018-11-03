@@ -47,7 +47,7 @@ public class Competition extends BaseActivity {
 
         }
         super.onCreate(savedInstanceState);
-        hideNavigationBar();
+
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //inflate your activity layout here!
         @SuppressLint("InflateParams")

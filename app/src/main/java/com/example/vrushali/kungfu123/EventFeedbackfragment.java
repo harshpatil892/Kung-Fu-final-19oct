@@ -75,7 +75,6 @@ public class EventFeedbackfragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_event_feedbackfragment, container, false);
-        hideNavigationBar();
 
 
         type_event = v.findViewById(R.id.spinner1);

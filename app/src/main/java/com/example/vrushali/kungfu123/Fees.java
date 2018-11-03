@@ -31,7 +31,7 @@ public class Fees extends BaseActivity{
         @SuppressLint("InflateParams")
         View contentView = inflater.inflate(R.layout.activity_fees, null, false);
         drawer.addView(contentView, 0);
-        hideNavigationBar();
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         FeesPagerAdapter adapter = new FeesPagerAdapter(this, getSupportFragmentManager());

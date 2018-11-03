@@ -60,7 +60,7 @@ public class CampFragment extends Fragment {
     contactList = new ArrayList<>();
 
     lv = (ListView)v.findViewById(R.id.campresult);
-    hideNavigationBar();
+
     new GetContacts().execute();
     return v;
   }

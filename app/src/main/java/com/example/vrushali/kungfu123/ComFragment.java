@@ -67,7 +67,7 @@ public class ComFragment extends Fragment {
     // Inflate the layout for this fragment
     View v =inflater.inflate(R.layout.fragment_com,container,false);
     contactList = new ArrayList<>();
-    hideNavigationBar();
+
     lv = (ListView)v.findViewById(R.id.compresult);
 
     new GetContacts().execute();

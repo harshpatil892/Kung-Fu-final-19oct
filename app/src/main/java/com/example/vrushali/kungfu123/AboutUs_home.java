@@ -22,7 +22,7 @@ public class AboutUs_home extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us_home);
-        hideNavigationBar();
+
         aboutus=(WebView)findViewById(R.id.aboutus);
         aboutus.getSettings().setJavaScriptEnabled(true);
         aboutus.loadUrl("http://www.aikfwsa.com/app/about-us/");

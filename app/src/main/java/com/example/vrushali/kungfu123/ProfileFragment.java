@@ -116,12 +116,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         setListeners();
         harshal();
         new GetContacts().execute();
-     update.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             new JsonPost().execute(file);
-         }
-     });
+     
         return v;
     }
 
@@ -334,90 +329,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-    class JsonPost extends AsyncTask<String ,String,String>{
 
 
-        @Override
-        protected String doInBackground(String... params) {
-
-            String response=PostJson(params);
-            Log.e("params",""+params);
-            Log.e("response",""+response);
-            return response;
-        }
-
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            Toast.makeText(getActivity(),"Registration successful",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
-
-//            textView.setText(result);
-        }
-    }
-
-////////////////////
-
-    private String PostJson(String[] params)  {
-
-        Log.e("postjson method invoke","");
-
-        HttpURLConnection connection = null;
-        BufferedReader br=null;
-        String data="";
-
-
-        try {
-            URL url =new URL("http://10.0.43.1/kungfu2/api/v1/user.php?data=update_image");
-            connection = (HttpURLConnection) url.openConnection();
-            String urlparam = file;
-            Log.e("data",urlparam);
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type","multipart/form-data");
-            connection.setDoOutput(true);
-            DataOutputStream dataOutputStream =new DataOutputStream(connection.getOutputStream());
-            dataOutputStream.writeBytes(urlparam);
-
-            dataOutputStream.flush();
-            dataOutputStream.close();
-
-            int responsecode=connection.getResponseCode();
-            int data1 = Log.e("data", "data:" + responsecode);
-
-            br =new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-            String line="";
-
-            StringBuffer buffer=new StringBuffer();
-
-            while((line =br.readLine())!=null){
-                buffer.append(line);
-                Log.e("line",""+line);
-
-
-            }
-            data=buffer.toString();
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } if(connection !=null) {
-            connection.disconnect();
-            try {
-                if (br != null) {
-                    br.close();
-                }
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-
-        }
-        return data;
-
-    }
     private void hideNavigationBar() {
         getActivity().getWindow().getDecorView()
                 .setSystemUiVisibility(

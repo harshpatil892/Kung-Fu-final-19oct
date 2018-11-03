@@ -42,7 +42,7 @@ public class Contact_detail extends Fragment {
         contactus.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         contactus.getSettings().setJavaScriptEnabled(true);
         contactus.loadUrl("http://www.aikfwsa.com/app/contact-us/");
-        hideNavigationBar();
+
         return v;
     }
 

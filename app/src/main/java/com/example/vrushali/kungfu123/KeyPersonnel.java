@@ -21,7 +21,7 @@ public class KeyPersonnel extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_key_personnel);
-        hideNavigationBar();
+
 
         keypersonal=(WebView)findViewById(R.id.keypersonal);
 

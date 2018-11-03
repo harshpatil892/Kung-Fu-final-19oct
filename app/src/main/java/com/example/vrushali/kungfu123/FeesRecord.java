@@ -67,7 +67,7 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
                              Bundle savedInstanceState) {
 
         View v =inflater.inflate(R.layout.fragment_fees_record,container,false);
-        hideNavigationBar();
+
         spin1 = (Spinner) v.findViewById(R.id.spinner1);
         lv = (ListView) v.findViewById(R.id.feerecord);
         mSearchView = (SearchView)v.findViewById(R.id.searchView1);

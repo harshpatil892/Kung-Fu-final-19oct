@@ -100,7 +100,6 @@
         android:id="@+id/takeatt"
         android:layout_width="match_parent"
         android:layout_height="386dp"
-        android:layout_marginBottom="56dp"
         android:listSelector="#ffd54f"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

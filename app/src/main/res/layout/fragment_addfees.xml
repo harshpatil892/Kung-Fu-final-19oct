@@ -16,7 +16,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
         <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -52,7 +51,6 @@
                     android:layout_height="40dp"
                     android:gravity="center"
                     android:text="@string/Select_Batch"
-                    android:textColor="#000"
                     android:textSize="16sp" />
 
                 <Spinner
@@ -82,7 +80,7 @@
                     android:layout_height="40dp"
                     android:gravity="center"
                     android:text="@string/Select_Student"
-                    android:textColor="#000"
+
                     android:textSize="16sp" />
 
                 <Spinner
@@ -112,7 +110,6 @@
                     android:layout_height="40dp"
                     android:gravity="center"
                     android:text="@string/Monthly_Fees"
-                    android:textColor="#000"
                     android:textSize="16sp" />
 
                 <EditText
@@ -145,7 +142,6 @@
                     android:id="@+id/select_mnth_btn"
                     android:gravity="center"
                     android:text="@string/Select_Month"
-                    android:textColor="#000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -153,7 +149,6 @@
                     android:layout_height="40dp"
                     android:id="@+id/select_month_tvw"
                     android:gravity="center"
-                    android:textColor="#000"
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -177,7 +172,6 @@
                     android:id="@+id/select_yr_btn"
                     android:gravity="center"
                     android:text="@string/Select_Year"
-                    android:textColor="#000"
                     android:textSize="16sp" />
 
                 <TextView
@@ -185,7 +179,6 @@
                     android:layout_height="40dp"
                     android:id="@+id/select_yr_tvw"
                     android:gravity="center"
-                    android:textColor="#000"
                     android:textSize="16sp" />
             </LinearLayout>
 

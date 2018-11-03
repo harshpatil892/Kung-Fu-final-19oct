@@ -89,8 +89,6 @@ public class Event_Register extends Fragment{
 
         View v =inflater.inflate(R.layout.fragment_event__register,container,false);
 
-        hideNavigationBar();
-
         type_event = (Spinner) v.findViewById(R.id.spinner1);
         sub_event = (Spinner) v.findViewById(R.id.spinner2);
         spin_batch = (Spinner) v.findViewById(R.id.spinner3);

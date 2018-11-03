@@ -53,7 +53,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
 
         }
         super.onCreate(savedInstanceState);
-        hideNavigationBar();
+
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //inflate your activity layout here!
         @SuppressLint("InflateParams")

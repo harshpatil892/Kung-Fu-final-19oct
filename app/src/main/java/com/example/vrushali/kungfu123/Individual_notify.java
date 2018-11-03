@@ -99,7 +99,7 @@ public class Individual_notify extends Fragment {
         spin1 = (Spinner) v.findViewById(R.id.spinner1);
 
         namelist = new ArrayList<>();
-        hideNavigationBar();
+
         listView = v.findViewById(R.id.listforstudinfo);
         checkBox_getid = v.findViewById(R.id.tv_checkbox);
         harsh=(EditText)v.findViewById(R.id.name);

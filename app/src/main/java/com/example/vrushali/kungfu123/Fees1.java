@@ -55,7 +55,7 @@ public class Fees1 extends BaseActivity {
         @SuppressLint("InflateParams")
         View contentView = inflater.inflate(R.layout.activity_fees1, null, false);
         drawer.addView(contentView, 0);
-        hideNavigationBar();
+
         contactList = new ArrayList<>();
 
         lv = (ListView) findViewById(R.id.list);

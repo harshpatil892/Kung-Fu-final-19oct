@@ -63,7 +63,7 @@ public class Feedbackfragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_feedbackfragment, container, false);
-        hideNavigationBar();
+
         contactList = new ArrayList<>();
         lv = (ListView) v.findViewById(R.id.list);
         rt1 = (RatingBar) v.findViewById(R.id.rating1);

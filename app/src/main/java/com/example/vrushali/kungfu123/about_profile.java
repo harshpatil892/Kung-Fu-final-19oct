@@ -42,7 +42,7 @@ public class about_profile extends Fragment {
         profile2=(WebView)v.findViewById(R.id.profile2);
         profile3=(WebView)v.findViewById(R.id.profile3);
         profile4=(WebView)v.findViewById(R.id.profile4);
-        hideNavigationBar();
+
         profile1.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         profile1.getSettings().setJavaScriptEnabled(true);
         profile1.loadUrl("http://www.aikfwsa.com/app/values/");

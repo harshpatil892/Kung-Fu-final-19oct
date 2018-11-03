@@ -57,7 +57,7 @@ public class Timetable extends Fragment {
         contactList = new ArrayList<>();
 
         lv = (ListView)v.findViewById(R.id.list1);
-        hideNavigationBar();
+
             new GetContacts().execute();
                 return v;
     }

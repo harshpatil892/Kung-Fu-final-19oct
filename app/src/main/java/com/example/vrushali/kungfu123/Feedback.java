@@ -56,7 +56,7 @@ public class Feedback extends BaseActivity {
         @SuppressLint("InflateParams")
         View contentView = inflater.inflate(R.layout.activity_feedback, null, false);
         drawer.addView(contentView, 0);
-        hideNavigationBar();
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         FeedbackPagerAdapter adapter = new FeedbackPagerAdapter(this, getSupportFragmentManager());

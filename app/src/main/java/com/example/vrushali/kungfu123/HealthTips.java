@@ -17,7 +17,7 @@ public class HealthTips extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_tips);
-        hideNavigationBar();
+
         health1=(WebView)findViewById(R.id.health1);
         health2=(WebView)findViewById(R.id.health2);
         health3=(WebView)findViewById(R.id.health3);
