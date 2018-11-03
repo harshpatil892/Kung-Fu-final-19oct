@@ -66,6 +66,7 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
+
     <SearchView
         android:id="@+id/searchView1"
         android:layout_width="400dp"

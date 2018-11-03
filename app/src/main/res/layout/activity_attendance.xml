@@ -67,24 +67,44 @@
 
     </android.support.v7.widget.CardView>
 
-    <SearchView
-        android:id="@+id/searchView1"
-        android:layout_width="400dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="8dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView8"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="124dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218" />
+        tools:ignore="MissingConstraints">
+
+        <SearchView
+            android:id="@+id/searchView1"
+            android:layout_width="400dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.218" />
+
+    </android.support.v7.widget.CardView>
 
     <ListView
         android:id="@+id/takeatt"
         android:layout_width="match_parent"
-        android:layout_height="502dp"
+        android:layout_height="386dp"
+        android:layout_marginBottom="56dp"
+        android:listSelector="#ffd54f"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

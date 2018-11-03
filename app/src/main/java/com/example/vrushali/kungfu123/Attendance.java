@@ -83,6 +83,7 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
             {
 
                 String value = lv.getItemAtPosition(position).toString();
+                
                 Log.e("ITEM SELECETD",value);
                 harsh = value.replaceAll("[a-z,{}.A-Z=]","");
                 Log.e("HARSHAL :",harsh);
@@ -377,7 +378,6 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         }
     }
 
-////////////////////
 
     private String PostJson(String[] params)  {
 
