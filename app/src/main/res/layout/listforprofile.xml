@@ -17,7 +17,6 @@
             android:drawableLeft="@drawable/ic_personprofile"
             android:drawablePadding="18dp"
             android:gravity="start"
-            android:textColor="#000"
             android:textSize="22dp"
             tools:ignore="RtlCompat" />
 
@@ -29,7 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:drawableLeft="@drawable/ic_phone"
-            android:textColor="#000"
+
             android:textSize="22dp"
              />
 
@@ -41,7 +40,7 @@
             android:gravity="start"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_beltname"
-            android:textColor="#000"
+
             android:textSize="22dp"
             />
 

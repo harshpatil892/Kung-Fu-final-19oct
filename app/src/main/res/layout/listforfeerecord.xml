@@ -13,7 +13,6 @@
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:gravity="start"
-        android:textColor="#000000"
         android:textSize="15dp"
         tools:ignore="RtlCompat" />
 
@@ -22,7 +21,6 @@
         android:layout_width="242dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:textColor="#000000"
         android:textSize="15dp" />
 
     <TextView
@@ -30,7 +28,6 @@
         android:layout_width="46dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="05dp"
-        android:textColor="#000000"
         android:textSize="15dp" />
 
 </LinearLayout>

@@ -38,7 +38,7 @@
             android:layout_marginTop="70dp"
             android:text="Date : "
             android:gravity="start"
-            android:textColor="#000"
+
             android:textSize="16dp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />
@@ -50,7 +50,7 @@
             android:layout_marginLeft="110dp"
             android:layout_marginTop="70dp"
             android:gravity="start"
-            android:textColor="#000"
+
             android:textSize="16dp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />
@@ -63,7 +63,7 @@
             android:layout_marginTop="160dp"
             android:gravity="start"
             android:text="Result : "
-            android:textColor="#000"
+
             android:textSize="16dp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />
@@ -75,14 +75,9 @@
             android:layout_marginLeft="110dp"
             android:layout_marginTop="160dp"
             android:gravity="start"
-            android:textColor="#000"
             android:textSize="16dp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />
-
-
-
-
 
     </android.support.v7.widget.CardView>
 </LinearLayout>
