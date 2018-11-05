@@ -30,6 +30,8 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -49,6 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.support.constraint.Constraints.TAG;
 
 public class Individual_notify extends Fragment {
 
@@ -99,7 +102,7 @@ public class Individual_notify extends Fragment {
         spin1 = (Spinner) v.findViewById(R.id.spinner1);
 
         namelist = new ArrayList<>();
-
+        hideNavigationBar();
         listView = v.findViewById(R.id.listforstudinfo);
         checkBox_getid = v.findViewById(R.id.tv_checkbox);
         harsh=(EditText)v.findViewById(R.id.name);
@@ -111,12 +114,38 @@ public class Individual_notify extends Fragment {
 
         new GetContacts().execute();
 
+        adapter = new CustomAdapterNotification(namelist, getActivity());
+
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+
+                UserModelNotify dataModel= (UserModelNotify) namelist.get(position);
+                dataModel.checked = !dataModel.checked;
+//                adapter.notifyDataSetChanged();
+
+            }
+        });
+
         noti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 title=harsh.getText().toString();
                 address=harshal.getText().toString();
+
+                FirebaseMessaging.getInstance().subscribeToTopic("test");
+                FirebaseInstanceId.getInstance().getToken();
+
+                SharedPreferences sp1 = getActivity().getSharedPreferences("notify", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp1.edit();
+
+                editor.putString("noti_title", title);
+                editor.putString("noti_msg", address);
+                editor.commit();
+
 
                 Log.e("TITLE:",title);
                 Log.e("Adreessss:-",address);
@@ -129,7 +158,6 @@ public class Individual_notify extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if(adapterView.getItemAtPosition(i).equals("select")){
-
 
                 }
                 else{
@@ -207,12 +235,10 @@ public class Individual_notify extends Fragment {
 
                         HashMap<String, String> contact = new HashMap<>();
 
-
                         contact.put("eg", eg);
 
                         select_batch.add(eg);
                     }
-
 
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -347,21 +373,12 @@ public class Individual_notify extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-
             adapter = new CustomAdapterNotification(namelist, getActivity());
 
             listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-                    UserModelNotify dataModel= (UserModelNotify) namelist.get(position);
-                    dataModel.checked = !dataModel.checked;
-                    adapter.notifyDataSetChanged();
-
-                }
-            });
 
         }
 
@@ -466,3 +483,4 @@ public class Individual_notify extends Fragment {
 
 
 }
+

@@ -149,6 +149,7 @@
                 android:id="@+id/listforstudinfo"
                 android:layout_width="fill_parent"
                 android:layout_height="1000dp"
+                android:listSelector="#ffd54f"
                 android:layout_below="@+id/notifycard"
                 >
 

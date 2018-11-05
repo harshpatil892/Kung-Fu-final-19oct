@@ -83,7 +83,6 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
         lv = (ListView) findViewById(R.id.attrec);
         mSearchView = (SearchView)findViewById(R.id.searchView1);
 
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -288,7 +287,6 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
     }
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {
-
 
         @Override
         protected void onPreExecute() {

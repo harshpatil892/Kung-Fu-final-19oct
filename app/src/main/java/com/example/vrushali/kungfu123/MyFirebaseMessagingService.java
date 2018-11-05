@@ -27,30 +27,26 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
+        showNotification(remoteMessage.getData().get("message"),remoteMessage.getData().get("title"));
 
-        Intent intent=new Intent(this,MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
-        notificationBuilder.setContentTitle("title");
-        notificationBuilder.setContentText("msg");
-
-//        notificationBuilder.setAutoCancel(true);
-        notificationBuilder.setSmallIcon(R.drawable.ic_beach);
-        notificationBuilder.setContentIntent(pendingIntent);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0,notificationBuilder.build());
-        try {
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-            r.play();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        long[] view = {500,1000};
-        notificationBuilder.setVibrate(view);
-//        notificationManager.notify(1, notificationBuilder.build());
     }
+
+    private void showNotification(String title,String message) {
+
+        Intent i = new Intent(this,MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,i,PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setAutoCancel(true)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setSmallIcon(R.drawable.ic_beach)
+                .setContentIntent(pendingIntent);
+        NotificationManager manager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        manager.notify(0,builder.build());
+
+    }
+
 }
 
 
