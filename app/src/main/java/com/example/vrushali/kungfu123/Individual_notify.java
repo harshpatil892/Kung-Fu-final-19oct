@@ -61,11 +61,11 @@ public class Individual_notify extends Fragment {
     SharedPreferences sp;
     Button noti;
     Spinner spin1;
-    String item1,select_item_id,title,address;
+    String item1,select_item_id,title,address,res1,batch,sorted;
     String uiddd="23";
     EditText harsh,harshal;
     CheckBox checkBox_getid;
-    private ListView listView;
+    ListView listView;
     ArrayList namelist;
     private CustomAdapterNotification adapter;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
@@ -104,7 +104,6 @@ public class Individual_notify extends Fragment {
         namelist = new ArrayList<>();
         hideNavigationBar();
         listView = v.findViewById(R.id.listforstudinfo);
-        checkBox_getid = v.findViewById(R.id.tv_checkbox);
         harsh=(EditText)v.findViewById(R.id.name);
         harshal=(EditText)v.findViewById(R.id.address_area);
         noti=(Button)v.findViewById(R.id.sendnoti);
@@ -114,17 +113,30 @@ public class Individual_notify extends Fragment {
 
         new GetContacts().execute();
 
-        adapter = new CustomAdapterNotification(namelist, getActivity());
-
-        listView.setAdapter(adapter);
+//        adapter = new CustomAdapterNotification(namelist, getActivity());
+//
+//        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-                UserModelNotify dataModel= (UserModelNotify) namelist.get(position);
-                dataModel.checked = !dataModel.checked;
-//                adapter.notifyDataSetChanged();
+                String value = listView.getItemAtPosition(position).toString();
+                Log.e("VALUE OF:-",value);
+                Log.e("ITEM SELECETD",value);
+                sorted = value.replaceAll("[a-z,{}.A-Z=]","");
+                Log.e("HARSHAL :",sorted);
+
+                title=harsh.getText().toString();
+                address=harshal.getText().toString();
+
+                FirebaseMessaging.getInstance().subscribeToTopic("test");
+                FirebaseInstanceId.getInstance().getToken();
+
+                new JsonPost().execute(title,address,sorted);
+//                UserModelNotify dataModel= (UserModelNotify) namelist.get(position);
+//                dataModel.checked = !dataModel.checked;
+////                adapter.notifyDataSetChanged();
 
             }
         });
@@ -162,15 +174,22 @@ public class Individual_notify extends Fragment {
                 }
                 else{
                     item1 =adapterView.getItemAtPosition(i).toString();
-                    select_item_id =String.valueOf(spin1.getSelectedItemId());
-                    Log.e("Selected item:",select_item_id);
+//                    select_item_id =String.valueOf(spin1.getSelectedItemId());
+//                    Log.e("Selected item:",select_item_id);
+
+                    String string = item1;
+                    String[] parts = string.split("-");
+                    batch = parts[0]; // 004
+                    String part2 = parts[1]; // 034556
+
+
 
                     SharedPreferences sp1 = getActivity().getSharedPreferences("batchinfo", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp1.edit();
 
-                    editor.putString("batchid", select_item_id);
+                    editor.putString("batchid", batch);
 
-                    new GetListNames(select_item_id).execute();
+                    new GetListNames(batch).execute();
 
                     editor.clear();
                     editor.commit();
@@ -233,11 +252,16 @@ public class Individual_notify extends Fragment {
                         String eg = c.getString("b_name");
                         String f = c.getString("b_location");
 
-                        HashMap<String, String> contact = new HashMap<>();
+//                        HashMap<String, String> contact = new HashMap<>();
+//
+//                        contact.put("eg", eg);
+//
+//                        select_batch.add(eg);
 
-                        contact.put("eg", eg);
 
-                        select_batch.add(eg);
+                        res1 = a + "-" + eg;
+                        select_batch.add(res1);
+
                     }
 
                 } catch (final JSONException e) {
@@ -328,6 +352,7 @@ public class Individual_notify extends Fragment {
 
                         HashMap<String, String> contact = new HashMap<>();
 
+                        contact.put("a",a);
                         contact.put("b",b);
 
                         SharedPreferences sp1=getActivity().getSharedPreferences("getid", MODE_PRIVATE);
@@ -335,7 +360,7 @@ public class Individual_notify extends Fragment {
                         editor.putString("studid", a);
                         editor.commit();
 
-                        namelist.add(new UserModelNotify(b, false));
+                        namelist.add(contact);
 
                     }
 
@@ -373,12 +398,20 @@ public class Individual_notify extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            adapter = new CustomAdapterNotification(namelist, getActivity());
+//            adapter = new CustomAdapterNotification(namelist, getActivity());
+//
+//            listView.setAdapter(adapter);
+//            adapter.notifyDataSetChanged();
+//
+
+
+            ListAdapter adapter = new SimpleAdapter(
+                    getActivity(), namelist,
+                    R.layout.listview_notify, new String[]{"a", "b",
+            }, new int[]{R.id.id,
+                    R.id.name});
 
             listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-
-
 
         }
 
@@ -433,7 +466,7 @@ public class Individual_notify extends Fragment {
         try {
             java.net.URL url =new URL("http://10.0.43.1/kungfu2/api/v1/user.php?data=indivisual_notification");
             connection = (HttpURLConnection) url.openConnection();
-            String urlparam = "{\"msg\":\""+title+"\",\"title\":\""+address+"\",\"uc_id\":\""+ uiddd +"\"}";
+            String urlparam = "{\"msg\":\""+title+"\",\"title\":\""+address+"\",\"uc_id\":\""+ sorted +"\"}";
             Log.e("data",urlparam);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type","application/json");

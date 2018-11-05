@@ -61,13 +61,14 @@
                             android:layout_height="40dp"
                             android:gravity="center"
                             android:text="Type of Event"
-                            android:textColor="#000"
                             android:textSize="16sp" />
 
                         <Spinner
                             android:layout_width="152dp"
                             android:layout_height="40dp"
-                            android:id="@+id/spinner1"></Spinner>
+                            android:id="@+id/spinner1">
+
+                        </Spinner>
 
 
                     </LinearLayout>
@@ -91,7 +92,7 @@
                             android:layout_height="40dp"
                             android:gravity="center"
                             android:text="Select event"
-                            android:textColor="#000"
+
                             android:textSize="16sp" />
 
                         <Spinner
@@ -121,7 +122,7 @@
                             android:layout_height="40dp"
                             android:gravity="center"
                             android:text="Select batch"
-                            android:textColor="#000"
+
                             android:textSize="16sp" />
 
                         <Spinner
@@ -151,7 +152,6 @@
                             android:layout_height="40dp"
                             android:gravity="center"
                             android:text="Select student"
-                            android:textColor="#000"
                             android:textSize="16sp" />
 
                         <Spinner
@@ -183,7 +183,7 @@
                             android:layout_height="40dp"
                             android:gravity="center"
                             android:text="Belt Level"
-                            android:textColor="#000"
+
                             android:textSize="16sp" />
 
                         <Spinner
@@ -216,7 +216,7 @@
                             android:layout_height="40dp"
                             android:gravity="center"
                             android:text="Registration fees"
-                            android:textColor="#000"
+
                             android:textSize="16sp" />
 
                         <EditText

@@ -25,14 +25,11 @@ public class Httpforinbox {
     static String UserId;
     String temp;
 
-
-
     public Httpforinbox(Context context){
 
         result1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
         temp = result1.getString("ucid", "");
     }
-
 
     public String makeServiceCall(String reqUrl) {
 

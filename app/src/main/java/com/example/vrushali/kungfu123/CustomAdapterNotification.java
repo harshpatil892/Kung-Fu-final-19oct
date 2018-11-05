@@ -62,8 +62,8 @@ public class CustomAdapterNotification extends ArrayAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_notify, parent, false);
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.tv_name);
-            viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.tv_checkbox);
+//            viewHolder.txtName = (TextView) convertView.findViewById(R.id.tv_name);
+//            viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.tv_checkbox);
 
             result=convertView;
             convertView.setTag(viewHolder);
