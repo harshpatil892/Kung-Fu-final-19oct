@@ -36,7 +36,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="50dp"
             android:gravity="start"
-
             android:textSize="16dp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />
@@ -48,7 +47,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="110dp"
             android:gravity="start"
-
             android:textSize="16dp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />

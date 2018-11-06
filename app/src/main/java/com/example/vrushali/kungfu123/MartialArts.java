@@ -29,10 +29,7 @@ public class MartialArts extends AppCompatActivity {
     public TextView txt,txt1,txt2,txt3;
     public CardView cardView,cardView1,card2,card22,card3,card33,card4,card44;
     private TextView mTextMessage;
-
-
     SharedPreferences store_id,reg_token;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +77,6 @@ public class MartialArts extends AppCompatActivity {
         webview5.loadUrl("http://www.aikfwsa.com/app/2017/04/12/25-benefits-of-martial-arts-for-your-child/");
         webview7.getSettings().setJavaScriptEnabled(true);
         webview7.loadUrl("http://www.aikfwsa.com/app/2017/04/11/second-test/");
-
-
-
 
         store_id = getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
         final String id = store_id.getString("userid","");
@@ -248,7 +242,6 @@ private void hideNavigationBar() {
 
             }
             data=buffer.toString();
-
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

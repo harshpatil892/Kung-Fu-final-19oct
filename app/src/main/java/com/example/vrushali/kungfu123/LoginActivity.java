@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_login);
-      hideNavigationBar();
+
       mob = findViewById(R.id.umob);
       pwd = findViewById(R.id.upwd);
 

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        hideNavigationBar();
+
         martial_arts_card = findViewById(R.id.martial_arts);
         health_tips_card = findViewById(R.id.health_tips);
         aboutus_card = findViewById(R.id.about_us_card);

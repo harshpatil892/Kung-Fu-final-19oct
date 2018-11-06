@@ -83,7 +83,7 @@ public class Addfees extends Fragment {
 
         spin1 = (Spinner) v.findViewById(R.id.spinner1);
         spin2 = (Spinner) v.findViewById(R.id.spinner2);
-        hideNavigationBar();
+
         insert_fees = v.findViewById(R.id.get_fees);
         btn1 = v.findViewById(R.id.add_button);
         mMonth = v.findViewById(R.id.select_mnth_btn);

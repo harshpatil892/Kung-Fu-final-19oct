@@ -63,7 +63,7 @@ public class Introslider extends AppCompatActivity {
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
-        hideNavigationBar();
+
 
         // layouts of all welcome sliders
         // add few more layouts if you want

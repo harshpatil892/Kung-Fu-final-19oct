@@ -20,7 +20,6 @@ import static android.view.View.generateViewId;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
-
     String note,note1;
 
     @Override

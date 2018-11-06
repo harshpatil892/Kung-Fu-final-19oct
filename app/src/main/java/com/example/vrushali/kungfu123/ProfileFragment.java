@@ -111,7 +111,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         selectImage = (TextView)v.findViewById(R.id.select_image);
         imageView = (ImageView)v.findViewById(R.id.share_imageview);
         update=(TextView)v.findViewById(R.id.update);
-        hideNavigationBar();
+
         Log.e("IMAGEURI:", String.valueOf(imageUri));
         setListeners();
         harshal();
