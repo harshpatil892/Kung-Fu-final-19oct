@@ -22,7 +22,7 @@
             android:id="@+id/name"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:background="#e64a19"
+            android:background="#ff6d00"
             android:drawableStart="@drawable/ic_pin"
             android:gravity="start"
             android:paddingBottom="2dip"

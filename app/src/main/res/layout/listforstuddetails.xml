@@ -22,7 +22,7 @@
             android:paddingBottom="2dip"
             android:paddingTop="6dip"
             android:textColor="#ffffff"
-            android:background="#ffad1457"
+            android:background="#ff6d00"
             android:textSize="21dp"
             android:drawableStart="@drawable/ic_place_black_24dp"
             android:gravity="start"

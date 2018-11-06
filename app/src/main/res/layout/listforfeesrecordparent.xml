@@ -38,13 +38,13 @@
                             android:id="@+id/mnth"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:background="#ffad1457"
+                            android:background="#ff6d00"
                             android:drawableStart="@drawable/ic_place_black_24dp"
                             android:gravity="start"
                             android:paddingTop="6dip"
                             android:paddingBottom="2dip"
                             android:textColor="#ffffff"
-                            android:textSize="16dp"
+                            android:textSize="17dp"
                             android:textStyle="bold"
                             tools:ignore="RtlCompat" />
 

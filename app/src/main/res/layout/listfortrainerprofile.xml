@@ -24,7 +24,7 @@
             android:layout_marginRight="-20dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            android:background="#ffad1457"
+            android:background="#ff6d00"
             android:gravity="center"
             android:paddingBottom="2dip"
             android:paddingTop="6dip"
