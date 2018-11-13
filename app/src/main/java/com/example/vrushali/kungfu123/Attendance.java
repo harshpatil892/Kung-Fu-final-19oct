@@ -373,7 +373,6 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(Attendance.this,"Attendance Inserted successfully",Toast.LENGTH_SHORT).show();
 
         }
     }

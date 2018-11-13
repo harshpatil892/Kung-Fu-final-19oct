@@ -12,6 +12,7 @@
         android:id="@+id/login"
         android:icon="@drawable/ic_logout"
         android:title="@string/login"
+
         />
 
     <item
@@ -121,6 +122,11 @@
         android:id="@+id/inbox"
         android:icon="@drawable/ic_mail"
         android:title="@string/inbox" />
+
+    <item
+        android:id="@+id/ChangeLang"
+        android:icon="@drawable/ic_mail"
+        android:title="@string/Language" />
 
     <item
         android:id="@+id/logout"

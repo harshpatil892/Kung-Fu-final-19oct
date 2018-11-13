@@ -167,10 +167,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 startActivity(getIntent());
                 return false;
-            case R.id.lang:
-                Intent intent5 = new Intent(BaseActivity.this, Lang.class);
-                startActivity(intent5);
-                return false;
+
             case R.id.mode:
                 Intent intent4 = new Intent(BaseActivity.this, Mode.class);
                 startActivity(intent4);
@@ -264,7 +261,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.inbox) {
             Intent intent12 = new Intent(BaseActivity.this, Inbox.class);
             startActivity(intent12);
-        }else if (id == R.id.logout) {
+
+        }
+        else if (id == R.id.ChangeLang) {
+            Intent intent13 = new Intent(BaseActivity.this, Lang.class);
+            startActivity(intent13);
+
+        }
+        else if (id == R.id.logout) {
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
             builder.setMessage("Are you sure want to logout?");

@@ -1,5 +1,6 @@
 package com.example.vrushali.kungfu123;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDelegate;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 
 public class Photos extends Fragment {
@@ -38,13 +41,25 @@ public class Photos extends Fragment {
 
         View v =inflater.inflate(R.layout.fragment_photos,container,false);
 
-        photos1=(WebView)v.findViewById(R.id.photo);
+        GridView gridView = v.findViewById(R.id.gridView);
+        gridView.setAdapter(new GalleryAdapter(getActivity()));
 
-        photos1.getSettings().setJavaScriptEnabled(true);
-        photos1.loadUrl("http://www.aikfwsa.com/app/gallery/photo-gallery/");
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getActivity(),FullImageActivity.class);
+                i.putExtra("id",position);
+                startActivity(i);
+            }
+        });
+
+//        photos1=(WebView)v.findViewById(R.id.photo);
+//
+//        photos1.getSettings().setJavaScriptEnabled(true);
+//        photos1.loadUrl("http://www.aikfwsa.com/app/gallery/photo-gallery/");
         return v;
     }
-    
+
     private void hideNavigationBar() {
         getActivity().getWindow().getDecorView()
                 .setSystemUiVisibility(

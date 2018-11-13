@@ -191,8 +191,8 @@ public class GradingFragment extends Fragment {
               R.layout.listforprofile, new String[]{"id", "name",
               "email"}, new int[]{R.id.name,
               R.id.email, R.id.address});
+      
       lv.setAdapter(adapter);
-
 
       if(lv.getCount()==0) {
         //empty, show alertDialog
@@ -204,10 +204,16 @@ public class GradingFragment extends Fragment {
                     dialog.cancel();
                   }
                 });
-        AlertDialog alert = builder.create();
+        final AlertDialog alert = builder.create();
+        alert.setOnShowListener( new DialogInterface.OnShowListener() {
+          @SuppressLint("ResourceAsColor")
+          @Override
+          public void onShow(DialogInterface arg0) {
+            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+          }
+        });
         alert.show();
       }
-
 
     }
 

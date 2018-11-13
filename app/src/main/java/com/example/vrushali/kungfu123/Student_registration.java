@@ -1,6 +1,9 @@
 package com.example.vrushali.kungfu123;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,14 +49,14 @@ import java.util.HashMap;
 
 
 
-public class Student_registration extends Fragment{
+public class Student_registration extends Fragment {
 
     private String TAG = Student_registration.class.getSimpleName();
 
     String nm,bd,reg_d,gender,mn,ad,spin_data1,spin_data2,ad_f,pd,cpd,gn;
     EditText name,mob_no,addr,ad_fee,pwd,con_pwd,gr_no;
     String buttonSelected,belt,batch,part1,part3;
-
+    String regexp = "\\d{2}\\D{3}";
     RadioGroup radio_group;
     RadioButton r_male,r_female;
 
@@ -61,7 +64,7 @@ public class Student_registration extends Fragment{
     DatePickerDialog picker;
     Button btnGet,btnGet1,save;
     TextView tvw,register_text;
-
+    String namepattern = "[a-z]";
     Spinner spin1,spin2;
 
     ArrayList<String> belt_level_names;
@@ -73,6 +76,7 @@ public class Student_registration extends Fragment{
 
 
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,7 +182,7 @@ public class Student_registration extends Fragment{
 
                     String string = item1;
                     String[] parts = string.split("-");
-                    part1 = parts[0]; // 004
+                    part3 = parts[0]; // 004
                     String part2 = parts[1]; // 034556
                 }
 
@@ -241,6 +245,7 @@ public class Student_registration extends Fragment{
 //        }
 
         save.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
 
@@ -257,13 +262,94 @@ public class Student_registration extends Fragment{
                 cpd = con_pwd.getText().toString();
                 gn = gr_no.getText().toString();
 
-                new JsonPost().execute(mn,role,nm,gender,pd,ad,bd,reg_d,part1,ad_f,part3,gn);
 
+                if(name.length() == 0 || name == null)
+                {
+                    name.requestFocus();
+                    name.setError("Enter Name");
+
+                }
+                else if (tvw.length() == 0 || tvw.equals("") || tvw == null) {
+
+                    tvw.requestFocus();
+                    tvw.setText("Enter Date *");
+                    tvw.setTextColor(R.color.red);
+                }
+                else if (register_text.length() == 0 || register_text.equals("") || register_text == null)
+                {
+                    //EditText is not empty
+                    register_text.requestFocus();
+                    register_text.setText("Enter Date *");
+                    register_text.setTextColor(R.color.red);
+                }
+                else if (mob_no.length() == 0 || mob_no.equals("") || mob_no == null)
+                {
+                    //EditText is not empty
+                    mob_no.requestFocus();
+                    mob_no.setError("Enter Mob No");
+                }
+                else if (mob_no.length() != 10){
+                    mob_no.requestFocus();
+                    mob_no.setError("10 Digit Number");
+
+                }  else if (addr.length() == 0 || addr.equals("") || addr == null)
+                {
+                    //EditText is not empty
+                    addr.requestFocus();
+                    addr.setError("Enter Address");
+                }
+//                else if (part1.equals("") || part1 == null)
+//                {
+//
+//                    Toast.makeText(getActivity(),"Select Belt Level",Toast.LENGTH_LONG).show();
+//                    //EditText is not empty
+////                    part1.requestFocus();
+////                    part1.setError("Please Enter Address");
+//                }
+//                else if (part3.equals("") || part3 == null)
+//                {
+//
+//                    Toast.makeText(getActivity(),"Select Batch",Toast.LENGTH_LONG).show();
+//                    //EditText is not empty
+////                    part1.requestFocus();
+////                    part1.setError("Please Enter Address");
+//                }
+                else if (ad_fee.length() == 0 || ad_fee.equals("") || ad_fee == null)
+                {
+                    //EditText is not empty
+                    ad_fee.requestFocus();
+                    ad_fee.setError("Enter Fees");
+                }
+                else if (pwd.length() == 0 || pwd.equals("") || pwd == null)
+                {
+                    //EditText is not empty
+                    pwd.requestFocus();
+                    pwd.setError("Enter Password");
+                }
+                else if (con_pwd.length() == 0 || con_pwd.equals("") || con_pwd == null)
+                {
+                    //EditText is not empty
+                    con_pwd.requestFocus();
+                    con_pwd.setError("Confirm Password");
+                }
+                else if (gr_no.length() == 0 || gr_no.equals("") || gr_no == null)
+                {
+                    //EditText is not empty
+                    gr_no.requestFocus();
+                    gr_no.setError("Enter Gr Number");
+                }
+                else {
+
+            new JsonPost().execute(mn, role, nm, gender, pd, ad, bd, reg_d, part1, ad_f, part3, gn);
+
+                }
             }
         });
 
         return v;
     }
+
+
 
 //    public void register(){
 //
@@ -298,14 +384,6 @@ public class Student_registration extends Fragment{
 //        if(TextUtils.isEmpty(reg_d)){
 //            register_text.setError("Please select registration date");
 //            valid = false;
-//        }
-//
-//        int selectedId = radio_group.getCheckedRadioButtonId();
-//        radioButton = (RadioButton) radio_group.findViewById(selectedId);
-//
-//
-//        if(selectedId==-1){
-//            Toast.makeText(getActivity(),"Please select gender",Toast.LENGTH_SHORT).show();
 //        }
 //
 //        if(TextUtils.isEmpty(mn)){

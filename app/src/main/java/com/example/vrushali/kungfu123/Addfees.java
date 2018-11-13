@@ -1,5 +1,6 @@
 package com.example.vrushali.kungfu123;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -220,6 +221,7 @@ public class Addfees extends Fragment {
 
 
         btn1.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
 
@@ -230,8 +232,26 @@ public class Addfees extends Fragment {
                 String get_month = mItemSelected.getText().toString();
                 String get_yr = yItemSelected.getText().toString();
 
-                new JsonPost().execute(part1,get_fee,temp,get_yr,get_month);
+                if(insert_fees.length() == 0 || insert_fees == null)
+                {
+                    insert_fees.requestFocus();
+                    insert_fees.setError("Enter fees");
 
+                }
+                else if (mItemSelected.length() == 0 || mItemSelected.equals("") || mItemSelected == null) {
+
+                    mItemSelected.requestFocus();
+                    mItemSelected.setText("Enter Date *");
+                    mItemSelected.setTextColor(R.color.red);
+                }
+                else if (yItemSelected.length() == 0 || yItemSelected.equals("") || yItemSelected == null) {
+
+                    yItemSelected.requestFocus();
+                    yItemSelected.setText("Enter Date *");
+                    yItemSelected.setTextColor(R.color.red);
+                }else {
+                    new JsonPost().execute(part1, get_fee, temp, get_yr, get_month);
+                }
             }
         });
 

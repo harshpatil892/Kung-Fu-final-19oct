@@ -105,6 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="379dp"
         android:layout_marginTop="8dp"
+        android:listSelector="#ffd54f"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

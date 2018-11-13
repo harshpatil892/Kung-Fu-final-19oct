@@ -67,8 +67,32 @@ public class Suggestions extends BaseActivity {
                 String un=username.getText().toString();
                 String pwd=password.getText().toString();
 
-                new JsonPost().execute(nm,un,pwd);
+                if(name.length() == 0 || name.equals("") || name == null)
+                {
+                    name.requestFocus();
+                    name.setError("Enter Name");
 
+                }
+                else if (username.length() == 0 || username.equals("") || username == null) {
+
+                    username.requestFocus();
+                    username.setError("Enter Mobile Number *");
+
+                }
+                else if (username.length() != 10){
+
+                    username.requestFocus();
+                    username.setError("10 Digit Number");
+                }
+                else if (password.length() == 0 || password.equals("") || password == null) {
+
+                    password.requestFocus();
+                    password.setError("Enter Suggestion *");
+
+                }
+                else {
+                    new JsonPost().execute(nm, un, pwd);
+                }
             }
         });
 

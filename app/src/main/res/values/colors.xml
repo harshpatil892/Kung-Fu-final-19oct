@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#ff5722</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="red">#d50000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="daynight_textColor">#617878</color>
     <color name="switchColor">#911DEE</color>

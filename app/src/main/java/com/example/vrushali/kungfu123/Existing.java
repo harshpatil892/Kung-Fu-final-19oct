@@ -1,5 +1,6 @@
 package com.example.vrushali.kungfu123;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -286,6 +287,7 @@ public class Existing extends Fragment{
 
 
         save_info.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
 
@@ -296,10 +298,40 @@ public class Existing extends Fragment{
                 String fees = ed_fees.getText().toString();
                 String gn = grno.getText().toString();
 
+                if(ed_name.length() == 0 || ed_name.equals("") || ed_name == null)
+                {
+                    ed_name.requestFocus();
+                    ed_name.setError("Enter name");
 
-                new JsonPost().execute(ucname,part1,gender,part5,gn,part3,fees,bd,regd);
+                }
+                else if (tvw.length() == 0 || tvw.equals("") || tvw == null) {
 
+                    tvw.requestFocus();
+                    tvw.setText("Enter Date *");
 
+                }
+                else if (register_text.length() == 0 || register_text.equals("") || register_text == null) {
+
+                    register_text.requestFocus();
+                    register_text.setError("Enter Date *");
+
+                }
+                else if (ed_fees.length() == 0 || ed_fees.equals("") || ed_fees == null) {
+
+                    ed_fees.requestFocus();
+                    ed_fees.setError("Enter fees");
+
+                }
+                else if (grno.length() == 0 || grno.equals("") || grno == null) {
+
+                    grno.requestFocus();
+                    grno.setError("Enter Gr_no");
+
+                }
+                else {
+
+                    new JsonPost().execute(ucname, part1, gender, part5, gn, part3, fees, bd, regd);
+                }
             }
         });
 

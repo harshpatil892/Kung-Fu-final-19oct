@@ -1,5 +1,6 @@
 package com.example.vrushali.kungfu123;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -266,12 +267,11 @@ public class Parent_registration extends Fragment {
 
 
         add_button.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
 
                 String role = "parent";
-
-
                 nm = namet.getText().toString();
                 gender = buttonSelected;
                 mob = mob_no.getText().toString();
@@ -285,9 +285,77 @@ public class Parent_registration extends Fragment {
                 gno = gr_no.getText().toString();
                 reg_d = register_text.getText().toString();
 
+                if(namet.length() == 0 || namet.equals("") || namet == null)
+                {
+                    namet.requestFocus();
+                    namet.setError("Enter name");
 
-               new JsonPost().execute(mob,role,nm,gender,pd,child_count,address,cnm,child_gender,part1,part3,gno,af,bd,reg_d);
+                }
+                else if (mob_no.length() == 0 || mob_no.equals("") || mob_no == null) {
 
+                    mob_no.requestFocus();
+                    mob_no.setError("Enter mobile number");
+
+                }
+                else if (mob_no.length() != 10){
+                    mob_no.requestFocus();
+                    mob_no.setError("10 Digit number");
+
+                }
+                else if (pwd.length() == 0 || pwd.equals("") || pwd == null)
+                {
+                    //EditText is not empty
+                    pwd.requestFocus();
+                    pwd.setError("Enter the password");
+
+                }
+                else if (con_pwd.length() == 0 || con_pwd.equals("") || con_pwd == null)
+                {
+                        con_pwd.requestFocus();
+                        con_pwd.setError("Confirm password");
+
+                }
+                  else if (addr.length() == 0 || addr.equals("") || addr == null)
+                {
+                    //EditText is not empty
+                    addr.requestFocus();
+                    addr.setError("Enter Address");
+                }
+                else if (cname.length() == 0 || cname.equals("") || cname == null)
+                {
+                    //EditText is not empty
+                    cname.requestFocus();
+                    cname.setError("Enter child name");
+                }
+                else if (tvw.length() == 0 || tvw.equals("") || tvw == null)
+                {
+                    //EditText is not empty
+                    tvw.requestFocus();
+                    tvw.setText("Enter date *");
+                }
+                else if (add_fees.length() == 0 || add_fees.equals("") || add_fees == null)
+                {
+                    //EditText is not empty
+                    add_fees.requestFocus();
+                    add_fees.setError("Enter fees");
+                }
+                else if (gr_no.length() == 0 || gr_no.equals("") || gr_no == null)
+                {
+                    //EditText is not empty
+                    gr_no.requestFocus();
+                    gr_no.setError("Enter Gr_no");
+                }
+                else if (register_text.length() == 0 || register_text.equals("") || register_text == null)
+                {
+                    //EditText is not empty
+                    register_text.requestFocus();
+                    register_text.setText("Enter Date *");
+                }
+                else {
+
+                    new JsonPost().execute(mob, role, nm, gender, pd, child_count, address, cnm, child_gender, part1, part3, gno, af, bd, reg_d);
+
+                }
             }
         });
 

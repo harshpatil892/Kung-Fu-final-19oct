@@ -192,7 +192,15 @@ public class Competition extends BaseActivity {
                                 startActivity(intent);
                             }
                         });
-                AlertDialog alert = builder.create();
+                final AlertDialog alert = builder.create();
+                alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                    @SuppressLint("ResourceAsColor")
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+                    }
+                });
+
                 alert.show();
             }
         }

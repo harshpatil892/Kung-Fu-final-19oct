@@ -241,17 +241,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         String gender = c.getString("u_reg_date");
                         String location = c.getString("u_status");
 
-
-//                        String tcstatus = c.getString("tc_status");
-//                        String uname = c.getString("uc_status");
-//                        String ureg = c.getString("uc_reg_date");
-//
-//                         Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
-
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 

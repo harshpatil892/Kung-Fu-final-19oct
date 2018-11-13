@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:drawableLeft="@drawable/ic_phone"
-
             android:textSize="22dp"
              />
 
@@ -40,7 +39,6 @@
             android:gravity="start"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_beltname"
-
             android:textSize="22dp"
             />
 

@@ -1,5 +1,6 @@
 package com.example.vrushali.kungfu123;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -254,6 +255,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent12);
 
         }
+        else if (id == R.id.ChangeLang) {
+            Intent intent13 = new Intent(MainActivity.this, Lang.class);
+            startActivity(intent13);
+
+        }
         else if (id == R.id.logout) {
 
 
@@ -285,11 +291,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         });
 
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
+          final AlertDialog alertDialog = builder.create();
+            alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
+                @SuppressLint("ResourceAsColor")
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+                    alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.darkblue);
 
-                    }
+                }
+            });
 
+        alertDialog.show();
+     }
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
@@ -358,11 +372,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.mode:
                 Intent intent4 = new Intent(MainActivity.this, Mode.class);
                 startActivity(intent4);
-                return true;
-
-            case R.id.lang:
-                Intent intent5 = new Intent(MainActivity.this, Lang.class);
-                startActivity(intent5);
                 return true;
 
             default:

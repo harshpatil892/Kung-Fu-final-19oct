@@ -2,7 +2,9 @@ package com.example.vrushali.kungfu123;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
@@ -33,8 +35,8 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
     private SearchView mSearchView;
     Spinner spin1;
 
-    String batch,res;
-
+    String batch,res,harsh,trainid,temp;
+    String cd;
     ArrayList<String> select_batch;
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
     String URL1 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=student_info_for_trainer_by_batch";
@@ -67,6 +69,31 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
         select_batch = new ArrayList<String>();
         new GetContacts().execute();
 
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int position, long id) {
+
+                String value = lv.getItemAtPosition(position).toString();
+
+                Log.e("ITEM SELECETD",value);
+                harsh = value.replaceAll("[a-z,{}.A-Z=]","");
+
+                trainid = temp;
+                String number = harsh.substring(harsh.length()-10,harsh.length());
+
+                Log.e("HARSHAL :",number);
+
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:"+number));//change the number
+                startActivity(callIntent);
+
+                return true;
+
+            }
+        });
+
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -90,7 +117,6 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
 
                     editor.putString("gbid", batch);
                     editor.commit();
-
 
                     new GetStudDetails(batch).execute();
 
@@ -231,7 +257,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
 
                         String a = c.getString("uc_name");
                         String b = c.getString("fulladdr");
-                        String cd = c.getString("u_mob");
+                         cd = c.getString("u_mob");
 
                         HashMap<String, String> contact = new HashMap<>();
 
@@ -307,6 +333,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
 //                pDialog.show();
         }
 
+
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandlerBatch sh = new HttpHandlerBatch(getApplicationContext());
@@ -336,6 +363,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
                         contact.put("cd", cd);
 
                         contactList.add(contact);
+
 
                     }
 
@@ -382,6 +410,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
                     R.id.name, R.id.email});
 
             lv.setAdapter(adapter);
+
 
         }
 

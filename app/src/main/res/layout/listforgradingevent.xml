@@ -25,7 +25,7 @@
             android:textColor="#ffffff"
             android:background="#ff6d00"
             android:textSize="21dp"
-            android:drawableStart="@drawable/ic_place_black_24dp"
+            android:drawableStart="@drawable/ic_flag"
             android:gravity="start"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />

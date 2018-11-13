@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="380dp"
     android:layout_height="400dp"
     tools:context=".Photos">
 
-    <WebView
-        android:id="@+id/photo"
+    <!--<WebView-->
+        <!--android:id="@+id/photo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="-260dp"-->
+        <!--android:contextClickable="true"-->
+        <!--&gt;-->
+
+    <!--</WebView>-->
+
+    <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-260dp"
-        android:contextClickable="true"
-        >
-
-    </WebView>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:columnWidth="100dp"
+        android:numColumns="2"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
+        android:stretchMode="columnWidth"
+        />
 
 </FrameLayout>
