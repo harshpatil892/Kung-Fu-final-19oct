@@ -77,10 +77,10 @@ public class Camp extends BaseActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(Camp.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
+//            pDialog = new ProgressDialog(Camp.this);
+//            pDialog.setMessage("Please wait...");
+//            pDialog.setCancelable(false);
+//            pDialog.show();
 
         }
 
@@ -169,8 +169,8 @@ public class Camp extends BaseActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             // Dismiss the progress dialog
-            if (pDialog.isShowing())
-                pDialog.dismiss();
+//            if (pDialog.isShowing())
+//                pDialog.dismiss();
 
 //            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(LoginActivity.this,Myapp.class));

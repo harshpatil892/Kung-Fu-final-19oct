@@ -1,76 +1,140 @@
 package com.example.vrushali.kungfu123;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.AdapterView;
-import android.widget.GridView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.vrushali.kungfu123.GalleryAdapter;
+import com.example.vrushali.kungfu123.AppController;
+import com.example.vrushali.kungfu123.Image;
 
-public class Photos extends Fragment {
-    public WebView photos1;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    public Photos() {
-        // Required empty public constructor
-    }
+import java.util.ArrayList;
+
+public class Photos extends BaseActivity {
+
+    private String TAG = Photos.class.getSimpleName();
+    private static final String endpoint = "http://www.aikfwsa.com/app/wp-json/wp/v2/media?per_page=100&&categories=4";
+    private ArrayList<Image> images;
+    private ProgressDialog pDialog;
+    private GalleryAdapter mAdapter;
+    private RecyclerView recyclerView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        if (InitApplication.getInstance().isNightModeEnabled()) {
+    protected void onCreate(Bundle savedInstanceState) { if (InitApplication.getInstance().isNightModeEnabled()) {
 
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-        } else {
+    } else {
 
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        }
+    }
         super.onCreate(savedInstanceState);
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflate your activity layout here!
+        @SuppressLint("InflateParams")
+        View contentView = inflater.inflate(R.layout.activity_photos, null, false);
+        drawer.addView(contentView, 0);
+
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
+//        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        pDialog = new ProgressDialog(this);
+        images = new ArrayList<>();
+        mAdapter = new com.example.vrushali.kungfu123.GalleryAdapter(getApplicationContext(), images);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getApplicationContext(), recyclerView, new GalleryAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("images", images);
+                bundle.putInt("position", position);
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
+                newFragment.setArguments(bundle);
+                newFragment.show(ft, "slideshow");
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+        fetchImages();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
+    private void fetchImages() {
 
-        View v =inflater.inflate(R.layout.fragment_photos,container,false);
+        pDialog.setMessage("Loading images...");
+        pDialog.show();
 
-        GridView gridView = v.findViewById(R.id.gridView);
-        gridView.setAdapter(new GalleryAdapter(getActivity()));
+        JsonArrayRequest req = new JsonArrayRequest(endpoint,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+                        pDialog.hide();
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        images.clear();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject object = response.getJSONObject(i);
+                                Image image = new Image();
+//                                image.setName(object.getString("id"));
+
+//                                JSONObject url = object.getJSONObject("source_url");
+                                image.setSmall(object.getString("source_url"));
+                                image.setMedium(object.getString("source_url"));
+                                image.setLarge(object.getString("source_url"));
+//                                image.setTimestamp(object.getString("date_gmt"));
+
+                                images.add(image);
+
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Json parsing error: " + e.getMessage());
+                            }
+                        }
+
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getActivity(),FullImageActivity.class);
-                i.putExtra("id",position);
-                startActivity(i);
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error: " + error.getMessage());
+                pDialog.hide();
             }
         });
 
-//        photos1=(WebView)v.findViewById(R.id.photo);
-//
-//        photos1.getSettings().setJavaScriptEnabled(true);
-//        photos1.loadUrl("http://www.aikfwsa.com/app/gallery/photo-gallery/");
-        return v;
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(req);
     }
-
-    private void hideNavigationBar() {
-        getActivity().getWindow().getDecorView()
-                .setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_FULLSCREEN |
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
-                                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                );
-    }
-
-
 }

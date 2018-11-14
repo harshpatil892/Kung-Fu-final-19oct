@@ -41,6 +41,7 @@ public class ComFragment extends Fragment {
   ArrayList<HashMap<String, String>> contactList;
 
   public ComFragment(Context context) {
+
     role1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
     role = role1.getString("userrole","");
 
@@ -77,8 +78,8 @@ public class ComFragment extends Fragment {
   public void onPause(){
 
     super.onPause();
-    if(pDialog != null)
-      pDialog.dismiss();
+//    if(pDialog != null)
+//      pDialog.dismiss();
   }
   private class GetContacts extends AsyncTask<Void, Void, Void> {
 
@@ -88,10 +89,10 @@ public class ComFragment extends Fragment {
 
 //            getUserId(this);
       // Showing progress dialog
-      pDialog = new ProgressDialog(getActivity());
-      pDialog.setMessage("Please wait...");
-      pDialog.setCancelable(false);
-      pDialog.show();
+//      pDialog = new ProgressDialog(getActivity());
+//      pDialog.setMessage("Please wait...");
+//      pDialog.setCancelable(false);
+//      pDialog.show();
     }
     @Override
     protected Void doInBackground(Void... arg0) {
@@ -177,9 +178,9 @@ public class ComFragment extends Fragment {
     protected void onPostExecute(Void result) {
       super.onPostExecute(result);
       // Dismiss the progress dialog
-      if (pDialog.isShowing())
-
-        pDialog.dismiss();
+//      if (pDialog.isShowing())
+//
+//        pDialog.dismiss();
       /**
        * Updating parsed JSON data into ListView
        * */

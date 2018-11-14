@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -34,7 +35,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
     private ListView lv;
     private SearchView mSearchView;
     Spinner spin1;
-
+    ListAdapter adapter;
     String batch,res,harsh,trainid,temp;
     String cd;
     ArrayList<String> select_batch;
@@ -68,7 +69,6 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
         lv = (ListView) findViewById(R.id.list3);
         select_batch = new ArrayList<String>();
         new GetContacts().execute();
-
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @SuppressLint("MissingPermission")
             @Override
@@ -131,6 +131,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
         });
 
         lv.setTextFilterEnabled(true);
+
         setupSearchView();
     }
     private void hideNavigationBar() {
@@ -160,7 +161,6 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
     @Override
     public boolean onQueryTextChange(String newText)
     {
-
         if (TextUtils.isEmpty(newText)) {
             lv.clearTextFilter();
         } else {
@@ -168,7 +168,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
         }
         return true;
     }
-
+    
     class GetContacts extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -403,7 +403,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
 
 
 
-            ListAdapter adapter = new SimpleAdapter(
+             adapter = new SimpleAdapter(
                     Student_details.this, contactList,
                     R.layout.listforstuddetails, new String[]{"a", "b",
                     "cd"}, new int[]{R.id.id,
