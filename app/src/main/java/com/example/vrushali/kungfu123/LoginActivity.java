@@ -143,13 +143,13 @@ public class LoginActivity extends AppCompatActivity {
                           String temp10 = cn.getString("u_role");
 //                          String temp11 = cn.getString("u_status");
 //                          String temp12 = cn.getString("u_reg_date");
-//                            String temp13=cn.getString("uc_id");
+                            String temp13=cn.getString("uc_id");
 
                           SharedPreferences sp1=getApplicationContext().getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
                           SharedPreferences.Editor editor = sp1.edit();
                           editor.putString("userrole", temp10);
                           editor.putString("userid",temp);
-//                          editor.putString("ucid",temp13);
+                          editor.putString("ucid",temp13);
                           editor.commit();
 
                           Toast.makeText(getApplicationContext(),temp10 , Toast.LENGTH_SHORT).show();

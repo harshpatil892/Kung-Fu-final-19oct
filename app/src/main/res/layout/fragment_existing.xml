@@ -43,7 +43,8 @@
                             android:id="@+id/e_batchspin"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_gravity="right"/>
+                            android:layout_gravity="right"
+                            android:spinnerMode="dialog"/>
 
                     </LinearLayout>
 
@@ -65,7 +66,8 @@
                             android:id="@+id/e_parentspin"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_gravity="right"/>
+                            android:layout_gravity="right"
+                            android:spinnerMode="dialog"/>
 
                     </LinearLayout>
 
@@ -226,7 +228,8 @@
                             android:id="@+id/e_beltspin"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_gravity="right"/>
+                            android:layout_gravity="right"
+                            android:spinnerMode="dialog"/>
 
                     </LinearLayout>
 

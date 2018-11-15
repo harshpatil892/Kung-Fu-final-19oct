@@ -91,8 +91,6 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
         contactList1 = new ArrayList<>();
 
-        new GetContacts1().execute();
-
         type_event.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -580,7 +578,6 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
                         contact.put("name", name);
                         contact.put("email", email);
 
-
                         // adding contact to contact list
                         contactList1.add(contact);
                     }
@@ -631,7 +628,6 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
         }
     }
-
     private void hideNavigationBar() {
         getActivity().getWindow().getDecorView()
                 .setSystemUiVisibility(

@@ -71,7 +71,11 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
 
         spin1 = findViewById(R.id.spinner1);
         mSearchView = (SearchView)findViewById(R.id.searchView1);
+
         select_batch = new ArrayList<String>();
+        select_batch.add(0,"select");
+
+
         contactList = new ArrayList<>();
         lv = (ListView) findViewById(R.id.takeatt);
 
@@ -344,10 +348,6 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
 //            if (pDialog.isShowing())
 //                pDialog.dismiss();
 
-//            mShimmerViewContainer.setVisibility(View.GONE);
-            /**
-             * Updating parsed JSON data into ListView
-             * */
             ListAdapter adapter = new SimpleAdapter(
                     Attendance.this, contactList,
                     R.layout.listfortakeattendance, new String[]{"id","name"
@@ -355,10 +355,14 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
             });
 
             lv.setAdapter(adapter);
-        }
-    }
-    class JsonPost extends AsyncTask<String ,String,String>{
 
+//            contactList.clear();
+//            ((SimpleAdapter) adapter).notifyDataSetChanged();
+        }
+
+    }
+
+    class JsonPost extends AsyncTask<String ,String,String>{
 
         @Override
         protected String doInBackground(String... params) {

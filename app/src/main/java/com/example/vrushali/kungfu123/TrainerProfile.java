@@ -10,10 +10,13 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +30,9 @@ public class TrainerProfile extends BaseActivity {
 
   private ProgressDialog pDialog;
   private ListView lv;
+  String show_img;
+  ImageView imageView;
+
 
   // URL to get contacts JSON
   private static String url = "http://10.0.43.1/kungfu2/api/v1/user.php?data=trainer_profile";
@@ -53,6 +59,7 @@ public class TrainerProfile extends BaseActivity {
     drawer.addView(contentView, 0);
     contactList = new ArrayList<>();
 
+    imageView = findViewById(R.id.profile_image);
     lv = (ListView) findViewById(R.id.trainer_profile);
     new GetContacts().execute();
 
@@ -92,20 +99,13 @@ public class TrainerProfile extends BaseActivity {
             JSONObject c = contacts.getJSONObject(i);
 
             String id = c.getString("u_id");
-            String tclocation = c.getString("u_name");
             String name = c.getString("u_name");
             String email = c.getString("u_mob");
             String address = c.getString("belt_name");
             String gender = c.getString("u_reg_date");
             String location = c.getString("u_status");
-//                        String address = c.getString("address");
-//                        String gender = c.getString("gender");
-//
-//                        // Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("phone");
-//                        String mobile = phone.getString("mobile");
-//                        String home = phone.getString("home");
-//                        String office = phone.getString("office");
+            show_img = c.getString("u_image");
+
 
             // tmp hash map for single contact
             HashMap<String, String> contact = new HashMap<>();
@@ -117,10 +117,7 @@ public class TrainerProfile extends BaseActivity {
             contact.put("address", address);
             contact.put("gender", gender);
             contact.put("location", location);
-//                        contact.put("tcid", tcid);
-//                        contact.put("tcregion", tcregion);
-            contact.put("tclocation", tclocation);
-//                        contact.put("mobile", mobile);
+            contact.put("show_img",show_img);
 
             // adding contact to contact list
             contactList.add(contact);
@@ -169,6 +166,8 @@ public class TrainerProfile extends BaseActivity {
               R.id.email, R.id.address});
 
       lv.setAdapter(adapter);
+
+      Glide.with(getApplicationContext()).load("http://10.0.43.1/kungfu2/images/"+show_img).into(imageView);
     }
 
   }

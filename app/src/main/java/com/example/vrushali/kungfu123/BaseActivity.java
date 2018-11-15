@@ -1,5 +1,6 @@
 package com.example.vrushali.kungfu123;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -294,7 +295,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-            AlertDialog alertDialog = builder.create();
+            final AlertDialog alertDialog = builder.create();
+            alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
+                @SuppressLint("ResourceAsColor")
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+                    alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.darkblue);
+
+                }
+            });
             alertDialog.show();
         }
 

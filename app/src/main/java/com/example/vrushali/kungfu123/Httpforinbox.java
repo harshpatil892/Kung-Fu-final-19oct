@@ -28,7 +28,7 @@ public class Httpforinbox {
     public Httpforinbox(Context context){
 
         result1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
-        temp = result1.getString("ucid", "");
+        temp = result1.getString("userid", "");
     }
 
     public String makeServiceCall(String reqUrl) {
@@ -41,7 +41,7 @@ public class Httpforinbox {
             conn.setRequestMethod("POST");
             conn.getRequestMethod();
             JSONObject jsonParam = new JSONObject();
-            jsonParam.put("uc_id", "2");
+            jsonParam.put("uc_id", temp);
 
             Log.e("data:",temp);
 

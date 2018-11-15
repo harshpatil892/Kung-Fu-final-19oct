@@ -58,7 +58,8 @@
                 <Spinner
                     android:layout_width="152dp"
                     android:layout_height="40dp"
-                    android:id="@+id/spinner1">
+                    android:id="@+id/spinner1"
+                    android:spinnerMode="dialog">
 
                 </Spinner>
 
@@ -89,7 +90,8 @@
                 <Spinner
                     android:layout_width="152dp"
                     android:layout_height="40dp"
-                    android:id="@+id/spinner2">
+                    android:id="@+id/spinner2"
+                    android:spinnerMode="dialog">
                 </Spinner>
 
             </LinearLayout>

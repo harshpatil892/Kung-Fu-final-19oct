@@ -383,7 +383,8 @@
                             android:id="@+id/beltspinner"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_gravity="right" />
+                            android:layout_gravity="right"
+                            android:spinnerMode="dialog"/>
 
                     </LinearLayout>
 
@@ -406,7 +407,8 @@
                             android:id="@+id/batchspinner"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_gravity="right" />
+                            android:layout_gravity="right"
+                            android:spinnerMode="dialog"/>
 
                     </LinearLayout>
 

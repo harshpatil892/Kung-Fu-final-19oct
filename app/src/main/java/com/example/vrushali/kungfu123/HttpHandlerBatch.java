@@ -22,14 +22,19 @@ public class HttpHandlerBatch {
 
   private static final String TAG = HttpHandlerBatch.class.getSimpleName();
 
-  SharedPreferences result1;
+  SharedPreferences result1,result2;
 
-  String temp;
+  String temp,temp1;
 
   public HttpHandlerBatch(Context context){
 
     result1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
     temp = result1.getString("userid", "");
+
+
+    result2 = context.getSharedPreferences("gbatchid", Context.MODE_PRIVATE);
+    temp1 = result2.getString("gbid", "");
+
   }
 
 
@@ -73,8 +78,8 @@ public class HttpHandlerBatch {
       conn.setRequestMethod("POST");
       conn.getRequestMethod();
       JSONObject jsonParam = new JSONObject();
-      jsonParam.put("batch_id", "14");
-      Log.e("data:",temp);
+      jsonParam.put("batch_id", temp1);
+      Log.e("data:",temp1);
 
       OutputStreamWriter out = new   OutputStreamWriter(conn.getOutputStream());
       out.write(jsonParam.toString());

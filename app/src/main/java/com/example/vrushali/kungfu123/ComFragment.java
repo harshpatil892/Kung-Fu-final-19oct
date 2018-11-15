@@ -78,8 +78,7 @@ public class ComFragment extends Fragment {
   public void onPause(){
 
     super.onPause();
-//    if(pDialog != null)
-//      pDialog.dismiss();
+
   }
   private class GetContacts extends AsyncTask<Void, Void, Void> {
 
@@ -87,12 +86,6 @@ public class ComFragment extends Fragment {
     protected void onPreExecute() {
       super.onPreExecute();
 
-//            getUserId(this);
-      // Showing progress dialog
-//      pDialog = new ProgressDialog(getActivity());
-//      pDialog.setMessage("Please wait...");
-//      pDialog.setCancelable(false);
-//      pDialog.show();
     }
     @Override
     protected Void doInBackground(Void... arg0) {
@@ -115,15 +108,6 @@ public class ComFragment extends Fragment {
             String name = c.getString("bc_reg_date");
             String email = c.getString("bc_reg_result");
 
-//                        String tcstatus = c.getString("tc_status");
-//                        String uname = c.getString("uc_status");
-//                        String ureg = c.getString("uc_reg_date");
-//
-//                         Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
 
             // tmp hash map for single contact
             HashMap<String, String> contact = new HashMap<>();
@@ -133,16 +117,6 @@ public class ComFragment extends Fragment {
             contact.put("name", name);
             contact.put("email", email);
 
-//                        contact.put("tcid", tcid);
-//                        contact.put("tcregion", tcregion);
-
-//                        contact.put("tcstatus", tcstatus);
-//                        contact.put("uname", uname);
-//                        contact.put("ureg", ureg);
-
-//                        contact.put("mobile", mobile);
-
-            // adding contact to contact list
             contactList.add(contact);
           }
         } catch (final JSONException e) {
@@ -177,13 +151,7 @@ public class ComFragment extends Fragment {
     @Override
     protected void onPostExecute(Void result) {
       super.onPostExecute(result);
-      // Dismiss the progress dialog
-//      if (pDialog.isShowing())
-//
-//        pDialog.dismiss();
-      /**
-       * Updating parsed JSON data into ListView
-       * */
+
       ListAdapter adapter = new SimpleAdapter(
               getActivity(), contactList,
               R.layout.listforcompresult, new String[]{"id", "name",

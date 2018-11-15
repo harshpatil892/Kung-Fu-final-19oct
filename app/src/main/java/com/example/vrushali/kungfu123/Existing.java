@@ -61,7 +61,7 @@ public class Existing extends Fragment{
     DatePickerDialog picker;
     Button btnGet,btnGet1;
     TextView tvw,register_text;
-
+    ArrayAdapter<String> myAdapter;
     RadioGroup radio_group;
     RadioButton r_male,r_female;
 
@@ -116,6 +116,8 @@ public class Existing extends Fragment{
 
         save_info = v.findViewById(R.id.button_save);
 
+
+
         belt_level_names=new ArrayList<String>();
         belt_level_names.add(0,"select");
         loadSpinnerData(URL);
@@ -163,8 +165,8 @@ public class Existing extends Fragment{
                     part3 = parts[0]; // 004
                     String part2 = parts[1]; // 034556
 
-                    select_item_id =String.valueOf(batch_spin1.getSelectedItemId());
-                    Log.e("Selected item:",select_item_id);
+//                    select_item_id =String.valueOf(batch_spin1.getSelectedItemId());
+//                    Log.e("Selected item:",select_item_id);
 
                     SharedPreferences sp1 = getActivity().getSharedPreferences("batchinfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp1.edit();
@@ -174,6 +176,11 @@ public class Existing extends Fragment{
                     editor.commit();
 
                     new GetContacts1(part3).execute();
+
+                    myAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, select_parent);
+                    parent_spin.setAdapter(myAdapter);
+
+                    myAdapter.clear();
 
 
                     Toast.makeText(adapterView.getContext(),"Selected:"+item1,Toast.LENGTH_SHORT).show();
@@ -231,7 +238,6 @@ public class Existing extends Fragment{
 
                     Toast.makeText(parent.getContext(),"Selected:"+item,Toast.LENGTH_SHORT).show();
 
-
                     String string = item;
                     String[] parts = string.split("-");
                     part5 = parts[0]; // 004
@@ -255,7 +261,7 @@ public class Existing extends Fragment{
                 int month = cldr.get(Calendar.MONTH);
                 int year = cldr.get(Calendar.YEAR);
                 // date picker dialog
-                picker = new DatePickerDialog(getActivity(),
+                picker = new DatePickerDialog(getActivity(),R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -274,7 +280,7 @@ public class Existing extends Fragment{
                 int month = cldr.get(Calendar.MONTH);
                 int year = cldr.get(Calendar.YEAR);
                 // date picker dialog
-                picker = new DatePickerDialog(getActivity(),
+                picker = new DatePickerDialog(getActivity(),R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -476,14 +482,9 @@ public class Existing extends Fragment{
 
     class GetContacts1 extends AsyncTask<Void, Void, Void> {
 
-//        SharedPreferences item2;
-
         String item1;
         public GetContacts1(String item) {
 
-
-//            item2 = getActivity().getSharedPreferences("batchinfo", Context.MODE_PRIVATE);
-//            item1 = item2.getString("batchid", "");
             this.item1 =item;
 
             Log.e("Selected batch id:",item1);
@@ -523,12 +524,6 @@ public class Existing extends Fragment{
                         String a = c.getString("u_id");
                         String b = c.getString("u_name");
 //
-//                        HashMap<String, String> contact = new HashMap<>();
-//
-//                        contact.put("eg", b);
-//
-//                        select_parent.add(b);
-
                         res = a + "-" + b;
 
                         Log.e("Concated:-",res);
@@ -573,7 +568,11 @@ public class Existing extends Fragment{
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-            parent_spin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, select_parent));
+            myAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, select_parent);
+            myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            parent_spin.setAdapter(myAdapter);
+            myAdapter.notifyDataSetChanged();
 
         }
 

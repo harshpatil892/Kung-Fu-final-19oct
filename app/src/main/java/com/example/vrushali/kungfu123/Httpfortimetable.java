@@ -35,17 +35,6 @@ public class Httpfortimetable {
         temp = result1.getString("userid", "");
     }
 
-//    private static SharedPreferences getPrefs(Context context) {
-//
-//
-//        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-//    }
-//
-//    public static String getUserId(Context context) {
-//
-//        UserId = getPrefs(context).getString("userid", "");
-//        return UserId;
-//    }
 
     public String makeServiceCall(String reqUrl) {
 

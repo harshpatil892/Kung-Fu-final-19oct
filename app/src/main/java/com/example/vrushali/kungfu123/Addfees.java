@@ -129,7 +129,7 @@ public class Addfees extends Fragment {
 
                         }, y, m, d);
                 dp.setTitle("Calender");
-                dp.setMessage("Select Your Graduation date Please?");
+                dp.setMessage("Please select date");
 
                 dp.show();
 

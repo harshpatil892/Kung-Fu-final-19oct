@@ -1,10 +1,12 @@
 package com.example.vrushali.kungfu123;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,7 +20,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +38,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
+
+import net.gotev.uploadservice.MultipartUploadRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,8 +50,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -52,6 +62,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -60,27 +71,35 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private String TAG = ProfileFragment.class.getSimpleName();
 
-    SharedPreferences role1;
+    private Bitmap bitmap;
+
+    private static final int STORAGE_PERMISSION_CODE = 123;
+
+    SharedPreferences result1,result2;
     private static TextView selectImage, shareImage, shareText;
     private static ImageView imageView;
     public TextView update;
     private static EditText textToShare;
-    private static Uri imageUri = null;
-    String uiddd="2";
     String suffix=".jpg";
-    String file;
+    String fname,img;
     private final int select_photo = 1;
     Context context;
     static String UserId;
-    String role;
+    String var1,var2,path1;
     private ProgressDialog pDialog;
     private ListView lv;
     private static String url = "http://10.0.43.1/kungfu2/api/v1/user.php?data=profile";
+    String url1 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=update_image";
+
     ArrayList<HashMap<String, String>> contactList;
 
+    private Uri filePath;
+
+    final String end = "\r\n";
+    final String twoHyphens = "--";
+
     public ProfileFragment(Context context) {
-        role1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
-        role = role1.getString("userrole","");
+
 
     }
 
@@ -104,89 +123,145 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        requestStoragePermission();
+
         View v =inflater.inflate(R.layout.fragment_profile,container,false);
         contactList = new ArrayList<>();
 
         lv = (ListView)v.findViewById(R.id.profilelist);
         selectImage = (TextView)v.findViewById(R.id.select_image);
         imageView = (ImageView)v.findViewById(R.id.share_imageview);
-        update=(TextView)v.findViewById(R.id.update);
+        update=(TextView)v.findViewById(R.id.img_update);
+//        hideNavigationBar();
 
-        Log.e("IMAGEURI:", String.valueOf(imageUri));
-        setListeners();
-        harshal();
         new GetContacts().execute();
-     
+
+        selectImage.setOnClickListener(this);
+        update.setOnClickListener(this);
+
         return v;
     }
 
-    public void harshal() {
+    private void requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+            return;
 
-//        Date date= new Date();
-//
-//        long time = date.getTime();
-//       Log.e("Timestampcurr:-", String.valueOf(time));
-//
-//       file=time + "_" + "trainer" + "_" + uiddd +suffix;
-
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            //If the user has denied the permission previously your code will come to this block
+            //Here you can explain why you need this permission
+            //Explain here why you need this permission
+        }
+        //And finally ask for the permission
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
     }
 
-    private void setListeners() {
-        selectImage.setOnClickListener(this);
-    }
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.select_image:
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-                Intent in = new Intent(Intent.ACTION_PICK);
-                in.setType("image/*");
-                startActivityForResult(in, select_photo);// start
+        //Checking the request code of our request
+        if (requestCode == STORAGE_PERMISSION_CODE) {
 
-                break;
+            //If permission is granted
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //Displaying a toast
+                Toast.makeText(getActivity(), "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
+            } else {
+                //Displaying another toast if permission is not granted
+                Toast.makeText(getActivity(), "Oops you just denied the permission", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
-    public void onActivityResult(int requestcode, int resultcode,
-                                    Intent imagereturnintent) {
-        super.onActivityResult(requestcode, resultcode, imagereturnintent);
-        switch (requestcode) {
-            case select_photo:
-                if (resultcode == RESULT_OK) {
-                    try {
+    private String getPath(Uri uri){
 
-                        imageUri = imagereturnintent.getData();// Get intent
-                        // data
-
-                        Bitmap bitmap = Utils.decodeUri(getActivity(),
-                                imageUri, 200);// call
-                        Log.e("PATH:", String.valueOf(imageUri));
-
-
-                        if (bitmap != null) {
-                            imageView.setImageBitmap(bitmap);// Set image over
-                            // bitmap
-                            // if bitmap is
-                            // not null
-                        } else {
-                            shareImage.setVisibility(View.GONE);
-                            Toast.makeText(getActivity(),
-                                    "Error while decoding image.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (FileNotFoundException e) {
-
-                        e.printStackTrace();
-                        Toast.makeText(getActivity(), "File not found.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-        }
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getActivity().managedQuery(uri, projection, null, null, null);
+        if (cursor != null) {
+            // HERE YOU WILL GET A NULLPOINTER IF CURSOR IS NULL
+            // THIS CAN BE, IF YOU USED OI FILE MANAGER FOR PICKING THE MEDIA
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } else
+            return null;
 
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == select_photo && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
 
+            Log.e("Filepath", String.valueOf(filePath));
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                imageView.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"),select_photo);
+    }
+
+    public void uploadMultipart() {
+        result1 = getActivity().getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
+        var1 = result1.getString("userrole","");
+
+        result2 = getActivity().getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
+        var2 = result2.getString("userid","");
+
+        Date date= new Date();
+
+        long time = date.getTime();
+        Log.e("Timestampcurr:-", String.valueOf(time));
+
+        fname = time + "_" + var1 + "_" + var2 + suffix;
+
+        Log.e("Role",var1);
+        Log.e("UIDD",var2);
+        Log.e("ffffff",fname);
+
+        path1 = getPath(filePath);
+
+        Log.e("Path1",path1);
+
+        try{
+            String uploadid = UUID.randomUUID().toString();
+
+            new MultipartUploadRequest(getActivity(), uploadid, url)
+                    .addFileToUpload(path1,"path1") //Adding file
+                    .addParameter("file", fname) //Adding text parameter to the request
+                    .setMaxRetries(2)
+                    .startUpload(); //Starting the upload
+
+            new JsonPost().execute(fname);
+
+        }catch (Exception exc){
+            Toast.makeText(getActivity(), exc.getMessage(), Toast.LENGTH_SHORT).show();
+
+            Log.e("Exception",exc.getMessage());
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == selectImage) {
+            showFileChooser();
+        }
+        if (v == update) {
+            uploadMultipart();
+        }
+    }
 
     @Override
     public void onPause(){
@@ -195,8 +270,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if(pDialog != null)
             pDialog.dismiss();
     }
-
-
 
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {
@@ -217,7 +290,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         @Override
         protected Void doInBackground(Void... arg0) {
             Httpforprofile hp = new Httpforprofile(getActivity());
-
 
             // Making a request to url and getting response
             String jsonStr = hp.makeServiceCall(url);
@@ -240,6 +312,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         String address = c.getString("belt_name");
                         String gender = c.getString("u_reg_date");
                         String location = c.getString("u_status");
+                        img = c.getString("u_image");
+
+
+
+
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
@@ -251,17 +328,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         contact.put("address", address);
                         contact.put("gender", gender);
                         contact.put("location", location);
-//                        contact.put("tcid", tcid);
-//                        contact.put("tcregion", tcregion);
                         contact.put("tclocation", tclocation);
-//                        contact.put("tcstatus", tcstatus);
-//                        contact.put("uname", uname);
-//                        contact.put("ureg", ureg);
-
-//                        contact.put("mobile", mobile);
+                        contact.put("img",img);
 
                         // adding contact to contact list
                         contactList.add(contact);
+
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -274,6 +346,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                                     .show();
                         }
                     });
+
+
+
+
 
                 }
             } else {
@@ -302,23 +378,126 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             /**
              * Updating parsed JSON data into ListView
              * */
+
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(), contactList,
                     R.layout.listforprofile, new String[]{"name", "email",
                     "address"}, new int[]{R.id.name,
                     R.id.email, R.id.address})
                     ;
-//            ListAdapter adapter1 = new SimpleAdapter(
-//                    MainActivity.this, contactList,
-//                    R.layout.list_item1, new String[]{"name", "email",
-//                    "mobile"}, new int[]{R.id.name,
-//                    R.id.email, R.id.mobile});
 
             lv.setAdapter(adapter);
+
+
+            Glide.with(getActivity()).load("http://10.0.43.1/kungfu2/images/"+img).into(imageView);
+
         }
 
     }
 
+    class JsonPost extends AsyncTask<String ,String,String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String response=PostJson(params);
+            Log.e("params",""+params);
+            Log.e("response",""+response);
+            return response;
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Toast.makeText(getActivity(),"Image updated successfully",Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private String PostJson(String[] params)  {
+
+        Log.e("postjson method invoke","");
+
+        HttpURLConnection connection = null;
+        BufferedReader br=null;
+        String data="";
+
+        try {
+            java.net.URL url =new URL("http://10.0.43.1/kungfu2/api/v1/user.php?data=update_image");
+
+            FileInputStream fStream = new FileInputStream(path1);
+
+            connection = (HttpURLConnection) url.openConnection();
+
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setUseCaches(false);
+
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Connection", "Keep-Alive");
+            connection.setRequestProperty("Charset", "UTF-8");
+            connection.setRequestProperty("Content-Type","multipart/form-data;boundary="+fname);
+            connection.setRequestProperty("file", fname);
+
+            DataOutputStream ds =new DataOutputStream(connection.getOutputStream());
+
+            ds.writeBytes(twoHyphens + fname + end);
+            ds.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\""
+                    + fname + "\"" + end);
+            ds.writeBytes(end);
+
+            int bufferSize = 1024;
+            byte[] buffer1 = new byte[bufferSize];
+            int length = -1;
+
+            while((length = fStream.read(buffer1)) != -1) {
+                ds.write(buffer1, 0, length);
+            }
+            ds.writeBytes(end);
+            ds.writeBytes(twoHyphens + fname + twoHyphens + end);
+
+            fStream.close();
+            ds.flush();
+            ds.close();
+
+
+            if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+                Toast.makeText(getActivity(), connection.getResponseMessage(), Toast.LENGTH_LONG);
+            }
+
+
+            StringBuffer buffer=new StringBuffer();
+
+            InputStream is = connection.getInputStream();
+            byte[] data2 = new byte[bufferSize];
+            int leng = -1;
+            while((leng = is.read(data2)) != -1) {
+                buffer.append(new String(data2, 0, leng));
+            }
+
+            data = buffer.toString();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } if(connection !=null) {
+            connection.disconnect();
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
+        return data;
+
+    }
 
     private void hideNavigationBar() {
         getActivity().getWindow().getDecorView()

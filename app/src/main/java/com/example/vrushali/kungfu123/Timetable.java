@@ -66,8 +66,8 @@ public class Timetable extends Fragment {
     public void onPause(){
 
         super.onPause();
-        if(pDialog != null)
-            pDialog.dismiss();
+//        if(pDialog != null)
+//            pDialog.dismiss();
     }
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {
@@ -78,10 +78,10 @@ public class Timetable extends Fragment {
 
 //            getUserId(this);
             // Showing progress dialog
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
+//            pDialog = new ProgressDialog(getActivity());
+//            pDialog.setMessage("Please wait...");
+//            pDialog.setCancelable(false);
+//            pDialog.show();
         }
 
         @Override
@@ -178,9 +178,9 @@ public class Timetable extends Fragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             // Dismiss the progress dialog
-            if (pDialog.isShowing())
-
-                pDialog.dismiss();
+//            if (pDialog.isShowing())
+//
+//                pDialog.dismiss();
             /**
              * Updating parsed JSON data into ListView
              * */

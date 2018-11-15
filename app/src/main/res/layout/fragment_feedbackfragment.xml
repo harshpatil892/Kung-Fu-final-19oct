@@ -33,7 +33,7 @@
                 android:paddingBottom="2dip"
                 android:paddingTop="6dip"
                 android:textColor="#ffffff"
-                android:background="#ffad1457"
+                android:background="#ff6d00"
                 android:textSize="15dp"
                 android:drawableStart="@drawable/ic_place_black_24dp"
                 android:gravity="start"
@@ -79,7 +79,7 @@
             android:paddingBottom="2dip"
             android:paddingTop="6dip"
             android:textColor="#ffffff"
-            android:background="#ffad1457"
+            android:background="#ff6d00"
             android:textSize="15dp"
             android:drawableStart="@drawable/ic_place_black_24dp"
             android:gravity="start"
@@ -124,7 +124,7 @@
             android:paddingBottom="2dip"
             android:paddingTop="6dip"
             android:textColor="#ffffff"
-            android:background="#ffad1457"
+            android:background="#ff6d00"
             android:textSize="15dp"
             android:drawableStart="@drawable/ic_place_black_24dp"
             android:gravity="start"
@@ -169,7 +169,7 @@
             android:paddingBottom="2dip"
             android:paddingTop="6dip"
             android:textColor="#ffffff"
-            android:background="#ffad1457"
+            android:background="#ff6d00"
             android:textSize="15dp"
             android:drawableStart="@drawable/ic_place_black_24dp"
             android:gravity="start"
@@ -216,11 +216,7 @@
 
         </LinearLayout>
 
-
-
-
     </LinearLayout>
-
 
     </ScrollView>
 

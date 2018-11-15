@@ -58,7 +58,8 @@
             <Spinner
                 android:id="@+id/spinner1"
                 android:layout_width="178dp"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:spinnerMode="dialog">
 
             </Spinner>
 
@@ -98,11 +99,12 @@
     <ListView
         android:id="@+id/takeatt"
         android:layout_width="match_parent"
-        android:layout_height="386dp"
+        android:layout_height="420dp"
+        android:layout_marginTop="172dp"
         android:listSelector="#ffd54f"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
 </android.support.constraint.ConstraintLayout>
