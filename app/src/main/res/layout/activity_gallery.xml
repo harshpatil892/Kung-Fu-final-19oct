@@ -57,14 +57,14 @@
                     android:layout_margin="10dp"
                     android:background="@color/lightgray" />
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:text="@string/slogen1"-->
-                    <!--android:textColor="@android:color/darker_gray"-->
-                    <!--android:textSize="14dp" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="The memories beats inside  like a second heart"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14dp" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -103,14 +103,14 @@
                     android:layout_margin="10dp"
                     android:background="@color/lightgray" />
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:text="@string/slogen2"-->
-                    <!--android:textColor="@android:color/darker_gray"-->
-                    <!--android:textSize="14dp" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="The memories beats inside  like a second heart"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14dp" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>

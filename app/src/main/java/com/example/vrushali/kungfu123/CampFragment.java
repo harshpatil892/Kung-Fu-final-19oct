@@ -79,10 +79,10 @@ public class CampFragment extends Fragment {
 
 //            getUserId(this);
       // Showing progress dialog
-      pDialog = new ProgressDialog(getActivity());
-      pDialog.setMessage("Please wait...");
-      pDialog.setCancelable(false);
-      pDialog.show();
+//      pDialog = new ProgressDialog(getActivity());
+//      pDialog.setMessage("Please wait...");
+//      pDialog.setCancelable(false);
+//      pDialog.show();
     }
     @Override
     protected Void doInBackground(Void... arg0) {

@@ -24,7 +24,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
-    SharedPreferences sp,result;
+    SharedPreferences log_out,result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        sp = getSharedPreferences("login", Context.MODE_PRIVATE);
 
 
         result = getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
@@ -285,11 +283,14 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    SharedPreferences.Editor e = sp.edit();
-                    e.clear();
+                    log_out = getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor e = log_out.edit();
+                    e.remove("userrole");
                     e.commit();
 
-                    finish();
+                    Intent intent = new Intent(BaseActivity.this,MainActivity.class);
+                    startActivity(intent);
+
                 }
             });
 

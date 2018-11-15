@@ -90,7 +90,6 @@ public class Photos extends BaseActivity {
         fetchImages();
     }
 
-
     private void fetchImages() {
 
         pDialog.setMessage("Loading images...");

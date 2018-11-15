@@ -188,7 +188,7 @@ public class GradingFragment extends Fragment {
        * */
       ListAdapter adapter = new SimpleAdapter(
               getActivity(), contactList,
-              R.layout.listforprofile, new String[]{"id", "name",
+              R.layout.listforgradingresult, new String[]{"id", "name",
               "email"}, new int[]{R.id.name,
               R.id.email, R.id.address});
       

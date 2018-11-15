@@ -20,7 +20,7 @@ public class ImageAdapter extends PagerAdapter{
     }
 
     private int[] sliderImageId = new int[]{
-            R.drawable.kunfu, R.drawable.kslide1, R.drawable.kslide2,R.drawable.kslide3, R.drawable.kunfu,
+             R.drawable.home1
     };
 
     @Override

@@ -106,7 +106,6 @@ public class Individual_notify extends Fragment {
         listView = v.findViewById(R.id.listforstudinfo);
         harsh=(EditText)v.findViewById(R.id.name);
         harshal=(EditText)v.findViewById(R.id.address_area);
-        noti=(Button)v.findViewById(R.id.sendnoti);
 
         select_batch = new ArrayList<String>();
         select_batch.add(0,"select");
@@ -141,30 +140,30 @@ public class Individual_notify extends Fragment {
             }
         });
 
-        noti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                title=harsh.getText().toString();
-                address=harshal.getText().toString();
-
-                FirebaseMessaging.getInstance().subscribeToTopic("test");
-                FirebaseInstanceId.getInstance().getToken();
-
-                SharedPreferences sp1 = getActivity().getSharedPreferences("notify", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp1.edit();
-
-                editor.putString("noti_title", title);
-                editor.putString("noti_msg", address);
-                editor.commit();
-
-
-                Log.e("TITLE:",title);
-                Log.e("Adreessss:-",address);
-                new JsonPost().execute(title,address,uiddd);
-
-            }
-        });
+//        noti.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                title=harsh.getText().toString();
+//                address=harshal.getText().toString();
+//
+//                FirebaseMessaging.getInstance().subscribeToTopic("test");
+//                FirebaseInstanceId.getInstance().getToken();
+//
+//                SharedPreferences sp1 = getActivity().getSharedPreferences("notify", MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sp1.edit();
+//
+//                editor.putString("noti_title", title);
+//                editor.putString("noti_msg", address);
+//                editor.commit();
+//
+//
+//                Log.e("TITLE:",title);
+//                Log.e("Adreessss:-",address);
+//                new JsonPost().execute(title,address,uiddd);
+//
+//            }
+//        });
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
