@@ -19,7 +19,7 @@
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary">
+                android:background="#ff6d00">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -77,12 +77,11 @@
                         android:id="@+id/edittextarea"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
-                        android:lines="3"
                         android:ems="10"
                         android:gravity="top"
+                        android:hint="Message"
                         android:inputType="textMultiLine"
-                        />
+                        android:lines="3" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -98,7 +97,7 @@
     <ListView
         android:id="@+id/listforbatch"
         android:layout_width="match_parent"
-        android:layout_height="244dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="280dp"
         android:listSelector="#ffd54f"
         />

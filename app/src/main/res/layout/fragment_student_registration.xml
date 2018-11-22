@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,13 +40,13 @@
                             android:id="@+id/textinputlayout1">
 
                             <EditText
+                                android:id="@+id/name"
+                                android:maxLength="50"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/name"
-                                android:id="@+id/name"/>
+                                android:hint="@string/name" />
 
                         </android.support.design.widget.TextInputLayout>
-
 
                     </LinearLayout>
 
@@ -185,6 +186,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/mobile"
                                 android:id="@+id/mob_no"
+                                android:maxLength="10"
                                 android:inputType="number"
                                 android:ems="10"/>
 
@@ -213,6 +215,7 @@
                                 android:lines="3"
                                 android:ems="10"
                                 android:gravity="top"
+                                android:maxLength="500"
                                 android:inputType="textMultiLine"
                                 />
 
@@ -284,6 +287,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/admission_fees"
                                 android:id="@+id/ad_fees"
+                                android:maxLength="5"
                                 android:inputType="number"/>
 
                         </android.support.design.widget.TextInputLayout>
@@ -383,7 +387,7 @@
                             android:id="@+id/button_save"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="#ff8f00"
+                            android:backgroundTint="#ff6d00"
                             android:textColor="#fff"
                             android:layout_marginLeft="120dp"
                             android:text="@string/add" />

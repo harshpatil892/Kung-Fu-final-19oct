@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -88,6 +89,9 @@ public class Student_registration extends Fragment {
                              Bundle savedInstanceState) {
 
         View v =inflater.inflate(R.layout.fragment_student_registration,container,false);
+
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         name = v.findViewById(R.id.name);
         mob_no = v.findViewById(R.id.mob_no);
@@ -454,9 +458,19 @@ public class Student_registration extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-
-
             Toast.makeText(getActivity(),"Registration successful",Toast.LENGTH_SHORT).show();
+            name.getText().clear();
+            tvw.setText("");
+            register_text.setText("");
+//            gender = "";
+            mob_no.getText().clear();
+            addr.getText().clear();
+            ad_fee.getText().clear();
+            pwd.getText().clear();
+            con_pwd.getText().clear();
+            gr_no.getText().clear();
+            spin1.setSelection(0);
+            spin2.setSelection(0);
 
         }
     }

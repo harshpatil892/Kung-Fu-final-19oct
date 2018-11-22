@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,6 +78,9 @@ public class Batch_notify extends Fragment {
         tit = (EditText) v.findViewById(R.id.name);
         des = (EditText) v.findViewById(R.id.edittextarea);
 
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         contactList = new ArrayList<>();
         lv = (ListView)v.findViewById(R.id.listforbatch);
@@ -104,7 +108,22 @@ public class Batch_notify extends Fragment {
                 Log.e("TITLE:",title);
                 Log.e("Adreessss:-",address);
 
+                if(tit.length() == 0 || tit.equals("") || tit == null)
+                {
+                    tit.requestFocus();
+                    tit.setError("Enter Title");
+
+                }
+                else if (des.length() == 0 || des.equals("") || des == null) {
+
+                    des.requestFocus();
+                    des.setError("Enter Date *");
+
+                }else{
+
                 new JsonPost().execute(title,address,harsh);
+
+                }
 
             }
         });
@@ -119,13 +138,7 @@ public class Batch_notify extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // Showing progress dialog
-//            pDialog = new ProgressDialog(TrainingCenters.this);
-//            pDialog.setMessage("Please wait...");
-//            pDialog.setCancelable(false);
-//            pDialog.show();
 
-//            mShimmerViewContainer.startShimmerAnimation();
 
         }
 
@@ -252,10 +265,29 @@ public class Batch_notify extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getActivity(),"Notification sent",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
 
-//            textView.setText(result);
+
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                String success = jsonObject.getString("st");
+
+                if(success.equals("1")){
+                    Toast.makeText(getActivity(), "Notification Sent", Toast.LENGTH_SHORT).show();
+
+                }else if(success.equals("2")){
+                    Toast.makeText(getActivity(), "Some Fields Empty", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getActivity(), "No user Exists", Toast.LENGTH_SHORT).show();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                Toast.makeText(getActivity(),e.toString(), Toast.LENGTH_SHORT).show();
+
+            }
         }
     }
 

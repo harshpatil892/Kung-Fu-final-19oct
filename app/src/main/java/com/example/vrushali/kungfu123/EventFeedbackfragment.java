@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -76,15 +77,16 @@ public class EventFeedbackfragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_event_feedbackfragment, container, false);
 
-
         type_event = v.findViewById(R.id.spinner1);
         sub_event = v.findViewById(R.id.spinner2);
 
         event_card = v.findViewById(R.id.card_view1);
-
         rt1 = (RatingBar) v.findViewById(R.id.rating1);
         ed1 = (EditText) v.findViewById(R.id.note1);
         btn = (Button) v.findViewById(R.id.button);
+
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         event_type = new ArrayList<String>();
 
@@ -122,9 +124,10 @@ public class EventFeedbackfragment extends Fragment {
 
                     myAdapter1 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, event_name);
                     sub_event.setAdapter(myAdapter1);
-
                     myAdapter1.clear();
+
                 }
+
                 else if(type_event.getSelectedItem().equals("Competition")){
 
                     selected_event_type =String.valueOf(type_event.getSelectedItem());
@@ -569,7 +572,7 @@ public class EventFeedbackfragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getActivity(),"Event Feedback submitted successfully",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Event Feedback submitted",Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
 
 //            textView.setText(result);

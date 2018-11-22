@@ -20,7 +20,7 @@ public class ImageAdapter extends PagerAdapter{
     }
 
     private int[] sliderImageId = new int[]{
-             R.drawable.home1
+             R.drawable.kunfu
     };
 
     @Override
@@ -39,6 +39,8 @@ public class ImageAdapter extends PagerAdapter{
 
     @Override
     public int getCount() {
+
         return sliderImageId.length;
+
     }
 }

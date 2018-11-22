@@ -3,8 +3,11 @@ package com.example.vrushali.kungfu123;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,9 +34,7 @@ public class Fees1 extends BaseActivity {
 
     // URL to get contacts JSON
     private static String url = "http://10.0.43.1/kungfu2/api/v1/user.php?data=show_fees";
-    //    Uri.Builder builder = new Uri.Builder()
-//            .appendQueryParameter("role","trainer" )
-//            .appendQueryParameter("uid", "3");
+
     ArrayList<HashMap<String, String>> contactList;
 
 
@@ -67,8 +68,8 @@ public class Fees1 extends BaseActivity {
     public void onPause(){
 
         super.onPause();
-        if(pDialog != null)
-            pDialog.dismiss();
+//        if(pDialog != null)
+//            pDialog.dismiss();
     }
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {
@@ -79,10 +80,10 @@ public class Fees1 extends BaseActivity {
 
 //            getUserId(this);
             // Showing progress dialog
-            pDialog = new ProgressDialog(Fees1.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
+//            pDialog = new ProgressDialog(Fees1.this);
+//            pDialog.setMessage("Please wait...");
+//            pDialog.setCancelable(false);
+//            pDialog.show();
         }
 
 
@@ -101,7 +102,7 @@ public class Fees1 extends BaseActivity {
 
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(url);
+            String jsonStr = sh.makeServiceCall1(url);
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr != null) {
                 try {
@@ -114,44 +115,31 @@ public class Fees1 extends BaseActivity {
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
 
-                        String id = c.getString("uc_name");
-                        String name = c.getString("sf_date");
-                        String email = c.getString("t_name");
-                        String address = c.getString("sf_s_id");
-                        String gender = c.getString("sf_total");
-                        String location = c.getString("sf_date");
-                        String tcid = c.getString("sf_reciever");
-                        String tcregion = c.getString("sf_month");
-                        String tclocation = c.getString("sf_year");
-                        String tcstatus = c.getString("sf_status");
-//                        String uname = c.getString("uc_status");
-//                        String ureg = c.getString("uc_reg_date");
-//
-                        // Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
+                        String a = c.getString("uc_name");
+                        String b = c.getString("t_name");
+                        String cd = c.getString("sf_id");
+                        String e = c.getString("sf_s_id");
+                        String f = c.getString("sf_total");
+                        String g = c.getString("sf_date");
+                        String h = c.getString("sf_reciever");
+                        String j = c.getString("sf_month");
+                        String k = c.getString("sf_year");
+                        String l = c.getString("sf_status");
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 
                         // adding each child node to HashMap key => value
-                        contact.put("id", id);
-                        contact.put("name", name);
-                        contact.put("email", email);
-                        contact.put("address", address);
-                        contact.put("gender", gender);
-                        contact.put("location", location);
-                        contact.put("tcid", tcid);
-                        contact.put("tcregion", tcregion);
-                        contact.put("tclocation", tclocation);
-                        contact.put("tcstatus", tcstatus);
-//                        contact.put("uname", uname);
-//                        contact.put("ureg", ureg);
-
-//                        contact.put("mobile", mobile);
-
+                        contact.put("a", a);
+                        contact.put("b", b);
+                        contact.put("cd",cd);
+                        contact.put("e", e);
+                        contact.put("f", f);
+                        contact.put("g", g);
+                        contact.put("h", h);
+                        contact.put("j", j);
+                        contact.put("k", k);
+                        contact.put("l", l);
                         // adding contact to contact list
                         contactList.add(contact);
                     }
@@ -161,7 +149,7 @@ public class Fees1 extends BaseActivity {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    "No Fee Record Found",
                                     Toast.LENGTH_LONG)
                                     .show();
                         }
@@ -189,22 +177,42 @@ public class Fees1 extends BaseActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             // Dismiss the progress dialog
-            if (pDialog.isShowing())
-
-                pDialog.dismiss();
+//            if (pDialog.isShowing())
+//
+//                pDialog.dismiss();
 
             ListAdapter adapter = new SimpleAdapter(
                     Fees1.this, contactList,
-                    R.layout.listforfeesrecordparent, new String[]{"id","name","email"}, new int[]{R.id.id,R.id.name,R.id.email
-            });
-
-//            ListAdapter adapter1 = new SimpleAdapter(
-//                    MainActivity.this, contactList,
-//                    R.layout.list_item1, new String[]{"name", "email",
-//                    "mobile"}, new int[]{R.id.name,
-//                    R.id.email, R.id.mobile});
+                    R.layout.listforfeesrecordparent, new String[]{"j","f","g","k","b"},
+                    new int[]{R.id.mnth,R.id.fee1,R.id.Feerecvdate1,R.id.feepaidyr1,R.id.feereciver1
+                    });
 
             lv.setAdapter(adapter);
+
+            if(lv.getCount()==0) {
+                //empty, show alertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(Fees1.this);
+                builder.setMessage("No Record Found")
+                        .setCancelable(true)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+
+                                Intent intent1 = new Intent(Fees1.this,MainActivity.class);
+                                startActivity(intent1);
+                            }
+                        });
+                final AlertDialog alert = builder.create();
+                alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                    @SuppressLint("ResourceAsColor")
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+                    }
+                });
+
+                alert.show();
+            }
         }
 
     }

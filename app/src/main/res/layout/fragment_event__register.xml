@@ -10,7 +10,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -29,7 +28,7 @@
                     <android.support.v7.widget.Toolbar
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:background="#ffa726">
+                        android:background="#ff6d00">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -256,14 +255,14 @@
                         >
 
                         <Button
-                            android:layout_width="fill_parent"
+                            android:id="@+id/add_button"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:backgroundTint="#ff6d00"
+                            android:layout_marginLeft="140dp"
                             android:text="@string/add"
-                            android:backgroundTint="#ffa726"
                             android:textColor="#fff"
-                            android:textStyle="bold"
-                            android:id="@+id/add_button"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
                 </LinearLayout>

@@ -102,7 +102,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         result = getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
         final String temp = result.getString("userrole", "");
 
+        if (temp.equals("admin")) {
 
+
+            Menu menu = navigationView.getMenu();
+            for (int menuItemIndex = 0; menuItemIndex < menu.size(); menuItemIndex++) {
+                MenuItem menuItem= menu.getItem(menuItemIndex);
+                if(menuItem.getItemId() == R.id.training_centre || menuItem.getItemId() == R.id.up_event
+                        || menuItem.getItemId() == R.id.suggestion || menuItem.getItemId() == R.id.about_us
+                        || menuItem.getItemId() == R.id.gallery || menuItem.getItemId() == R.id.inbox
+                        || menuItem.getItemId() == R.id.logout){
+                    menuItem.setVisible(true);
+                }
+
+
+                if(menuItem.getItemId() == R.id.login){
+                    menuItem.setVisible(false);
+                }
+            }
+
+        }
 
         if (temp.equals("trainer")) {
 

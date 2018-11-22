@@ -12,9 +12,9 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="@dimen/img_width_height"
-            android:layout_height="@dimen/img_width_height"
-            android:src="@drawable/ic_movie" />
+            android:layout_width="331dp"
+            android:layout_height="271dp"
+            android:src="@drawable/os3" />
 
         <TextView
             android:layout_width="wrap_content"

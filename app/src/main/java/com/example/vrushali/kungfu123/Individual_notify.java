@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -73,7 +74,6 @@ public class Individual_notify extends Fragment {
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
     String URL1 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=student_info_for_trainer_by_batch";
 
-
     public Individual_notify() {
         // Required empty public constructor
     }
@@ -99,6 +99,12 @@ public class Individual_notify extends Fragment {
                              Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_individual_notify,container,false);
 
+
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
+
         spin1 = (Spinner) v.findViewById(R.id.spinner1);
 
         namelist = new ArrayList<>();
@@ -112,11 +118,7 @@ public class Individual_notify extends Fragment {
 
         new GetContacts().execute();
 
-//        adapter = new CustomAdapterNotification(namelist, getActivity());
-//
-//        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
@@ -132,56 +134,40 @@ public class Individual_notify extends Fragment {
                 FirebaseMessaging.getInstance().subscribeToTopic("test");
                 FirebaseInstanceId.getInstance().getToken();
 
-                new JsonPost().execute(title,address,sorted);
-//                UserModelNotify dataModel= (UserModelNotify) namelist.get(position);
-//                dataModel.checked = !dataModel.checked;
-////                adapter.notifyDataSetChanged();
+                if(harsh.length() == 0 || harsh.equals("") || harsh == null)
+                {
+                    harsh.requestFocus();
+                    harsh.setError("Enter Title");
+
+                }
+                else if (harshal.length() == 0 || harshal.equals("") || harshal == null) {
+
+                    harshal.requestFocus();
+                    harshal.setError("Enter Date *");
+
+                }else{
+
+                    new JsonPost().execute(title,address,sorted);
+
+                }
 
             }
         });
 
-//        noti.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                title=harsh.getText().toString();
-//                address=harshal.getText().toString();
-//
-//                FirebaseMessaging.getInstance().subscribeToTopic("test");
-//                FirebaseInstanceId.getInstance().getToken();
-//
-//                SharedPreferences sp1 = getActivity().getSharedPreferences("notify", MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sp1.edit();
-//
-//                editor.putString("noti_title", title);
-//                editor.putString("noti_msg", address);
-//                editor.commit();
-//
-//
-//                Log.e("TITLE:",title);
-//                Log.e("Adreessss:-",address);
-//                new JsonPost().execute(title,address,uiddd);
-//
-//            }
-//        });
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if(adapterView.getItemAtPosition(i).equals("select")){
-
+                    listView.setAdapter(null);
                 }
                 else{
                     item1 =adapterView.getItemAtPosition(i).toString();
-//                    select_item_id =String.valueOf(spin1.getSelectedItemId());
-//                    Log.e("Selected item:",select_item_id);
 
                     String string = item1;
                     String[] parts = string.split("-");
                     batch = parts[0]; // 004
                     String part2 = parts[1]; // 034556
-
-
 
                     SharedPreferences sp1 = getActivity().getSharedPreferences("batchinfo", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp1.edit();
@@ -189,9 +175,18 @@ public class Individual_notify extends Fragment {
                     editor.putString("batchid", batch);
 
                     new GetListNames(batch).execute();
-
                     editor.clear();
                     editor.commit();
+
+                    ListAdapter adapter = new SimpleAdapter(
+                            getActivity(), namelist,
+                            R.layout.listview_notify, new String[]{"a", "b",
+                    }, new int[]{R.id.id,
+                            R.id.name});
+
+                    listView.setAdapter(adapter);
+
+                    namelist.clear();
 
                     Toast.makeText(adapterView.getContext(),"Selected:"+item1,Toast.LENGTH_SHORT).show();
                 }
@@ -250,13 +245,6 @@ public class Individual_notify extends Fragment {
                         String d = c.getString("b_to_time");
                         String eg = c.getString("b_name");
                         String f = c.getString("b_location");
-
-//                        HashMap<String, String> contact = new HashMap<>();
-//
-//                        contact.put("eg", eg);
-//
-//                        select_batch.add(eg);
-
 
                         res1 = a + "-" + eg;
                         select_batch.add(res1);
@@ -397,12 +385,6 @@ public class Individual_notify extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-//            adapter = new CustomAdapterNotification(namelist, getActivity());
-//
-//            listView.setAdapter(adapter);
-//            adapter.notifyDataSetChanged();
-//
-
 
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(), namelist,
@@ -411,6 +393,8 @@ public class Individual_notify extends Fragment {
                     R.id.name});
 
             listView.setAdapter(adapter);
+
+            ((SimpleAdapter) adapter).notifyDataSetChanged();
 
         }
 
@@ -444,14 +428,31 @@ public class Individual_notify extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getActivity(),"Notification sent",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
 
-//            textView.setText(result);
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                String success = jsonObject.getString("st");
+
+                if(success.equals("1")){
+                    Toast.makeText(getActivity(), "Notification Sent", Toast.LENGTH_SHORT).show();
+
+                }else if(success.equals("2")){
+                    Toast.makeText(getActivity(), "Some Fields Empty", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getActivity(), "No user Exists", Toast.LENGTH_SHORT).show();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                Toast.makeText(getActivity(),e.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+
         }
     }
-
-////////////////////
 
     private String PostJson(String[] params)  {
 

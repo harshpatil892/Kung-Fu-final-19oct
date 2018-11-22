@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -32,7 +33,7 @@ public class CampFragment extends Fragment {
   private String TAG = CampFragment.class.getSimpleName();
 
   SharedPreferences role1;
-
+  TextView harshal;
   static String UserId;
   String role;
   private ProgressDialog pDialog;
@@ -60,6 +61,7 @@ public class CampFragment extends Fragment {
     contactList = new ArrayList<>();
 
     lv = (ListView)v.findViewById(R.id.campresult);
+    harshal=(TextView)v.findViewById(R.id.harshal);
 
     new GetContacts().execute();
     return v;
@@ -68,8 +70,7 @@ public class CampFragment extends Fragment {
   public void onPause(){
 
     super.onPause();
-//    if(pDialog != null)
-//      pDialog.dismiss();
+
   }
   private class GetContacts extends AsyncTask<Void, Void, Void> {
 
@@ -77,12 +78,7 @@ public class CampFragment extends Fragment {
     protected void onPreExecute() {
       super.onPreExecute();
 
-//            getUserId(this);
-      // Showing progress dialog
-//      pDialog = new ProgressDialog(getActivity());
-//      pDialog.setMessage("Please wait...");
-//      pDialog.setCancelable(false);
-//      pDialog.show();
+
     }
     @Override
     protected Void doInBackground(Void... arg0) {
@@ -107,18 +103,6 @@ public class CampFragment extends Fragment {
             String name = c.getString("te_reg_date");
             String email = c.getString("te_reg_status");
 
-
-
-//                        String tcstatus = c.getString("tc_status");
-//                        String uname = c.getString("uc_status");
-//                        String ureg = c.getString("uc_reg_date");
-//
-//                         Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
-
             // tmp hash map for single contact
             HashMap<String, String> contact = new HashMap<>();
 
@@ -126,12 +110,6 @@ public class CampFragment extends Fragment {
             contact.put("id", id);
             contact.put("name", name);
             contact.put("email", email);
-
-//                        contact.put("tcstatus", tcstatus);
-//                        contact.put("uname", uname);
-//                        contact.put("ureg", ureg);
-
-//                        contact.put("mobile", mobile);
 
             // adding contact to contact list
             contactList.add(contact);
@@ -154,10 +132,29 @@ public class CampFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
           @Override
           public void run() {
-            Toast.makeText(getActivity(),
-                    "Couldn't get json from server. Check LogCat for possible errors!",
-                    Toast.LENGTH_LONG)
-                    .show();
+//            Toast.makeText(getActivity(),
+//                    "Couldn't get json from server. Check LogCat for possible errors!",
+//                    Toast.LENGTH_LONG)
+//                    .show();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("No event for current time")
+                    .setCancelable(true)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                      }
+                    });
+            final AlertDialog alert = builder.create();
+            alert.setOnShowListener( new DialogInterface.OnShowListener() {
+              @SuppressLint("ResourceAsColor")
+              @Override
+              public void onShow(DialogInterface arg0) {
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+              }
+            });
+            alert.show();
+
           }
         });
 
@@ -165,16 +162,12 @@ public class CampFragment extends Fragment {
 
       return null;
     }
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onPostExecute(Void result) {
       super.onPostExecute(result);
       // Dismiss the progress dialog
-//      if (pDialog.isShowing())
-//
-//        pDialog.dismiss();
-      /**
-       * Updating parsed JSON data into ListView
-       * */
+
       ListAdapter adapter = new SimpleAdapter(
               getActivity(), contactList,
               R.layout.listforcampresult, new String[]{"id", "name",
@@ -185,24 +178,28 @@ public class CampFragment extends Fragment {
 
       if(lv.getCount()==0) {
         //empty, show alertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("No event for current time")
-                .setCancelable(true)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                  }
-                });
-        final AlertDialog alert = builder.create();
-        alert.setOnShowListener( new DialogInterface.OnShowListener() {
-          @SuppressLint("ResourceAsColor")
-          @Override
-          public void onShow(DialogInterface arg0) {
-            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
-          }
-        });
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setMessage("No event for current time")
+//                .setCancelable(true)
+//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                  public void onClick(DialogInterface dialog, int id) {
+//                    dialog.cancel();
+//                  }
+//                });
+//        final AlertDialog alert = builder.create();
+//        alert.setOnShowListener( new DialogInterface.OnShowListener() {
+//          @SuppressLint("ResourceAsColor")
+//          @Override
+//          public void onShow(DialogInterface arg0) {
+//            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+//          }
+//        });
 
-        alert.show();
+//        alert.show();
+        harshal.setVisibility(View.VISIBLE);
+        harshal.setText("NO EVENT FOR CURRENT TIME");
+        harshal.setTextColor(R.color.red);
+
       }
 
     }
@@ -219,4 +216,5 @@ public class CampFragment extends Fragment {
                             View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             );
   }
+
 }

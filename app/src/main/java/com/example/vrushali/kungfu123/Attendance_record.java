@@ -3,6 +3,7 @@ package com.example.vrushali.kungfu123;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -10,7 +11,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -50,8 +54,8 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
     ArrayAdapter<String> adapter;
     private RecyclerView recyclerView;
     ArrayList<String> select_batch;
-
-    String stud_id,part1,res;
+    public CardView cardView;
+    String part1,res;
 
     private android.support.v7.widget.SearchView searchView;
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
@@ -78,9 +82,11 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
         View contentView = inflater.inflate(R.layout.activity_attendance_record, null, false);
         drawer.addView(contentView, 0);
         contactList = new ArrayList<>();
-
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         lv = (ListView) findViewById(R.id.attrec);
+        cardView=(CardView)findViewById(R.id.cardView8);
         mSearchView = (SearchView)findViewById(R.id.searchView1);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -92,7 +98,11 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
                 String value = lv.getItemAtPosition(position).toString();
                 Log.e("ITEM SELECETD",value);
-                stud_id = value.replaceAll("[a-z,{}.A-Z=]","");
+
+                String[] items = value.split(",");
+                String stud_name = items[0].split("=")[1];
+                String stud_id = items[1].replaceAll("[a-z,{}.A-Z=]","");
+
                 Log.e("HARSHAL :",stud_id);
 
                 SharedPreferences sp1 = getSharedPreferences("studentid", Context.MODE_PRIVATE);
@@ -113,7 +123,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
         spin1 = findViewById(R.id.spinner1);
 
         select_batch = new ArrayList<String>();
-        select_batch.add(0,"select");
+        select_batch.add(0,"Select");
 
 
         new GetBatch().execute();
@@ -123,13 +133,15 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if(adapterView.getItemAtPosition(i).equals("select")) {
-                    // do nothing
+                if(adapterView.getItemAtPosition(i).equals("Select")) {
+
+                    lv.setAdapter(null);
 
                 }
 
                 else{
 
+                    cardView.setVisibility(View.VISIBLE);
                     String item2 =adapterView.getItemAtPosition(i).toString();
 
                     String string = item2;
@@ -146,6 +158,16 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
                     new GetContacts().execute();
 
+                    ListAdapter adapter = new SimpleAdapter(
+                            Attendance_record.this, contactList,
+                            R.layout.listforattendancerecord, new String[]{"id", "name",
+                    }, new int[]{R.id.id,
+                            R.id.name});
+
+                    lv.setAdapter(adapter);
+
+                    contactList.clear();
+
                 }
 
 
@@ -161,7 +183,6 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 
     }
 
-
     private void setupSearchView()
     {
         mSearchView.setIconifiedByDefault(false);
@@ -169,6 +190,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
         mSearchView.setSubmitButtonEnabled(false);
         mSearchView.setQueryHint("Search Here");
     }
+
     @Override
     public boolean onQueryTextChange(String newText)
     {
@@ -250,20 +272,21 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    "Invalid Operation " + e.getMessage(),
                                     Toast.LENGTH_LONG)
                                     .show();
                         }
                     });
 
                 }
-            } else {
+            }
+            else {
                 Log.e(TAG, "Couldn't get json from server.");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                "Please Check Internet Connection!",
                                 Toast.LENGTH_LONG)
                                 .show();
                     }
@@ -320,7 +343,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
 
-                        String id = c.getString("uc_id");
+//                        String id = c.getString("u_id");
                         String name = c.getString("uc_name");
 //                        String name1 = c.getString("uc_batch");
 //                        String name2 = c.getString("a_id");
@@ -328,6 +351,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 //                        String name4 = c.getString("a_t_id");
 //                        String name5 = c.getString("a_date");
 //                        String name6 = c.getString("a_status");
+                        String id = c.getString("uc_id");
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
@@ -376,10 +400,6 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 //            if (pDialog.isShowing())
 //                pDialog.dismiss();
 
-//            mShimmerViewContainer.setVisibility(View.GONE);
-            /**
-             * Updating parsed JSON data into ListView
-             * */
             ListAdapter adapter = new SimpleAdapter(
                     Attendance_record.this, contactList,
                     R.layout.listforattendancerecord, new String[]{"id", "name",
@@ -387,6 +407,30 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
                     R.id.name});
 
             lv.setAdapter(adapter);
+
+            ((SimpleAdapter) adapter).notifyDataSetChanged();
+
+            if(lv.getCount()==0) {
+                //empty, show alertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(Attendance_record.this);
+                builder.setMessage("No Record Found")
+                        .setCancelable(true)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                final AlertDialog alert = builder.create();
+                alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                    @SuppressLint("ResourceAsColor")
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+                    }
+                });
+
+                alert.show();
+            }
         }
     }
 

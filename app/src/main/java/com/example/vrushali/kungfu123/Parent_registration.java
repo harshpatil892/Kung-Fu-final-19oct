@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -95,6 +96,11 @@ public class Parent_registration extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_parent_registration, container, false);
+
+
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         namet = v.findViewById(R.id.name);
         mob_no = v.findViewById(R.id.mobno);
@@ -511,6 +517,22 @@ public class Parent_registration extends Fragment {
 
 
             Toast.makeText(getActivity(),"Registration successful",Toast.LENGTH_SHORT).show();
+
+            namet.getText().clear();
+//            gender = buttonSelected;
+            mob_no.getText().clear();
+            pwd.getText().clear();
+            con_pwd.getText().clear();
+            addr.getText().clear();
+            cname.getText().clear();
+            tvw.setText("");
+            add_fees.setText("");
+//            child_gender = buttonSelected1;
+            gr_no.getText().clear();
+            register_text.setText("");
+            spin1.setSelection(0);
+            spin2.setSelection(0);
+
 
         }
     }

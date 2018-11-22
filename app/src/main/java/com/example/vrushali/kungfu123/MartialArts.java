@@ -71,10 +71,13 @@ public class MartialArts extends AppCompatActivity {
         webview.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.loadUrl("http://www.aikfwsa.com/app/2017/04/12/the-importance-of-martial-arts-to-youth/");
+        webview3.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         webview3.getSettings().setJavaScriptEnabled(true);
         webview3.loadUrl("http://www.aikfwsa.com/app/2017/04/12/importance-and-benefits-of-martial-arts-in-real-life/");
+        webview5.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         webview5.getSettings().setJavaScriptEnabled(true);
         webview5.loadUrl("http://www.aikfwsa.com/app/2017/04/12/25-benefits-of-martial-arts-for-your-child/");
+        webview7.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         webview7.getSettings().setJavaScriptEnabled(true);
         webview7.loadUrl("http://www.aikfwsa.com/app/2017/04/11/second-test/");
 

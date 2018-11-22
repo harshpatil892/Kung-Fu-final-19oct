@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 public class KeyPersonnel extends AppCompatActivity {
@@ -24,6 +25,8 @@ public class KeyPersonnel extends AppCompatActivity {
 
 
         keypersonal=(WebView)findViewById(R.id.keypersonal);
+
+        keypersonal.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
 
         keypersonal.getSettings().setJavaScriptEnabled(true);
         keypersonal.loadUrl("http://www.aikfwsa.com/app/key-personnel/");

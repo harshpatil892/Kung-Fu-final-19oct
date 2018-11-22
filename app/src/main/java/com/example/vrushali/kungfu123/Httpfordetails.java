@@ -21,10 +21,10 @@ public class Httpfordetails {
 
     private static final String TAG = Httpfordetails.class.getSimpleName();
 
-    SharedPreferences result1,result2,result3,result4,result5;
+    SharedPreferences result1,result2,result3,result4,result5,result6;
 
     static String UserId;
-    String temp,temp1,temp2,temp3,temp4;
+    String temp,temp1,temp2,temp3,temp4,temp5;
 
     public Httpfordetails(Context context){
 
@@ -43,18 +43,23 @@ public class Httpfordetails {
         result5 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
         temp4 = result5.getString("userid", "");
 
-    }
+        result6 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
+        temp5 = result6.getString("ucid", "");
 
+    }
 
     public String makeServiceCall(String reqUrl) {
 
         String response = null;
         try {
+
             URL url = new URL("http://10.0.43.1/kungfu2/api/v1/user.php?data=show_attendance");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.getRequestMethod();
+
             JSONObject jsonParam = new JSONObject();
+
             jsonParam.put("role", temp1);
             jsonParam.put("uid", temp);
             jsonParam.put("month", temp2);
@@ -94,12 +99,12 @@ public class Httpfordetails {
             conn.getRequestMethod();
             JSONObject jsonParam = new JSONObject();
             jsonParam.put("role", temp1);
-            jsonParam.put("uid", temp4);
+            jsonParam.put("uid", temp5);
             jsonParam.put("month", temp2);
             jsonParam.put("year", temp3);
 
             Log.e("role", temp1);
-            Log.e("uid", temp4);
+            Log.e("uid", temp5);
             Log.e("month", temp2);
             Log.e("year", temp3);
 

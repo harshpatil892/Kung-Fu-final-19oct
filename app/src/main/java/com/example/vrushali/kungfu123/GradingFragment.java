@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -32,7 +33,7 @@ public class GradingFragment extends Fragment {
   private String TAG = GradingFragment.class.getSimpleName();
 
   SharedPreferences role1;
-
+  TextView harshal;
   static String UserId;
   String role;
   private ProgressDialog pDialog;
@@ -69,7 +70,7 @@ public class GradingFragment extends Fragment {
     contactList = new ArrayList<>();
 
     lv = (ListView)v.findViewById(R.id.gradingresult);
-
+    harshal=(TextView)v.findViewById(R.id.harshal);
     new GetContacts().execute();
     return v;
   }
@@ -165,17 +166,18 @@ public class GradingFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
           @Override
           public void run() {
-            Toast.makeText(getActivity(),
-                    "Couldn't get json from server. Check LogCat for possible errors!",
-                    Toast.LENGTH_LONG)
-                    .show();
-          }
+//            Toast.makeText(getActivity(),
+//                    "Couldn't get json from server. Check LogCat for possible errors!",
+//                    Toast.LENGTH_LONG)
+//                    .show();
+                   }
         });
 
       }
 
       return null;
     }
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onPostExecute(Void result) {
       super.onPostExecute(result);
@@ -183,9 +185,7 @@ public class GradingFragment extends Fragment {
 //      if (pDialog.isShowing())
 //
 //        pDialog.dismiss();
-      /**
-       * Updating parsed JSON data into ListView
-       * */
+
       ListAdapter adapter = new SimpleAdapter(
               getActivity(), contactList,
               R.layout.listforgradingresult, new String[]{"id", "name",
@@ -195,24 +195,27 @@ public class GradingFragment extends Fragment {
       lv.setAdapter(adapter);
 
       if(lv.getCount()==0) {
-        //empty, show alertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("No event for current time")
-                .setCancelable(true)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                  }
-                });
-        final AlertDialog alert = builder.create();
-        alert.setOnShowListener( new DialogInterface.OnShowListener() {
-          @SuppressLint("ResourceAsColor")
-          @Override
-          public void onShow(DialogInterface arg0) {
-            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
-          }
-        });
-        alert.show();
+//        //empty, show alertDialog
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setMessage("No event for current time")
+//                .setCancelable(true)
+//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                  public void onClick(DialogInterface dialog, int id) {
+//                    dialog.cancel();
+//                  }
+//                });
+//        final AlertDialog alert = builder.create();
+//        alert.setOnShowListener( new DialogInterface.OnShowListener() {
+//          @SuppressLint("ResourceAsColor")
+//          @Override
+//          public void onShow(DialogInterface arg0) {
+//            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+//          }
+//        });
+//        alert.show();
+        harshal.setVisibility(View.VISIBLE);
+        harshal.setText("NO EVENT FOR CURRENT TIME");
+        harshal.setTextColor(R.color.red);
       }
 
     }

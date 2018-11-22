@@ -3,16 +3,19 @@ package com.example.vrushali.kungfu123;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -38,6 +41,8 @@ public class AttendanceParent extends BaseActivity {
   private String TAG = AttendanceParent.class.getSimpleName();
   private ProgressDialog pDialog;
   private ListView lv;
+
+  LinearLayout attend;
 
   private static String URL1 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=show_attendance";
   ArrayList<HashMap<String, String>> attendance_list;
@@ -71,6 +76,8 @@ public class AttendanceParent extends BaseActivity {
 
     lv = (ListView) findViewById(R.id.listforatt);
 
+    attend = findViewById(R.id.yr_id_attend);
+
     mnth.add(0,"select");
     mnth.add("January");
     mnth.add("February");
@@ -90,12 +97,17 @@ public class AttendanceParent extends BaseActivity {
     year.add("2018");
     year.add("2019");
 
+//    adapter1 = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1, year);
+//    get_year.setAdapter(adapter1);
+//
+//    adapter1.clear();
+//
 
     ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, mnth);
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     get_month.setAdapter(adapter);
 
-    ArrayAdapter<String> adapter1=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, year);
+    final ArrayAdapter<String> adapter1=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, year);
     adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     get_year.setAdapter(adapter1);
 
@@ -105,11 +117,17 @@ public class AttendanceParent extends BaseActivity {
 
         if(parent.getItemAtPosition(position).equals("select")) {
           // do nothing
+          lv.setAdapter(null);
+          attend.setVisibility(View.GONE);
 
         }
 
         else{
+
+          lv.setAdapter(null);
           monthh= String.valueOf(get_month.getSelectedItemId());
+
+
 
           SharedPreferences sp1 = getSharedPreferences("month", Context.MODE_PRIVATE);
           SharedPreferences.Editor editor = sp1.edit();
@@ -119,6 +137,20 @@ public class AttendanceParent extends BaseActivity {
           editor.commit();
 
           Log.e("Selected month id",monthh);
+
+          attend.setVisibility(View.VISIBLE);
+
+          ListAdapter adapter2 = new SimpleAdapter(
+                  AttendanceParent.this, attendance_list,
+                  R.layout.listforattendancerecdetails, new String[]{"id"
+          }, new int[]{R.id.id
+          });
+
+          lv.setAdapter(adapter2);
+
+          attendance_list.clear();
+//          adapter1 = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1, year);
+//          get_year.setAdapter(adapter1);
 
         }
       }
@@ -134,11 +166,13 @@ public class AttendanceParent extends BaseActivity {
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         if(parent.getItemAtPosition(position).equals("select")) {
-          // do nothing
 
+          lv.setAdapter(null);
         }
 
         else{
+
+          lv.setAdapter(null);
           yr = String.valueOf(get_year.getSelectedItem());
 
           SharedPreferences sp1 = getSharedPreferences("year", Context.MODE_PRIVATE);
@@ -152,6 +186,21 @@ public class AttendanceParent extends BaseActivity {
 
           new GetContacts().execute();
 
+          ListAdapter adapter2 = new SimpleAdapter(
+                  AttendanceParent.this, attendance_list,
+                  R.layout.listforattendancerecdetails, new String[]{"id"
+          }, new int[]{R.id.id
+          });
+
+          lv.setAdapter(null);
+
+          lv.setAdapter(adapter2);
+
+          attendance_list.clear();
+
+          yr.equals(null);
+
+//          adapter1.clear();
         }
       }
 
@@ -165,6 +214,17 @@ public class AttendanceParent extends BaseActivity {
   }
 
   private class GetContacts extends AsyncTask<Void, Void, Void> {
+//
+//    String item1,item2;
+//    public GetContacts(String item,String ittem) {
+//
+//      this.item1 = item;
+//      this.item2 = ittem;
+//
+//      Log.e("Selected month:",item1);
+//      Log.e("Selected year:",item2);
+//
+//    }
 
     @Override
     protected void onPreExecute() {
@@ -250,13 +310,36 @@ public class AttendanceParent extends BaseActivity {
 
 //            mShimmerViewContainer.stopShimmerAnimation();
 
-      ListAdapter adapter = new SimpleAdapter(
+      ListAdapter adapter2 = new SimpleAdapter(
               AttendanceParent.this, attendance_list,
               R.layout.listforattendancerecdetails, new String[]{"id"
       }, new int[]{R.id.id
       });
 
-      lv.setAdapter(adapter);
+      lv.setAdapter(adapter2);
+      ((SimpleAdapter) adapter2).notifyDataSetChanged();
+
+      if(lv.getCount()==0) {
+        //empty, show alertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(AttendanceParent.this);
+        builder.setMessage("No Record Found")
+                .setCancelable(true)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                  public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                  }
+                });
+        final AlertDialog alert = builder.create();
+        alert.setOnShowListener( new DialogInterface.OnShowListener() {
+          @SuppressLint("ResourceAsColor")
+          @Override
+          public void onShow(DialogInterface arg0) {
+            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+          }
+        });
+
+        alert.show();
+      }
 
     }
   }

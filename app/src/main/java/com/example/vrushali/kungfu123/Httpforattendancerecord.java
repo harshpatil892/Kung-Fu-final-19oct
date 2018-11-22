@@ -21,15 +21,13 @@ public class Httpforattendancerecord {
 
     private static final String TAG = Httpforattendancerecord.class.getSimpleName();
 
-    SharedPreferences result1,result2,result3;
+    SharedPreferences result2,result3;
 
     static String UserId;
-    String temp,temp1,temp2;
+    String temp1,temp2;
 
     public Httpforattendancerecord(Context context){
 
-        result1 = context.getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
-        temp = result1.getString("userid", "");
 
         result2 = context.getSharedPreferences("attbatchid", Context.MODE_PRIVATE);
         temp1 = result2.getString("gatt", "");

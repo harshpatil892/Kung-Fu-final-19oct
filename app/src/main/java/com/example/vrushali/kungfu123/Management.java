@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 public class Management extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class Management extends AppCompatActivity {
 
         setContentView(R.layout.activity_management);
         management=(WebView)findViewById(R.id.managemnet);
+        management.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         management.getSettings().setJavaScriptEnabled(true);
         management.loadUrl("http://www.aikfwsa.com/app/management/");
     }

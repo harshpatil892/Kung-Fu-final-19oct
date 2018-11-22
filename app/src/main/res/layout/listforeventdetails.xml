@@ -20,12 +20,12 @@
         android:id="@+id/name"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="5dp"
         android:textSize="15dp" />
 
     <TextView
         android:id="@+id/email"
-        android:layout_width="50dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="05dp"
         android:textSize="15dp" />

@@ -1,6 +1,8 @@
 package com.example.vrushali.kungfu123;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,13 +36,14 @@ public class Ch_password extends Fragment {
     public Button save;
     String savepassword,uid,npassword;
     String userid="2";
-
+    SharedPreferences result1;
+    String temp;
     private static String url = "http://10.0.43.1/kungfu2/api/v1/user.php?data=change_password";
     ArrayList<HashMap<String, String>> contactList;
 
     public Ch_password() {
 
- }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -61,11 +64,12 @@ public class Ch_password extends Fragment {
 
         }
 
-
         View v =inflater.inflate(R.layout.fragment_ch_password,container,false);
         npass=(EditText)v.findViewById(R.id.pwd);
         pass=(EditText)v.findViewById(R.id.con_pwd);
         save=(Button)v.findViewById(R.id.add_button);
+        result1 = getActivity().getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
+        temp = result1.getString("userid", "");
         contactList = new ArrayList<>();
         save.setOnClickListener(new View.OnClickListener() {
 
@@ -74,7 +78,7 @@ public class Ch_password extends Fragment {
 
         npassword=npass.getText().toString();
         savepassword=pass.getText().toString();
-        uid=userid;
+        uid=temp;
         if(savepassword.equals( npassword))
         {
 
@@ -105,10 +109,8 @@ class JsonPost extends AsyncTask<String ,String,String>{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getActivity(),"Registration successful",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
+            Toast.makeText(getActivity(),"Password Changed successfully",Toast.LENGTH_SHORT).show();
 
-//            textView.setText(result);
         }
     }
 
@@ -124,7 +126,7 @@ class JsonPost extends AsyncTask<String ,String,String>{
         try {
             URL url =new URL("http://10.0.43.1/kungfu2/api/v1/user.php?data=change_password");
             connection = (HttpURLConnection) url.openConnection();
-            String urlparam = "{\"uid\":\""+userid+"\",\"password\":\""+ params[1]+"\"}";
+            String urlparam = "{\"uid\":\""+temp+"\",\"password\":\""+ params[1]+"\"}";
             Log.e("data",urlparam);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type","application/json");

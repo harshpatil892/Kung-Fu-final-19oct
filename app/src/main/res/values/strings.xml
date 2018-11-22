@@ -139,7 +139,7 @@
     <string name="Select_Batch">Select Batch</string>
     <string name="Select_Month">Select Month</string>
     <string name="Select_Year">Select Year</string>
-    <string name="Compitition">Compitition</string>
+    <string name="Competition">Competition</string>
     <string name="Select_Student">Select Student</string>
     <string name="Monthly_Fees">Monthly Fees</string>
     <string name="Notification_batch">Send Notification to Batch</string>
@@ -152,8 +152,8 @@
     <string name="Belt_level">Belt Level</string>
     <string name="Fee_Record">Fee Record</string>
     <string name="Notification_Individual">Notification Individual</string>
-    <string name="Upload_Photo">Upload Photo</string>
-    <string name="Update_photo">Update Photo</string>
+    <string name="Upload_Photo">Pick Image</string>
+    <string name="Update_photo">Update Image</string>
     <string name="Night_Mode">Night Mode</string>
 
 
@@ -181,5 +181,19 @@
     <string name="mobileerror">Enter a valid mobile</string>
     <string name="dateerror">Enter a valid date</string>
     <string name="ageerror">Enter a valid age</string>
+    <string name="title_activity_maps">Map</string>
+
+
+    <string name="app_name1">Android Login and Registration</string>
+    <string name="hint_email">Mobile Number</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_link_to_register">Not a member? Sign up now.</string>
+    <string name="btn_link_to_login">Already registred! Login Me.</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">LOGOUT</string>
+    <string name="namelogin">Fullname</string>
 
 </resources>

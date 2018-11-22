@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
     private SearchView mSearchView;
     ArrayList<String> event_type ;
     ArrayList<String> event_name;
-
+    CardView cardView;
     ArrayAdapter<String> myAdapter,myAdapter1;
 
     String URL="http://10.0.43.1/kungfu2/api/v1/user.php?data=events_details";
@@ -77,7 +78,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
         event_type = new ArrayList<>();
         event_name = new ArrayList<>();
 
-        event_type.add(0,"select");
+        event_type.add(0,"Select");
         event_type.add("Grading-Exam");
         event_type.add("Competition");
         event_type.add("Camp");
@@ -87,7 +88,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
 
         lv = (ListView) v.findViewById(R.id.eventrecord);
-
+        cardView=(CardView)v.findViewById(R.id.cardView8);
 
         contactList1 = new ArrayList<>();
 
@@ -95,7 +96,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(parent.getItemAtPosition(position).equals("select")){
+                if(parent.getItemAtPosition(position).equals("Select")){
                     // do nothing
 
                     myAdapter1 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, event_name);
@@ -107,7 +108,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
                 }
 
                 else if(type_event.getSelectedItem().equals("Grading-Exam")){
-
+                        cardView.setVisibility(View.VISIBLE);
                     selected_event_type =String.valueOf(type_event.getSelectedItem());
                     Log.e("Selected item:",selected_event_type);
 
@@ -120,7 +121,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
                 }
                 else if(type_event.getSelectedItem().equals("Competition")){
 
-
+                    cardView.setVisibility(View.VISIBLE);
                     selected_event_type =String.valueOf(type_event.getSelectedItem());
                     Log.e("Selected item:",selected_event_type);
 
@@ -134,6 +135,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
                 else if(type_event.getSelectedItem().equals("Camp")){
 
+                    cardView.setVisibility(View.VISIBLE);
                     selected_event_type =String.valueOf(type_event.getSelectedItem());
                     Log.e("Selected item:",selected_event_type);
 

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -46,6 +47,9 @@ public class Suggestions extends BaseActivity {
         @SuppressLint("InflateParams")
         View contentView = inflater.inflate(R.layout.activity_suggestions, null, false);
         drawer.addView(contentView, 0);
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         name=findViewById(R.id.name);
         username=findViewById(R.id.mob_no);
@@ -91,8 +95,21 @@ public class Suggestions extends BaseActivity {
 
                 }
                 else {
+
                     new JsonPost().execute(nm, un, pwd);
+
+//                    Intent email = new Intent(Intent.ACTION_SEND);
+//                    email.putExtra(Intent.EXTRA_EMAIL,new String[] { "vrushaliahirrao16@gmail.com"});
+//                    email.putExtra(Intent.EXTRA_SUBJECT,"Contact Us");
+//                    email.putExtra(Intent.EXTRA_TEXT,"sent a message using the contact us ");
+//
+//                    email.setType("message/rfc822");
+//
+//                    startActivityForResult(Intent.createChooser(email, "Choose an Email client:"),
+//                            1);
                 }
+
+
             }
         });
 
@@ -124,7 +141,11 @@ public class Suggestions extends BaseActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(Suggestions.this,"Registration successful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Suggestions.this,"Successfull",Toast.LENGTH_SHORT).show();
+
+            name.getText().clear();
+            username.getText().clear();
+            password.getText().clear();
 //            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
 
 //            textView.setText(result);

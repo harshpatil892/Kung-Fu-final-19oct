@@ -13,11 +13,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,20 +55,21 @@ public class Addfees extends Fragment {
     EditText insert_fees;
     String part1,part3,res1;
 
+    private ListView lv;
     SharedPreferences result1;
 
     ArrayList<String> select_batch;
     ArrayList<String> select_student = new ArrayList<String>();;
-    ArrayList<String> harshal = new ArrayList<String>();
     ArrayAdapter<String> myAdapter;
-//    ArrayList<Integer> mUserMonths = new ArrayList<>();
+
+    ArrayList<HashMap<String, String>> fee_info;
 
     String select_item_id,result,select_student_id;
     String erg = "";
     String erg1 = "";
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
     String URL1 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=student_info_for_trainer_by_batch";
-
+    String URL2 = "http://10.0.43.1/kungfu2/api/v1/user.php?data=student_last_2_fee_info";
 
     public Addfees() {
         // Required empty public constructor
@@ -84,6 +89,8 @@ public class Addfees extends Fragment {
 
         spin1 = (Spinner) v.findViewById(R.id.spinner1);
         spin2 = (Spinner) v.findViewById(R.id.spinner2);
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         insert_fees = v.findViewById(R.id.get_fees);
         btn1 = v.findViewById(R.id.add_button);
@@ -100,6 +107,10 @@ public class Addfees extends Fragment {
 
         select_student.add(0,"select");
 
+        fee_info = new ArrayList<>();
+
+        lv = v.findViewById(R.id.list_fees);
+
         mMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +122,7 @@ public class Addfees extends Fragment {
                 int d = c.get(Calendar.DAY_OF_MONTH);
                 final String[] MONTH = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
-                DatePickerDialog dp = new DatePickerDialog(getActivity(),
+                DatePickerDialog dp = new DatePickerDialog(getActivity(),R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -206,6 +217,26 @@ public class Addfees extends Fragment {
                     String[] parts = string.split("-");
                     part1 = parts[0]; // 004
                     String part2 = parts[1]; // 034556
+
+                    Log.e("Part1",part1);
+
+                    SharedPreferences sp1 = getActivity().getSharedPreferences("getsidfee", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp1.edit();
+
+                    editor.putString("s_id", part1);
+                    editor.clear();
+                    editor.commit();
+
+                    new GetLastFeeInfo(part1).execute();
+                    ListAdapter adapter2 = new SimpleAdapter(
+                            getActivity(), fee_info,
+                            R.layout.listforfeesrecordparent, new String[]{"j","f","g","k","b"},
+                            new int[]{R.id.mnth,R.id.fee1,R.id.Feerecvdate1,R.id.feepaidyr1,R.id.feereciver1
+                            });
+
+                    lv.setAdapter(adapter2);
+
+                    fee_info.clear();
 
                     Toast.makeText(parent.getContext(),"Selected:"+part1,Toast.LENGTH_SHORT).show();
                 }
@@ -478,6 +509,12 @@ public class Addfees extends Fragment {
 
             Toast.makeText(getActivity(),"Fees added succesfully",Toast.LENGTH_SHORT).show();
 
+            insert_fees.getText().clear();
+            mItemSelected.setText("");
+            yItemSelected.setText("");
+            spin1.setSelection(0);
+            spin2.setSelection(0);
+
         }
     }
 
@@ -541,4 +578,147 @@ public class Addfees extends Fragment {
         return data;
 
     }
+
+
+    private class GetLastFeeInfo extends AsyncTask<Void, Void, Void> {
+
+        String item2;
+        public GetLastFeeInfo(String item) {
+
+            this.item2 =item;
+
+            Log.e("Selected stud id:",item2);
+
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            HttpHandler1 sh = new HttpHandler1(getActivity());
+
+
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall2(URL2);
+            Log.e(TAG, "Response from url: " + jsonStr);
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    JSONArray contacts = jsonObj.getJSONArray("student_fees");
+
+                    // looping through All Contacts
+                    for (int i = 0; i < contacts.length(); i++) {
+                        JSONObject c = contacts.getJSONObject(i);
+                        String a = c.getString("uc_name");
+                        String b = c.getString("t_name");
+                        String cd = c.getString("sf_id");
+                        String e = c.getString("sf_s_id");
+                        String f = c.getString("sf_total");
+                        String g = c.getString("sf_date");
+                        String h = c.getString("sf_reciever");
+                        String j = c.getString("sf_month");
+                        String k = c.getString("sf_year");
+                        String l = c.getString("sf_status");
+
+                        // tmp hash map for single contact
+                        HashMap<String, String> contact = new HashMap<>();
+
+                        // adding each child node to HashMap key => value
+                        contact.put("a", a);
+                        contact.put("b", b);
+                        contact.put("cd",cd);
+                        contact.put("e", e);
+                        contact.put("f", f);
+                        contact.put("g", g);
+                        contact.put("h", h);
+                        contact.put("j", j);
+                        contact.put("k", k);
+                        contact.put("l", l);
+
+                        // adding contact to contact list
+                        fee_info.add(contact);
+                    }
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(),
+                                    "No Record Found",
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            // Dismiss the progress dialog
+//            if (pDialog.isShowing())
+//
+//                pDialog.dismiss();
+
+            ListAdapter adapter2 = new SimpleAdapter(
+                    getActivity(), fee_info,
+                    R.layout.listforfeesrecordparent, new String[]{"j","f","g","k","b"},
+                    new int[]{R.id.mnth,R.id.fee1,R.id.Feerecvdate1,R.id.feepaidyr1,R.id.feereciver1
+                    });
+
+            lv.setAdapter(adapter2);
+
+            ((SimpleAdapter) adapter2).notifyDataSetChanged();
+
+//            if(lv.getCount()==0) {
+//                //empty, show alertDialog
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setMessage("No Record Found")
+//                        .setCancelable(true)
+//                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.cancel();
+//
+//                                Intent intent1 = new Intent(getActivity(),MainActivity.class);
+//                                startActivity(intent1);
+//                            }
+//                        });
+//                final AlertDialog alert = builder.create();
+//                alert.setOnShowListener( new DialogInterface.OnShowListener() {
+//                    @SuppressLint("ResourceAsColor")
+//                    @Override
+//                    public void onShow(DialogInterface arg0) {
+//                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+//                    }
+//                });
+//
+//                alert.show();
+//            }
+        }
+
+    }
+
 }

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -36,10 +37,13 @@ public class HealthTips extends AppCompatActivity {
         hcard3=(CardView)findViewById(R.id.hcard3);
         hcard33=(CardView)findViewById(R.id.hcard33);
 
+        health1.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         health1.getSettings().setJavaScriptEnabled(true);
         health1.loadUrl("http://www.aikfwsa.com/app/2017/04/17/top-12-health-and-beauty-benefits-of-green-tea/");
+        health2.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         health2.getSettings().setJavaScriptEnabled(true);
         health2.loadUrl("http://www.aikfwsa.com/app/2017/04/12/womens-health-tips-for-heart-mind-and-body/");
+        health3.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         health3.getSettings().setJavaScriptEnabled(true);
         health3.loadUrl("http://www.aikfwsa.com/app/2017/04/12/5-exercise-benefits-of-martial-arts/");
 

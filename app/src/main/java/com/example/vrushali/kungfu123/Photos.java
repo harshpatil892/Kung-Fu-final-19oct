@@ -37,7 +37,9 @@ public class Photos extends BaseActivity {
     private RecyclerView recyclerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) { if (InitApplication.getInstance().isNightModeEnabled()) {
+    protected void onCreate(Bundle savedInstanceState) {
+
+        if (InitApplication.getInstance().isNightModeEnabled()) {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
@@ -101,8 +103,8 @@ public class Photos extends BaseActivity {
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
                         pDialog.hide();
-
                         images.clear();
+
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject object = response.getJSONObject(i);

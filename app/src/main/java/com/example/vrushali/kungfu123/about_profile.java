@@ -46,10 +46,13 @@ public class about_profile extends Fragment {
         profile1.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         profile1.getSettings().setJavaScriptEnabled(true);
         profile1.loadUrl("http://www.aikfwsa.com/app/values/");
+        profile2.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         profile2.getSettings().setJavaScriptEnabled(true);
         profile2.loadUrl("http://www.aikfwsa.com/app/goals/");
+        profile3.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         profile3.getSettings().setJavaScriptEnabled(true);
         profile3.loadUrl("http://www.aikfwsa.com/app/mission/");
+        profile4.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         profile4.getSettings().setJavaScriptEnabled(true);
         profile4.loadUrl("http://www.aikfwsa.com/app/vision/");
         return v;

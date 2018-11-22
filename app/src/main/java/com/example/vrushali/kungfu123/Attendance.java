@@ -4,15 +4,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -38,9 +42,11 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
 
     private String TAG = Attendance.class.getSimpleName();
 
+    Button button;
     Spinner spin1;
-    String trainid,batch,res;
+    String trainid,batch,res,stud_id;
     private SearchView mSearchView;
+    CardView harshal;
     String  item,harsh,temp;
     ArrayList<String> select_batch;
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
@@ -65,40 +71,48 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //inflate your activity layout here!
-        @SuppressLint("InflateParams")
-        View contentView = inflater.inflate(R.layout.activity_attendance, null, false);
+        @SuppressLint("InflateParams") final View contentView = inflater.inflate(R.layout.activity_attendance, null, false);
         drawer.addView(contentView, 0);
 
         spin1 = findViewById(R.id.spinner1);
         mSearchView = (SearchView)findViewById(R.id.searchView1);
+        harshal = findViewById(R.id.harshal);
 
         select_batch = new ArrayList<String>();
-        select_batch.add(0,"select");
+        select_batch.add(0,"Select");
 
 
         contactList = new ArrayList<>();
         lv = (ListView) findViewById(R.id.takeatt);
+//        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3)
-            {
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int position, long id) {
 
                 String value = lv.getItemAtPosition(position).toString();
-                
+//
                 Log.e("ITEM SELECETD",value);
-                harsh = value.replaceAll("[a-z,{}.A-Z=]","");
-                Log.e("HARSHAL :",harsh);
+                String[] items = value.split(",");
+                String stud_name = items[0].split("=")[1];
+                stud_id = items[1].replaceAll("[a-z,{}.A-Z=]","");
+
+                Log.e("HARSHAL :",stud_id);
 
                 result1 = getSharedPreferences("usersinfos", Context.MODE_PRIVATE);
                 temp = result1.getString("userid", "");
 
                 trainid = temp;
-                new JsonPost().execute(trainid,harsh);
+
+                new JsonPost().execute(trainid,stud_id);
+
+                return true;
 
             }
+
         });
 
         new GetContacts().execute();
@@ -108,13 +122,14 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if(adapterView.getItemAtPosition(i).equals("select")) {
-                    // do nothing
+                if(adapterView.getItemAtPosition(i).equals("Select")) {
 
+                    lv.setAdapter(null);
                 }
 
                 else{
 
+                    harshal.setVisibility(View.VISIBLE);
                     String item2 =adapterView.getItemAtPosition(i).toString();
 
                     String string = item2;
@@ -131,6 +146,16 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
 
                     new GetContacts1(batch).execute();
 
+                    ListAdapter adapter = new SimpleAdapter(
+                            Attendance.this, contactList,
+                            R.layout.listfortakeattendance, new String[]{"id","name"
+                    }, new int[]{R.id.id,R.id.name
+                    });
+
+                    lv.setAdapter(adapter);
+
+                    contactList.clear();
+
                 }
 
             }
@@ -141,6 +166,7 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         });
 
         lv.setTextFilterEnabled(true);
+
         setupSearchView();
     }
     private void hideNavigationBar() {
@@ -154,6 +180,8 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
                                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 );
     }
+
+
     private void setupSearchView()
     {
         mSearchView.setIconifiedByDefault(false);
@@ -161,6 +189,8 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         mSearchView.setSubmitButtonEnabled(true);
         mSearchView.setQueryHint("Search Here");
     }
+
+
     @Override
     public boolean onQueryTextChange(String newText)
     {
@@ -356,8 +386,9 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
 
             lv.setAdapter(adapter);
 
-//            contactList.clear();
-//            ((SimpleAdapter) adapter).notifyDataSetChanged();
+
+            ((SimpleAdapter) adapter).notifyDataSetChanged();
+
         }
 
     }
@@ -377,9 +408,32 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                String success = jsonObject.getString("st");
+
+                if(success.equals("1")){
+                    Toast.makeText(Attendance.this, "Attendance Marked", Toast.LENGTH_SHORT).show();
+
+                }else if(success.equals("2")){
+                    Toast.makeText(Attendance.this, "Already Marked", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(Attendance.this, "Some field empty", Toast.LENGTH_SHORT).show();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                Toast.makeText(Attendance.this,e.toString(), Toast.LENGTH_SHORT).show();
+
+            }
 
         }
-    }
+
+        }
+
 
 
     private String PostJson(String[] params)  {
@@ -394,7 +448,7 @@ public class Attendance extends BaseActivity implements SearchView.OnQueryTextLi
         try {
             java.net.URL url =new URL("http://10.0.43.1/kungfu2/api/v1/user.php?data=insert_attendance");
             connection = (HttpURLConnection) url.openConnection();
-            String urlparam = "{\"trainer_id\":\""+trainid+"\",\"students\":\""+ harsh +"\"}";
+            String urlparam = "{\"trainer_id\":\""+trainid+"\",\"students\":\""+ stud_id +"\"}";
             Log.e("data",urlparam);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type","application/json");

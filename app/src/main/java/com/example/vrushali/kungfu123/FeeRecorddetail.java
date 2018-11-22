@@ -86,14 +86,14 @@ public class FeeRecorddetail extends BaseActivity {
             HttpHandler1 sh = new HttpHandler1(getApplicationContext());
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall1(url);
+            String jsonStr = sh.makeServiceCall(url);
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
                     // Getting JSON Array node
-                    JSONArray contacts = jsonObj.getJSONArray("student_fees");
+                    JSONArray contacts = jsonObj.getJSONArray("0");
 
                     // looping through All Contacts
                     for (int i = 0; i < contacts.length(); i++) {
@@ -110,12 +110,6 @@ public class FeeRecorddetail extends BaseActivity {
                         String k = c.getString("sf_year");
                         String l = c.getString("sf_status");
 //
-                        // Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
-
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 

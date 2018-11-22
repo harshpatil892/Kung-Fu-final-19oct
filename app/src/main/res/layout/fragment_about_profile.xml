@@ -29,7 +29,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="15dp"
                 android:shadowColor="#000"
                 android:shadowDx="0"
                 android:shadowDy="30"
@@ -37,7 +37,6 @@
                 app:cardBackgroundColor="#fff"
                 app:cardCornerRadius="06dp"
                 app:cardElevation="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.515"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="-270dp"
-                    android:contextClickable="true"
-                    >
+                    android:contextClickable="true">
 
                 </WebView>
 
@@ -67,7 +65,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="480dp"
+                android:layout_marginTop="410dp"
                 android:shadowColor="#000"
                 android:shadowDx="0"
                 android:shadowDy="30"
@@ -85,9 +83,9 @@
                 <WebView
                     android:id="@+id/profile2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="-270dp"
+                    android:layout_height="wrap_content"
                     android:contextClickable="true"
+                    android:layout_marginTop="-270dp"
                     >
 
                 </WebView>
@@ -105,7 +103,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="920dp"
+                android:layout_marginTop="840dp"
                 android:shadowColor="#000"
                 android:shadowDx="0"
                 android:shadowDy="30"
@@ -138,12 +136,12 @@
                 android:layout_width="335dp"
                 android:layout_height="400dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="1290dp"
+                android:layout_marginTop="1205dp"
                 android:shadowColor="#000"
                 android:shadowDx="0"
                 android:shadowDy="30"

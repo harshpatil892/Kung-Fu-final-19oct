@@ -315,9 +315,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         img = c.getString("u_image");
 
 
-
-
-
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
 

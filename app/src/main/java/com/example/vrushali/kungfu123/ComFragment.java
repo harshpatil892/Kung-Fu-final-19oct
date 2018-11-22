@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -32,7 +33,7 @@ public class ComFragment extends Fragment {
   private String TAG = ComFragment.class.getSimpleName();
 
   SharedPreferences role1;
-
+  TextView harshal;
   static String UserId;
   String role;
   private ProgressDialog pDialog;
@@ -70,6 +71,7 @@ public class ComFragment extends Fragment {
     contactList = new ArrayList<>();
 
     lv = (ListView)v.findViewById(R.id.compresult);
+    harshal=(TextView)v.findViewById(R.id.harshal);
 
     new GetContacts().execute();
     return v;
@@ -148,6 +150,7 @@ public class ComFragment extends Fragment {
 
       return null;
     }
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onPostExecute(Void result) {
       super.onPostExecute(result);
@@ -162,25 +165,29 @@ public class ComFragment extends Fragment {
 
       if(lv.getCount()==0) {
         //empty, show alertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("No event for current time")
-                .setCancelable(true)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                  }
-                });
-        final AlertDialog alert = builder.create();
-        alert.setOnShowListener( new DialogInterface.OnShowListener() {
-          @SuppressLint("ResourceAsColor")
-          @Override
-          public void onShow(DialogInterface arg0) {
-            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
-          }
-        });
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setMessage("No event for current time")
+//                .setCancelable(true)
+//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                  public void onClick(DialogInterface dialog, int id) {
+//                    dialog.cancel();
+//                  }
+//                });
+//        final AlertDialog alert = builder.create();
+//        alert.setOnShowListener( new DialogInterface.OnShowListener() {
+//          @SuppressLint("ResourceAsColor")
+//          @Override
+//          public void onShow(DialogInterface arg0) {
+//            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+//          }
+//        });
+//
+//        alert.show();
 
-        alert.show();
-      }
+        harshal.setVisibility(View.VISIBLE);
+        harshal.setText("NO EVENT FOR CURRENT TIME");
+
+       }
 
     }
 

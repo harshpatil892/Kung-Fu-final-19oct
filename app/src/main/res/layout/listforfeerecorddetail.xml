@@ -38,7 +38,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:background="#ff6d00"
-                            android:drawableStart="@drawable/ic_place_black_24dp"
+                            android:drawableStart="@drawable/ic_bank"
                             android:gravity="start"
                             android:paddingTop="6dip"
                             android:paddingBottom="2dip"

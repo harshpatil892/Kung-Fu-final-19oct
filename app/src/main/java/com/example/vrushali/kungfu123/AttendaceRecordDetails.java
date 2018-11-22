@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -34,6 +35,9 @@ public class AttendaceRecordDetails extends BaseActivity {
     Spinner get_month,get_year;
 
     String monthh,yr;
+
+    LinearLayout attend;
+
 
     ArrayList<String> mnth ;
     ArrayList<String> year;
@@ -68,7 +72,9 @@ public class AttendaceRecordDetails extends BaseActivity {
         contactList = new ArrayList<>();
 
         lv = (ListView) findViewById(R.id.listforattrecdetails);
-//        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+
+        attend = findViewById(R.id.yr_id_attend);
+
 
         get_month = findViewById(R.id.spinner1);
         get_year = findViewById(R.id.spinner2);
@@ -112,6 +118,8 @@ public class AttendaceRecordDetails extends BaseActivity {
 
                 if(parent.getItemAtPosition(position).equals("select")) {
                     // do nothing
+                    lv.setAdapter(null);
+                    attend.setVisibility(View.GONE);
 
                 }
 
@@ -126,6 +134,18 @@ public class AttendaceRecordDetails extends BaseActivity {
                     editor.commit();
 
                     Log.e("Selected month id",monthh);
+
+                    attend.setVisibility(View.VISIBLE);
+
+                    ListAdapter adapter2 = new SimpleAdapter(
+                            AttendaceRecordDetails.this, contactList,
+                            R.layout.listforattendancerecdetails, new String[]{"id"
+                    }, new int[]{R.id.id
+                    });
+
+                    lv.setAdapter(adapter2);
+
+                    contactList.clear();
 
                 }
             }
@@ -142,7 +162,7 @@ public class AttendaceRecordDetails extends BaseActivity {
 
                 if(parent.getItemAtPosition(position).equals("select")) {
                     // do nothing
-
+                    lv.setAdapter(null);
                 }
 
                 else{
@@ -159,6 +179,15 @@ public class AttendaceRecordDetails extends BaseActivity {
 
                     new GetContacts().execute();
 
+                    ListAdapter adapter2 = new SimpleAdapter(
+                            AttendaceRecordDetails.this, contactList,
+                            R.layout.listforattendancerecdetails, new String[]{"id"
+                    }, new int[]{R.id.id
+                    });
+
+                    lv.setAdapter(adapter2);
+
+                    contactList.clear();
                 }
             }
 
@@ -256,15 +285,38 @@ public class AttendaceRecordDetails extends BaseActivity {
 //                pDialog.dismiss();
 
 
-//            mShimmerViewContainer.stopShimmerAnimation();
-
-            ListAdapter adapter = new SimpleAdapter(
+            ListAdapter adapter2 = new SimpleAdapter(
                     AttendaceRecordDetails.this, contactList,
                     R.layout.listforattendancerecdetails, new String[]{"id"
             }, new int[]{R.id.id
             });
 
-            lv.setAdapter(adapter);
+            lv.setAdapter(adapter2);
+
+            ((SimpleAdapter) adapter2).notifyDataSetChanged();
+
+            if(lv.getCount()==0) {
+                //empty, show alertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(AttendaceRecordDetails.this);
+                builder.setMessage("No Record Found")
+                        .setCancelable(true)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                final AlertDialog alert = builder.create();
+                alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                    @SuppressLint("ResourceAsColor")
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.darkblue);
+                    }
+                });
+
+                alert.show();
+            }
+
 
         }
     }

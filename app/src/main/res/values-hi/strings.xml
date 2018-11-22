@@ -144,7 +144,7 @@
     <string name="Select_Batch">बैच का चयन करें</string>
     <string name="Select_Month">महीना चुनिए</string>
     <string name="Select_Year">वर्ष का चयन करें</string>
-    <string name="Compitition">प्रतियोगिता</string>
+    <string name="Competition">प्रतियोगिता</string>
     <string name="Select_Student">छात्र चुने</string>
     <string name="Monthly_Fees">मासिक शुल्क</string>
     <string name="Notification_batch">बैच को अधिसूचना भेजें</string>
@@ -184,5 +184,20 @@
     <string name="mobileerror">Enter a valid mobile</string>
     <string name="dateerror">Enter a valid date</string>
     <string name="ageerror">Enter a valid age</string>
+    <string name="title_activity_maps">नक्शा</string>
+
+
+
+    <string name="app_name1">Android Login and Registration</string>
+    <string name="hint_email">Mobile Number</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Fullname</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_link_to_register">Not a member? Sign up now.</string>
+    <string name="btn_link_to_login">Already registred! Login Me.</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">LOGOUT</string>
+    <string name="namelogin">Fullname</string>
 
 </resources>

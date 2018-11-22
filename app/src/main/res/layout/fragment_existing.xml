@@ -88,6 +88,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/name"
+                                android:maxLength="50"
                                 android:id="@+id/name"/>
 
                         </android.support.design.widget.TextInputLayout>
@@ -250,6 +251,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/admission_fees"
+                                android:maxLength="5"
                                 android:id="@+id/ad_fees"
                                 android:inputType="number"/>
 
@@ -292,7 +294,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="120dp"
-                            android:backgroundTint="#ff8f00"
+                            android:backgroundTint="#ff6d00"
                             android:textColor="#fff"
                             android:text="@string/add" />
 

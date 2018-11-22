@@ -134,7 +134,7 @@ public class Inbox extends BaseActivity {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    " Inbox empty",
                                     Toast.LENGTH_LONG)
                                     .show();
                         }

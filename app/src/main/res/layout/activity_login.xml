@@ -1,141 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#455a64"
-    tools:context=".MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/testcolorblue"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp" >
 
-  <ImageView
-      android:id="@+id/imageView"
-      android:layout_width="242dp"
-      android:layout_height="154dp"
-      android:layout_alignEnd="@+id/umob"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentTop="true"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginBottom="8dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.095"
-      app:srcCompat="@drawable/index"
-      tools:ignore="RtlCompat" />
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:paddingLeft="20dp"
+      android:paddingRight="20dp" >
 
-  <EditText
-      android:id="@+id/umob"
-      android:layout_width="230dp"
-      android:layout_height="43dp"
-      android:layout_alignParentTop="true"
-      android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginBottom="8dp"
-      android:background="#11000000"
-      android:drawableLeft="@drawable/ic_username"
-      android:ems="10"
-      android:hint="Username"
-      android:inputType="number"
-      android:textColor="#fff"
-      android:textSize="16dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.543"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/imageView"
-      app:layout_constraintVertical_bias="0.107" />
-
-
-  <EditText
-      android:id="@+id/upwd"
-      android:layout_width="230dp"
-      android:layout_height="44dp"
-      android:layout_alignStart="@+id/umob"
-      android:layout_alignParentTop="true"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentRight="true"
-      android:layout_alignParentBottom="true"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginBottom="8dp"
-      android:background="#11000000"
-      android:drawableLeft="@drawable/ic_lock"
-      android:ems="10"
-      android:hint="Password"
-      android:inputType="textPassword"
-      android:textColor="#fff"
-      android:textSize="16dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.543"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/umob"
-      app:layout_constraintVertical_bias="0.067"
-      tools:ignore="RtlCompat" />
-
-
-  <!--<EditText-->
-  <!--android:id="@+id/editText2"-->
-  <!--android:layout_width="200dp"-->
-  <!--android:layout_height="20dp"-->
-  <!--android:drawableLeft="@drawable/ic_lock"-->
-  <!--android:layout_alignStart="@+id/editText"-->
-  <!--android:layout_alignTop="@+id/imageView"-->
-  <!--android:layout_alignParentEnd="true"-->
-  <!--android:layout_alignParentRight="true"-->
-  <!--android:layout_alignParentBottom="true"-->
-  <!--android:layout_marginTop="249dp"-->
-  <!--android:layout_marginEnd="93dp"-->
-  <!--android:layout_marginRight="93dp"-->
-  <!--android:layout_marginBottom="206dp"-->
-  <!--android:textSize="16dp"-->
-  <!--android:ems="10"-->
-  <!--android:hint="Password"-->
-  <!--android:inputType="textPassword"-->
-  <!--tools:ignore="RtlCompat" />-->
-
-  <android.support.v7.widget.CardView
-      android:id="@+id/cardView3"
-      android:layout_width="176dp"
-      android:layout_height="45dp"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentTop="true"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentRight="true"
-      android:layout_alignParentBottom="true"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginBottom="8dp"
-      app:cardBackgroundColor="@color/colorAccent"
-      app:cardCornerRadius="25dp"
-      app:cardElevation="10dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/upwd"
-      app:layout_constraintVertical_bias="0.218">
-
-    <TextView
-        android:id="@+id/loginbtn"
-        android:layout_width="64dp"
+    <EditText
+        android:id="@+id/umob"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="7dp"
-        android:text="@string/login"
-        android:textColor="#ffffff"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:hint="@string/hint_email"
+        android:inputType="number"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/input_login"
+        android:textColorHint="@color/input_login_hint" />
 
-  </android.support.v7.widget.CardView>
+    <EditText
+        android:id="@+id/upwd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/input_login"
+        android:textColorHint="@color/input_login_hint" />
 
-</android.support.constraint.ConstraintLayout>
+    <!-- Login Button -->
+
+    <Button
+        android:id="@+id/loginbtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:background="@color/btn_login_bg"
+        android:text="@string/btn_login"
+        android:textColor="@color/btn_login" />
+
+    <!-- Link to Login Screen -->
+
+
+
+
+  </LinearLayout>
+
+</LinearLayout>

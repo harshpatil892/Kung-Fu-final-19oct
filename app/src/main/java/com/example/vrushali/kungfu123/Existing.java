@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -93,6 +94,11 @@ public class Existing extends Fragment{
                              Bundle savedInstanceState) {
 
         View v =inflater.inflate(R.layout.fragment_existing,container,false);
+
+
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         ed_name = v.findViewById(R.id.name);
         ed_fees = v.findViewById(R.id.ad_fees);
@@ -599,6 +605,17 @@ public class Existing extends Fragment{
             super.onPostExecute(result);
 
             Toast.makeText(getActivity(),"Registration successful",Toast.LENGTH_SHORT).show();
+
+            ed_name.getText().clear();
+            tvw.setText("");
+            register_text.setText("");
+//            buttonSelected;
+            ed_fees.getText().clear();
+            grno.getText().clear();
+            batch_spin1.setSelection(0);
+//            parent_spin.setSelection();
+            belt_spin.setSelection(0);
+
 
         }
     }

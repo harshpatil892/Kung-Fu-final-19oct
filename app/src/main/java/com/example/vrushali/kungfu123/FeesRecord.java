@@ -102,6 +102,16 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
 
                     new GetContacts1(part1).execute();
 
+                    ListAdapter adapter = new SimpleAdapter(
+                            getActivity(), contactList1,
+                            R.layout.listforfeerecord, new String[]{"id", "name","email"
+                    }, new int[]{R.id.id,
+                            R.id.name,R.id.email});
+
+                    lv.setAdapter(adapter);
+
+                    contactList1.clear();
+
                     Toast.makeText(parent.getContext(),"Selected:"+item1,Toast.LENGTH_SHORT).show();
                 }
             }
@@ -348,6 +358,8 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
                     R.id.name,R.id.email});
 
             lv.setAdapter(adapter);
+
+            ((SimpleAdapter) adapter).notifyDataSetChanged();
         }
     }
 

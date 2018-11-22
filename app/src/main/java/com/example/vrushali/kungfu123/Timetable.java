@@ -97,7 +97,7 @@ public class Timetable extends Fragment {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
                     // Getting JSON Array node
-                    JSONArray contacts = jsonObj.getJSONArray("data");
+                    JSONArray contacts = jsonObj.getJSONArray("0");
 
                     // looping through All Contacts
                     for (int i = 0; i < contacts.length(); i++) {
@@ -113,14 +113,6 @@ public class Timetable extends Fragment {
                         String tcregion = c.getString("tc_region");
                         String tclocation = c.getString("tc_location");
                         String tcstatus = c.getString("tc_status");
-//                        String uname = c.getString("uc_status");
-//                        String ureg = c.getString("uc_reg_date");
-//
-                        // Phone node is JSON Object
-//                        JSONObject phone = c.getJSONObject("data");
-//                        String mobile = phone.getString("b_day");
-//                        String home = phone.getString("tc_region");
-//                        String office = phone.getString("tc_location");
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
@@ -136,10 +128,6 @@ public class Timetable extends Fragment {
                         contact.put("tcregion", tcregion);
                         contact.put("tclocation", tclocation);
                         contact.put("tcstatus", tcstatus);
-//                        contact.put("uname", uname);
-//                        contact.put("ureg", ureg);
-
-//                        contact.put("mobile", mobile);
 
                         // adding contact to contact list
                         contactList.add(contact);
@@ -181,19 +169,11 @@ public class Timetable extends Fragment {
 //            if (pDialog.isShowing())
 //
 //                pDialog.dismiss();
-            /**
-             * Updating parsed JSON data into ListView
-             * */
-            ListAdapter adapter = new SimpleAdapter(
+                   ListAdapter adapter = new SimpleAdapter(
                     getActivity(), contactList,
                     R.layout.listfortimetable, new String[]{"id", "name","email","address","gender"
                     }, new int[]{R.id.id,R.id.name,R.id.email,R.id.address,R.id.gender
             });
-//            ListAdapter adapter1 = new SimpleAdapter(
-//                    MainActivity.this, contactList,
-//                    R.layout.list_item1, new String[]{"name", "email",
-//                    "mobile"}, new int[]{R.id.name,
-//                    R.id.email, R.id.mobile});
 
             lv.setAdapter(adapter);
         }

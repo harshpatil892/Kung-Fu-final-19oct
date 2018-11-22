@@ -24,12 +24,15 @@
         android:title="@string/Fees"
         app:showAsAction="never" />
 
+
+</group>
+
     <item
         android:id="@+id/refresh"
         android:orderInCategory="100"
         android:title=""
         app:showAsAction="always"
-       android:icon="@drawable/ic_refresh"/>
+        android:icon="@drawable/ic_refresh"/>
 
     <item
         android:id="@+id/mode"
@@ -38,8 +41,5 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_brightness"
         />
-
-
-</group>
 
 </menu>

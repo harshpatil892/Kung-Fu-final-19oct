@@ -12,7 +12,7 @@
         android:id="@+id/appbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+    <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/collapsingtoolbar"
@@ -22,7 +22,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:title="@string/nav_home">
 
-            <android.support.v4.view.ViewPager
+        <android.support.v4.view.ViewPager
                 android:id="@+id/viewPage"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
@@ -36,6 +36,7 @@
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -58,6 +59,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
@@ -65,29 +67,35 @@
                     android:layout_width="350dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center">
+
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:background="@drawable/circlebackpurple"
                             android:src="@drawable/ic_accessibility"
                             android:padding="10dp"/>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
                             android:text="@string/title_home"/>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:background="@color/lightgray"
                             android:layout_margin="10dp"/>
+
                         <TextView
+                            android:id="@+id/slogen1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -97,7 +105,9 @@
                             android:textColor="@android:color/darker_gray"/>
 
                     </LinearLayout>
+
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
@@ -105,47 +115,58 @@
                     android:layout_height="190dp"
                     android:layout_margin="10dp"
                     android:id="@+id/health_tips">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center">
+
                         <ImageView
+                            android:id="@+id/harsh"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:background="@drawable/circlebackyellow"
                             android:src="@drawable/ic_directions_bike"
                             android:padding="10dp"/>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
                             android:text="@string/title_dashboard"/>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:background="@color/lightgray"
                             android:layout_margin="10dp"/>
+
                         <TextView
+                            android:id="@+id/slogen2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="14dp"
+
                             android:text="@string/slogen2"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
                     </LinearLayout>
+
                 </android.support.v7.widget.CardView>
 
             </LinearLayout>
+
             <LinearLayout
                 android:clipToPadding="false"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
@@ -178,13 +199,16 @@
                             android:layout_height="1dp"
                             android:background="@color/lightgray"
                             android:layout_margin="10dp"/>
+
                         <TextView
+                            android:id="@+id/slogen3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textSize="14dp"
                             android:text="@string/slogen3"
                             android:padding="5dp"
+
                             android:textColor="@android:color/darker_gray"/>
 
                     </LinearLayout>

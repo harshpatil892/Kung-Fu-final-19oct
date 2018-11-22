@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 public class AboutUs_home extends AppCompatActivity {
@@ -23,7 +24,9 @@ public class AboutUs_home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us_home);
 
+
         aboutus=(WebView)findViewById(R.id.aboutus);
+        aboutus.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
         aboutus.getSettings().setJavaScriptEnabled(true);
         aboutus.loadUrl("http://www.aikfwsa.com/app/about-us/");
 

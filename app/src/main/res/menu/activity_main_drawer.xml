@@ -53,7 +53,7 @@
 
     <item
         android:id="@+id/stud_detail"
-        android:icon="@drawable/ic_person"
+        android:icon="@drawable/ic_format"
         android:title="@string/Student_Details"
         android:visible="false"/>
 
@@ -71,19 +71,19 @@
 
     <item
         android:id="@+id/notify"
-        android:icon="@drawable/ic_mail"
+        android:icon="@drawable/ic_notifications"
         android:title="@string/Send_Notification"
         android:visible="false"/>
 
     <item
         android:id="@+id/attend_record"
-        android:icon="@drawable/ic_feedback"
+        android:icon="@drawable/ic_record"
         android:title="@string/Attendance_Record"
         android:visible="false"/>
 
     <item
         android:id="@+id/bank_detail"
-        android:icon="@drawable/ic_result"
+        android:icon="@drawable/ic_bank"
         android:title="@string/Bank_Details"
         android:visible="false"/>
 
@@ -105,7 +105,7 @@
 
     <item
         android:id="@+id/suggestion"
-        android:icon="@drawable/ic_feedback"
+        android:icon="@drawable/ic_note"
         android:title="@string/Suggestions" />
 
     <item
@@ -125,7 +125,7 @@
 
     <item
         android:id="@+id/ChangeLang"
-        android:icon="@drawable/ic_mail"
+        android:icon="@drawable/ic_language"
         android:title="@string/Language" />
 
     <item

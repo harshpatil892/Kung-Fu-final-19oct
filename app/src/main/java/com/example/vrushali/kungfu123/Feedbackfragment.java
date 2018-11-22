@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
@@ -77,7 +78,8 @@ public class Feedbackfragment extends Fragment {
         ed4 = (EditText) v.findViewById(R.id.note4);
 
         btn = (Button) v.findViewById(R.id.button);
-
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +137,7 @@ public class Feedbackfragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getActivity(),"Registration successful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Feedback Submitted",Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(SigninActivity.this,LoginActivity.class));
 
 //            textView.setText(result);

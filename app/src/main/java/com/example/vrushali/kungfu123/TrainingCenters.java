@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
@@ -24,13 +25,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.common.collect.Maps;
 
 public class TrainingCenters extends BaseActivity {
 
-    private ShimmerFrameLayout mShimmerViewContainer;
+
     private String TAG = TrainingCenters.class.getSimpleName();
     private ProgressDialog pDialog;
     private ListView lv;
+    private FloatingActionButton fab;
 
     // URL to get contacts JSON
     private static String url = "http://10.0.43.2/kungfu2/api/ v1/user.php?data=training_centers";
@@ -48,18 +51,27 @@ public class TrainingCenters extends BaseActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         }
+
         super.onCreate(savedInstanceState);
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //inflate your activity layout here!
+
         @SuppressLint("InflateParams")
         View contentView = inflater.inflate(R.layout.activity_training_centers, null, false);
         drawer.addView(contentView, 0);
         contactList = new ArrayList<>();
 
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TrainingCenters.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         lv = (ListView) findViewById(R.id.list);
-//        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+
         new GetContacts().execute();
     }
 

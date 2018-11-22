@@ -90,7 +90,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="15dp">
+                android:paddingLeft="15dp"
+                android:id="@+id/yr_id_attend"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="152dp"

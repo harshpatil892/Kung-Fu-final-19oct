@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -94,6 +95,9 @@ public class Event_Register extends Fragment{
         spin_batch = (Spinner) v.findViewById(R.id.spinner3);
         spin_student = (Spinner) v.findViewById(R.id.spinner4);
         spin_belt = (Spinner) v.findViewById(R.id.spinner5);
+
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         fees = v.findViewById(R.id.reg_fees);
 
@@ -896,6 +900,12 @@ public class Event_Register extends Fragment{
 
             Toast.makeText(getActivity(),"Event registered succesfully",Toast.LENGTH_SHORT).show();
 
+             fees.getText().clear();
+             type_event.setSelection(0);
+             spin_batch.setSelection(0);
+             sub_event.setSelection(0);
+             spin_student.setSelection(0);
+             spin_belt.setSelection(0);
         }
     }
 

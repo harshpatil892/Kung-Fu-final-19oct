@@ -4,14 +4,23 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.CardView;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
@@ -35,7 +44,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
     private ListView lv;
     private SearchView mSearchView;
     Spinner spin1;
-    ListAdapter adapter;
+    public CardView cardView;
     String batch,res,harsh,trainid,temp;
     String cd;
     ArrayList<String> select_batch;
@@ -63,12 +72,19 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
         View contentView = inflater.inflate(R.layout.activity_student_details, null, false);
         drawer.addView(contentView, 0);
 
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         spin1 = findViewById(R.id.spinner1);
         contactList = new ArrayList<>();
         mSearchView = (SearchView)findViewById(R.id.searchView1);
         lv = (ListView) findViewById(R.id.list3);
+        cardView = (CardView)findViewById(R.id.cardView8);
         select_batch = new ArrayList<String>();
+        select_batch.add(0,"Select");
+
         new GetContacts().execute();
+
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @SuppressLint("MissingPermission")
             @Override
@@ -81,10 +97,10 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
                 harsh = value.replaceAll("[a-z,{}.A-Z=]","");
 
                 trainid = temp;
-                String number = harsh.substring(harsh.length()-10,harsh.length());
+                String number = harsh.substring(harsh.length()-11,harsh.length());
 
                 Log.e("HARSHAL :",number);
-
+//
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:"+number));//change the number
                 startActivity(callIntent);
@@ -94,15 +110,19 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
             }
         });
 
+
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if(adapterView.getItemAtPosition(i).equals("select")){
+                if(adapterView.getItemAtPosition(i).equals("Select")){
                     // do nothing
-
+                    lv.setAdapter(null);
                 }
                 else{
+
+                    cardView.setVisibility(View.VISIBLE);
+
                     String item = adapterView.getItemAtPosition(i).toString();
 //                    Log.e("Selected belt",item);
                     Toast.makeText(adapterView.getContext(),"Selected:"+item,Toast.LENGTH_SHORT).show();
@@ -120,6 +140,16 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
 
                     new GetStudDetails(batch).execute();
 
+                    ListAdapter adapter = new SimpleAdapter(
+                            Student_details.this, contactList,
+                            R.layout.listforstuddetails, new String[]{"a", "b",
+                            "cd"}, new int[]{R.id.id,
+                            R.id.name, R.id.email});
+
+                    lv.setAdapter(adapter);
+
+                    contactList.clear();
+
                 }
 
             }
@@ -131,6 +161,7 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
         });
 
         lv.setTextFilterEnabled(true);
+//        lv.setFilterText("");
 
         setupSearchView();
     }
@@ -207,68 +238,12 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
                         String eg = c.getString("b_name");
                         String f = c.getString("b_location");
 
-
                         res = a + "-" + eg;
 
                         select_batch.add(res);
 
                     }
 
-
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
-
-                }
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
-
-            }
-
-            String jsonStr1 = sh.makeServiceCall1(URL1);
-            Log.e(TAG, "Response from url: " + jsonStr1);
-            if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr1);
-
-                    // Getting JSON Array node
-                    JSONArray contacts = jsonObj.getJSONArray("0");
-
-                    // looping through All Contacts
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
-
-                        String a = c.getString("uc_name");
-                        String b = c.getString("fulladdr");
-                         cd = c.getString("u_mob");
-
-                        HashMap<String, String> contact = new HashMap<>();
-
-                        // adding each child node to HashMap key => value
-                        contact.put("a", a);
-                        contact.put("b", b);
-                        contact.put("cd", cd);
-
-                        contactList.add(contact);
-
-                    }
 
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -353,6 +328,8 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
                         String a = c.getString("uc_name");
                         String b = c.getString("fulladdr");
                         String cd = c.getString("u_mob");
+                        String e = c.getString("uc_gender");
+                        String f = c.getString("uc_dob");
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
@@ -361,6 +338,8 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
                         contact.put("a", a);
                         contact.put("b", b);
                         contact.put("cd", cd);
+                        contact.put("e", e);
+                        contact.put("f", f);
 
                         contactList.add(contact);
 
@@ -401,21 +380,28 @@ public class Student_details extends BaseActivity implements SearchView.OnQueryT
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-
-
-             adapter = new SimpleAdapter(
+             ListAdapter adapter = new SimpleAdapter(
                     Student_details.this, contactList,
                     R.layout.listforstuddetails, new String[]{"a", "b",
-                    "cd"}, new int[]{R.id.id,
-                    R.id.name, R.id.email});
+                    "cd","e","f"}, new int[]{R.id.id,
+                    R.id.name, R.id.email,R.id.gender,R.id.dob});
 
-            lv.setAdapter(adapter);
+             lv.setAdapter(adapter);
+
+             ((SimpleAdapter) adapter).notifyDataSetChanged();
 
 
         }
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(Student_details.this,MainActivity.class);
+        startActivity(intent);
+
+    }
 
 
 }

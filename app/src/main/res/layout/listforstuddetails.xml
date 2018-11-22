@@ -31,10 +31,10 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="299dp"
-            android:layout_height="48dp"
+            android:layout_width="306dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:gravity="start"
             android:textSize="16dp"
             android:textStyle="bold"
@@ -45,14 +45,58 @@
             android:layout_width="299dp"
             android:layout_height="34dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="90dp"
             android:gravity="start"
             android:textSize="16dp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />
 
 
+        <TextView
+            android:id="@+id/dob"
+            android:layout_width="95dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="130dp"
+            android:gravity="start"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
 
+
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="240dp"
+            android:layout_marginTop="130dp"
+            android:gravity="start"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:text="DOB :"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="130dp"
+            android:gravity="start"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+
+        <TextView
+            android:text="Gender :"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginTop="130dp"
+            android:gravity="start"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
 
 
     </android.support.v7.widget.CardView>
