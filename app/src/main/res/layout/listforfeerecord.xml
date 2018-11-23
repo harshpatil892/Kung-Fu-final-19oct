@@ -13,7 +13,7 @@
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:gravity="start"
-        android:textSize="15dp"
+        android:textSize="0dp"
         tools:ignore="RtlCompat" />
 
     <TextView

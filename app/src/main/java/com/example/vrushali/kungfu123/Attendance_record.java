@@ -36,11 +36,13 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +58,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
     ArrayList<String> select_batch;
     public CardView cardView;
     String part1,res;
+    TextView header;
 
     private android.support.v7.widget.SearchView searchView;
     String URL = "http://10.0.43.1/kungfu2/api/v1/user.php?data=batches";
@@ -88,6 +91,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
         lv = (ListView) findViewById(R.id.attrec);
         cardView=(CardView)findViewById(R.id.cardView8);
         mSearchView = (SearchView)findViewById(R.id.searchView1);
+        header = (TextView)findViewById(R.id.header);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -136,6 +140,7 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
                 if(adapterView.getItemAtPosition(i).equals("Select")) {
 
                     lv.setAdapter(null);
+                    header.setVisibility(View.GONE);
 
                 }
 
@@ -400,7 +405,8 @@ public class Attendance_record extends BaseActivity implements SearchView.OnQuer
 //            if (pDialog.isShowing())
 //                pDialog.dismiss();
 
-            ListAdapter adapter = new SimpleAdapter(
+           header.setVisibility(View.VISIBLE);
+           ListAdapter adapter = new SimpleAdapter(
                     Attendance_record.this, contactList,
                     R.layout.listforattendancerecord, new String[]{"id", "name",
             }, new int[]{R.id.id,

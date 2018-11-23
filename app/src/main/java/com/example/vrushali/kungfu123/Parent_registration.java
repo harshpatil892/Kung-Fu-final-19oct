@@ -97,10 +97,8 @@ public class Parent_registration extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_parent_registration, container, false);
 
-
         getActivity().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 
         namet = v.findViewById(R.id.name);
         mob_no = v.findViewById(R.id.mobno);

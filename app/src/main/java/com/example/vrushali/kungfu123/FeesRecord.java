@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,11 +19,13 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +36,8 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
     ArrayList<HashMap<String, String>> contactList1;
     Spinner spin1;
     ListView lv;
+    CardView cardView;
+    TextView header,left;
     ArrayList<String> select_batch;
     private SearchView mSearchView;
     String part1,res1;
@@ -71,18 +76,24 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
         spin1 = (Spinner) v.findViewById(R.id.spinner1);
         lv = (ListView) v.findViewById(R.id.feerecord);
         mSearchView = (SearchView)v.findViewById(R.id.searchView1);
-
+        header = (TextView)v.findViewById(R.id.header);
+        cardView = (CardView)v.findViewById(R.id.cardView8);
+        left = (TextView) v.findViewById(R.id.left);
         select_batch = new ArrayList<String>();
         contactList1 = new ArrayList<>();
-        select_batch.add(0,"select");
+        select_batch.add(0,"Select");
         new GetContacts().execute();
 
         spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(parent.getItemAtPosition(position).equals("select")){
+                if(parent.getItemAtPosition(position).equals("Select")){
                     // do nothing
+                    cardView.setVisibility(View.GONE);
+                    header.setVisibility(View.GONE);
+                    left.setVisibility(View.GONE);
+                    lv.setAdapter(null);
 
                 }
                 else{
@@ -351,6 +362,9 @@ public class FeesRecord extends Fragment implements SearchView.OnQueryTextListen
 //            if (pDialog.isShowing())
 //                pDialog.dismiss();
 
+            header.setVisibility(View.VISIBLE);
+            cardView.setVisibility(View.VISIBLE);
+            left.setVisibility(View.VISIBLE);
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(), contactList1,
                     R.layout.listforfeerecord, new String[]{"id", "name","email"

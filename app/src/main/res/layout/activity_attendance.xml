@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Attendance">
 
-    <android.support.v7.widget.Toolbar
+<android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -69,8 +69,8 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/harshal"
-        android:visibility="gone"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -95,6 +95,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.218" />
 
+
     </android.support.v7.widget.CardView>
 
     <ListView
@@ -104,7 +105,7 @@
         android:layout_marginTop="172dp"
         android:listSelector="#ffd54f"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 

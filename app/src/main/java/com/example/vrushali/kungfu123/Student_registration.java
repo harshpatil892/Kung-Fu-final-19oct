@@ -101,7 +101,6 @@ public class Student_registration extends Fragment {
         con_pwd = v.findViewById(R.id.con_pwd);
         gr_no = v.findViewById(R.id.gr_no);
 
-
         btnGet = (Button) v.findViewById(R.id.select_bdate);
         tvw = (TextView) v.findViewById(R.id.birthdate);
 

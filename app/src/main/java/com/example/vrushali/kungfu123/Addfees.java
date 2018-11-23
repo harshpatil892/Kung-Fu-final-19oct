@@ -47,6 +47,7 @@ import java.util.Map;
 public class Addfees extends Fragment {
 
     private String TAG = Addfees.class.getSimpleName();
+
     String a;
     String res,abc;
     Spinner spin1, spin2;
