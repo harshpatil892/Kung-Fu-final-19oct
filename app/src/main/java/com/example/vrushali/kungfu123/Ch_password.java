@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -83,7 +84,7 @@ public class Ch_password extends Fragment {
         {
 
          new JsonPost().execute(uid,savepassword);
-
+            pass.onEditorAction(EditorInfo.IME_ACTION_DONE);
         }
         else {
             Toast.makeText(getActivity(), "Password does not match", Toast.LENGTH_LONG).show();

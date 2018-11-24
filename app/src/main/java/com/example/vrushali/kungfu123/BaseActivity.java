@@ -1,6 +1,7 @@
 package com.example.vrushali.kungfu123;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -46,7 +49,27 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        {
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                // Do whatever you want here
+            }
+
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
+                InputMethodManager inputMethodManager = (InputMethodManager) BaseActivity.this
+                        .getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(
+                        BaseActivity.this.getCurrentFocus().getWindowToken(),
+                        0
+                );
+
+            }
+        };
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -282,11 +305,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent12);
 
         }
-        else if (id == R.id.ChangeLang) {
-            Intent intent13 = new Intent(BaseActivity.this, Lang.class);
-            startActivity(intent13);
-
-        }
+//        else if (id == R.id.ChangeLang) {
+//            Intent intent13 = new Intent(BaseActivity.this, Lang.class);
+//            startActivity(intent13);
+//
+//        }
         else if (id == R.id.logout) {
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
@@ -330,9 +353,27 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    public static void hideKeyboard(View pView, Activity pActivity) {
+        if (pView == null) {
+            pView = pActivity.getWindow().getCurrentFocus();
+        }
+        if (pView != null) {
+            InputMethodManager imm = (InputMethodManager) pActivity
+                    .getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(pView.getWindowToken(), 0);
+            }
+        }
+    }
+
     private void hideNavigationBar() {
         this.getWindow().getDecorView()
                 .setSystemUiVisibility(

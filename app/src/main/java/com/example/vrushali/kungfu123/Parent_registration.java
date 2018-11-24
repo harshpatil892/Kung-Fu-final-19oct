@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -358,7 +359,7 @@ public class Parent_registration extends Fragment {
                 else {
 
                     new JsonPost().execute(mob, role, nm, gender, pd, child_count, address, cnm, child_gender, part1, part3, gno, af, bd, reg_d);
-
+                    register_text.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 }
             }
         });

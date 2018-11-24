@@ -23,8 +23,8 @@ public class Registration extends BaseActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         }
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //inflate your activity layout here!
         @SuppressLint("InflateParams")
@@ -41,8 +41,8 @@ public class Registration extends BaseActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-
     }
+
     private void hideNavigationBar() {
         this.getWindow().getDecorView()
                 .setSystemUiVisibility(
@@ -57,10 +57,8 @@ public class Registration extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-
         Intent intent = new Intent(Registration.this,MainActivity.class);
         startActivity(intent);
-
     }
 
 }

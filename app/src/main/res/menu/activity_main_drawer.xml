@@ -123,10 +123,10 @@
         android:icon="@drawable/ic_mail"
         android:title="@string/inbox" />
 
-    <item
-        android:id="@+id/ChangeLang"
-        android:icon="@drawable/ic_language"
-        android:title="@string/Language" />
+    <!--<item-->
+        <!--android:id="@+id/ChangeLang"-->
+        <!--android:icon="@drawable/ic_language"-->
+        <!--android:title="@string/Language" />-->
 
     <item
         android:id="@+id/logout"

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -97,6 +98,7 @@ public class Suggestions extends BaseActivity {
                 else {
 
                     new JsonPost().execute(nm, un, pwd);
+                    password.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
 //                    Intent email = new Intent(Intent.ACTION_SEND);
 //                    email.putExtra(Intent.EXTRA_EMAIL,new String[] { "vrushaliahirrao16@gmail.com"});

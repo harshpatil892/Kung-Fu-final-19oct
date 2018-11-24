@@ -16,7 +16,7 @@ public class Splashscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splashscreen);
-        img=(ImageView)findViewById(R.id.imageView2);
+        hideNavigationBar();
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        getActionBar().hide();
         new Handler().postDelayed(new Runnable() {

@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -40,6 +41,7 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
     ArrayList<String> event_type ;
     ArrayList<String> event_name;
     CardView cardView;
+    TextView header,left,action;
     ArrayAdapter<String> myAdapter,myAdapter1;
 
     String URL="http://10.0.43.1/kungfu2/api/v1/user.php?data=events_details";
@@ -89,7 +91,9 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
 
         lv = (ListView) v.findViewById(R.id.eventrecord);
         cardView=(CardView)v.findViewById(R.id.cardView8);
-
+        header = (TextView)v.findViewById(R.id.header);
+        left = (TextView)v.findViewById(R.id.left);
+        action = (TextView)v.findViewById(R.id.action);
         contactList1 = new ArrayList<>();
 
         type_event.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -103,6 +107,11 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
                     sub_event.setAdapter(myAdapter1);
 
                     myAdapter1.clear();
+                    lv.setAdapter(null);
+                    cardView.setVisibility(View.GONE);
+                    header.setVisibility(View.GONE);
+                    left.setVisibility(View.GONE);
+                    action.setVisibility(View.GONE);
 
 
                 }
@@ -619,6 +628,12 @@ public class Event_register_detail extends Fragment implements SearchView.OnQuer
             // Dismiss the progress dialog
 //            if (pDialog.isShowing())
 //                pDialog.dismiss();
+
+            cardView.setVisibility(View.VISIBLE);
+            header.setVisibility(View.VISIBLE);
+            left.setVisibility(View.VISIBLE);
+            action.setVisibility(View.VISIBLE);
+
 
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(), contactList1,

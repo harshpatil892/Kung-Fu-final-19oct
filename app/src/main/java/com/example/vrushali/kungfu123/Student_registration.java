@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -344,7 +345,7 @@ public class Student_registration extends Fragment {
                 else {
 
             new JsonPost().execute(mn, role, nm, gender, pd, ad, bd, reg_d, part1, ad_f, part3, gn);
-
+                    gr_no.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 }
             }
         });

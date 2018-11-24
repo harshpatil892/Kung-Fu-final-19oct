@@ -23,6 +23,9 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,7 +67,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                // Do whatever you want here
+            }
+
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
+                InputMethodManager inputMethodManager = (InputMethodManager) MainActivity.this
+                        .getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(
+                        MainActivity.this.getCurrentFocus().getWindowToken(),
+                        0
+                );
+
+            }
+        };
+
+
 
         drawer.addDrawerListener(toggle);
 
@@ -74,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
-       martial_arts_card.setOnClickListener(new View.OnClickListener() {
+        martial_arts_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MartialArts.class);
@@ -274,11 +297,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent12);
 
         }
-        else if (id == R.id.ChangeLang) {
-            Intent intent13 = new Intent(MainActivity.this, Lang.class);
-            startActivity(intent13);
-
-        }
+//        else if (id == R.id.ChangeLang) {
+//            Intent intent13 = new Intent(MainActivity.this, Lang.class);
+//            startActivity(intent13);
+//
+//        }
         else if (id == R.id.logout) {
 
 
@@ -324,10 +347,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.show();
      }
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
+
+
 
     private void hideNavigationBar() {
         this.getWindow().getDecorView()
@@ -340,6 +366,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 );
     }
+
+
+
+
 
     @Override
     public void onBackPressed() {

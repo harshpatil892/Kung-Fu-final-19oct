@@ -130,7 +130,7 @@ public class Introslider extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(Introslider.this, FingerprintActivity.class));
+        startActivity(new Intent(Introslider.this, MainActivity.class));
         finish();
     }
 

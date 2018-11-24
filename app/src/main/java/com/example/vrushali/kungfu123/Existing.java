@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -343,6 +344,7 @@ public class Existing extends Fragment{
                 else {
 
                     new JsonPost().execute(ucname, part1, gender, part5, gn, part3, fees, bd, regd);
+                    grno.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 }
             }
         });
